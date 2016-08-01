@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- custom views -->
+    <color name="head_bg">#E9E9E9</color>
+    <color name="header_text_color">#4B4B4B</color>
+    <!-- custom views -->
+    
+    <color name="white">#FFFFFF</color>
+</resources>
