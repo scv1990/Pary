@@ -1,4 +1,4 @@
-package com.yisa.pary;
+package com.yisa.pray;
 
 
 import com.lidroid.xutils.ui.BaseActivity;

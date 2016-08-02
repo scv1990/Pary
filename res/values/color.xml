@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- custom views -->
-    <color name="head_bg">#E9E9E9</color>
-    <color name="header_text_color">#4B4B4B</color>
+    <color name="head_bg">#FE5900</color>
+    <color name="header_text_color">#FFFFFF</color>
     <!-- custom views -->
     
     <color name="white">#FFFFFF</color>
+    <!-- seperator line color -->
+    <color name="seperator_line_color">#E9E9E9</color>
+    
+    <!-- user info background -->
+    <color name="user_info_background">#FE5900</color>
 </resources>

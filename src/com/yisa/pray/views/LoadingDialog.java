@@ -1,4 +1,4 @@
-package com.yisa.pary.views;
+package com.yisa.pray.views;
 
 import java.util.Timer;
 import java.util.TimerTask;

@@ -1,4 +1,4 @@
-package com.yisa.pary.views;
+package com.yisa.pray.views;
 
 import com.yisa.pary.R;
 

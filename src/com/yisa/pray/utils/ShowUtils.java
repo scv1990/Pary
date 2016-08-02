@@ -1,4 +1,4 @@
-package com.yisa.pary.utils;
+package com.yisa.pray.utils;
 
 import android.content.Context;
 import android.util.DisplayMetrics;

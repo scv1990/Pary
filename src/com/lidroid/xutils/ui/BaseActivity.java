@@ -17,12 +17,11 @@ import android.widget.Toast;
 import com.lidroid.xutils.manager.ActivityManager;
 import com.lidroid.xutils.util.LogUtils;
 import com.lidroid.xutils.util.SystemTool;
-import com.yisa.pary.base.MyApplication;
-import com.yisa.pary.utils.Constants;
-import com.yisa.pary.utils.PreferenceUtils;
-import com.yisa.pary.utils.ShowUtils;
-import com.yisa.pary.utils.UIHelper;
-import com.yisa.pary.views.LoadingDialog;
+import com.yisa.pray.base.MyApplication;
+import com.yisa.pray.utils.Constants;
+import com.yisa.pray.utils.PreferenceUtils;
+import com.yisa.pray.utils.ShowUtils;
+import com.yisa.pray.views.LoadingDialog;
 
 public abstract class BaseActivity extends FragmentActivity implements OnClickListener {
 
