@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:expandableTextView="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/main_blog_bg"
+    android:layout_marginLeft="@dimen/blog_item_margin"
+    android:layout_marginRight="@dimen/blog_item_margin"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/rl_user"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/blog_item_user_info_area_height" >
+
+        <com.yisa.pray.views.CircleImageView
+            android:id="@+id/user_head_pic"
+            android:layout_width="@dimen/blog_item_user_head_pic_height"
+            android:layout_height="@dimen/blog_item_user_head_pic_height"
+            android:layout_alignParentTop="true"
+            android:layout_margin="@dimen/blog_item_user_head_pic_margin"
+            android:src="@drawable/default_user_head_pic" />
+
+        <LinearLayout
+            android:id="@+id/ll_user_info"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginRight="100dp"
+            android:layout_toRightOf="@id/user_head_pic"
+            android:orientation="vertical"
+            android:weightSum="2" >
+
+            <TextView
+                android:id="@+id/user_name"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="@dimen/blog_item_user_head_pic_margin"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:gravity="top"
+                android:singleLine="true"
+                android:text="用户名"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/app_text_size_12" />
+
+            <TextView
+                android:id="@+id/add_time"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginBottom="@dimen/blog_item_user_head_pic_margin"
+                android:layout_weight="1"
+                android:drawableLeft="@drawable/clock"
+                android:text="3分钟前"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/app_text_size_12"
+                android:ellipsize="end"
+                android:gravity="center_vertical"
+                android:singleLine="true" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/attention"
+            android:layout_width="50dp"
+            android:layout_height="23dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/add_attention_bg"
+            android:paddingLeft="10dp"
+            android:text="@string/add_attention" 
+            android:textSize="@dimen/app_text_size_12"
+            android:focusable="false"/>
+
+    </RelativeLayout>
+    
+    <LinearLayout 
+        android:id="@+id/artical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/blog_item_user_head_pic_margin"
+        android:orientation="vertical">
+         <com.yisa.pray.views.ExpandableTextView
+            android:id="@+id/posts_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            expandableTextView:animAlphaStart="1"
+            expandableTextView:maxCollapsedLines="5" >
+
+            <TextView
+                android:id="@id/expandable_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="8dp"
+                android:fontFamily="sans-serif-light"
+                android:textColor="#666666"
+                android:textSize="15dp" />
+
+            <ImageButton
+                android:id="@id/expand_collapse"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|bottom"
+                android:layout_margin="16dp"
+                android:background="@android:color/transparent" />
+        </com.yisa.pray.views.ExpandableTextView>
+        <ImageView
+            android:id="@+id/single_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/gray"
+            android:contentDescription="@null"
+            android:scaleType="centerCrop" >
+        </ImageView>
+
+        <LinearLayout
+            android:id="@+id/bloglist_hor_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/bloglist_ver_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+        </LinearLayout>
+        <RelativeLayout
+            android:id="@+id/video_layout"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="#000000"
+            android:visibility="gone" >
+
+            <com.yisa.pray.views.VideoView
+                android:id="@+id/videoview"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_centerInParent="true"
+                android:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/video_image"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:scaleType="centerCrop" />
+
+            <ProgressBar
+                android:id="@+id/progressbar"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_centerInParent="true"
+                android:visibility="gone" />
+
+            <ImageButton
+                android:id="@+id/video_play_btn"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_centerInParent="true"
+                android:background="@drawable/video_play" />
+        </RelativeLayout>
+    </LinearLayout>
+</LinearLayout>

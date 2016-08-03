@@ -5,12 +5,12 @@
     android:layout_height="match_parent" 
     android:background="@android:color/white">
     
-     <com.yisa.pary.views.CustomHeadView 
+     <com.yisa.pray.views.CustomHeadView 
         android:id="@+id/head_view"
         android:layout_width="match_parent"
         android:layout_height="@dimen/header_height_size"
         android:layout_alignParentTop="true"
         app:headTitle="@string/pray_wall_title">
-    </com.yisa.pary.views.CustomHeadView>
+    </com.yisa.pray.views.CustomHeadView>
 
 </RelativeLayout>

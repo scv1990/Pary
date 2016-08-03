@@ -3,7 +3,9 @@ package com.yisa.pray.views;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import com.yisa.pary.R;
+
+
+import com.yisa.pray.R;
 
 import android.app.AlertDialog;
 import android.content.Context;

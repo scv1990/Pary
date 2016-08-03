@@ -1,6 +1,7 @@
 package com.yisa.pray.views;
 
-import com.yisa.pary.R;
+
+import com.yisa.pray.R;
 
 import android.content.Context;
 import android.content.res.TypedArray;

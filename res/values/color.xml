@@ -11,4 +11,7 @@
     
     <!-- user info background -->
     <color name="user_info_background">#FE5900</color>
+    
+    <!-- 天蓝色 -->
+    <color name="gray">#808080</color>
 </resources>
