@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <com.yisa.pray.views.CustomHeadView
+            android:id="@+id/head_view"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            app:headTitle="@string/register" >
+        </com.yisa.pray.views.CustomHeadView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:orientation="vertical" >
+
+            <LinearLayout style="@style/register_layout_style" >
+
+                <TextView
+                    style="@style/register_textview_style"
+                    android:text="@string/reg_nickname_label" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@android:color/darker_gray" />
+
+                <EditText
+                    android:id="@+id/nickname"
+                    style="@style/register_edittext_style"
+                    android:hint="@string/reg_nickname_hint" />
+            </LinearLayout>
+
+            <LinearLayout style="@style/register_layout_style" >
+
+                <TextView
+                    style="@style/register_textview_style"
+                    android:text="@string/reg_pwd_label" />
+
+                <View style="@style/vertical_sep_line_short" />
+
+                <EditText
+                    android:id="@+id/pwd"
+                    style="@style/register_edittext_style"
+                    android:hint="@string/reg_pwd_hint"
+                    android:inputType="textPassword" />
+            </LinearLayout>
+
+            <LinearLayout style="@style/register_layout_style" >
+
+                <TextView
+                    style="@style/register_textview_style"
+                    android:text="@string/reg_pwd_repeat_label" />
+
+                <View style="@style/vertical_sep_line_short" />
+
+                <EditText
+                    android:id="@+id/reg_pwd_repeat"
+                    style="@style/register_edittext_style"
+                    android:hint="@string/reg_pwd_repeat_hint"
+                    android:inputType="textPassword"
+                    android:textColorHint="@android:color/darker_gray" />
+            </LinearLayout>
+
+            <LinearLayout style="@style/register_layout_style" >
+
+                <TextView
+                    style="@style/register_textview_style"
+                    android:text="@string/reg_tel_label" />
+
+                <View style="@style/vertical_sep_line_short" />
+
+                <EditText
+                    android:id="@+id/reg_tel"
+                    style="@style/register_edittext_style"
+                    android:hint="@string/reg_tel_hint"
+                    android:textColorHint="@android:color/darker_gray" />
+            </LinearLayout>
+
+            <LinearLayout style="@style/register_layout_style" >
+
+                <TextView
+                    style="@style/register_textview_style"
+                    android:text="@string/reg_invite_code_label" />
+
+                <View style="@style/vertical_sep_line_short" />
+
+                <EditText
+                    android:id="@+id/inviteCode"
+                    style="@style/register_edittext_style"
+                    android:hint="@string/reg_invite_code_hint" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/commitBtn"
+                android:layout_width="match_parent"
+                android:layout_height="36dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="30dp"
+                android:background="@color/head_bg"
+                android:text="@string/reg_commit_btn"
+                android:textColor="@android:color/white" >
+            </Button>
+        </LinearLayout>
+    </LinearLayout>
+
+</ScrollView>
