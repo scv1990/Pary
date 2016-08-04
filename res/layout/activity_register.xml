@@ -38,7 +38,7 @@
                     android:background="@android:color/darker_gray" />
 
                 <EditText
-                    android:id="@+id/nickname"
+                    android:id="@+id/reg_username"
                     style="@style/register_edittext_style"
                     android:hint="@string/reg_nickname_hint" />
             </LinearLayout>
@@ -52,7 +52,7 @@
                 <View style="@style/vertical_sep_line_short" />
 
                 <EditText
-                    android:id="@+id/pwd"
+                    android:id="@+id/reg_pwd"
                     style="@style/register_edittext_style"
                     android:hint="@string/reg_pwd_hint"
                     android:inputType="textPassword" />
@@ -98,13 +98,13 @@
                 <View style="@style/vertical_sep_line_short" />
 
                 <EditText
-                    android:id="@+id/inviteCode"
+                    android:id="@+id/reg_invite_code"
                     style="@style/register_edittext_style"
                     android:hint="@string/reg_invite_code_hint" />
             </LinearLayout>
 
             <Button
-                android:id="@+id/commitBtn"
+                android:id="@+id/reg_commit_btn"
                 android:layout_width="match_parent"
                 android:layout_height="36dp"
                 android:layout_marginLeft="10dp"

@@ -18,6 +18,7 @@
     <string name="reg_invite_code_label">邀请码</string>
     <string name="reg_invite_code_hint">请输入邀请码</string>
     <string name="reg_commit_btn">注册</string>
+    <string name="reg_pwd_different">两次密码不相同</string>
     
 
 </resources>
