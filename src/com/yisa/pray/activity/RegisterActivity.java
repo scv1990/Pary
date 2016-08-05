@@ -103,15 +103,15 @@ public class RegisterActivity extends BaseActivity implements OnClickListener{
 		}
 		
 		
-		Retrofit retrofit = new Retrofit.Builder().build();
-//						.baseUrl(UrlUtils.SERVER_ADDRESS)
-//				        //增加返回值为String的支持
-//				        .addConverterFactory(ScalarsConverterFactory.create())
-//				        //增加返回值为Gson的支持(以实体类返回)
-//				        .addConverterFactory(GsonConverterFactory.create())
-//				        //增加返回值为Oservable<T>的支持
-//				        .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-//				        .build();
+		Retrofit retrofit = new Retrofit.Builder()
+						.baseUrl(UrlUtils.SERVER_ADDRESS)
+				        //增加返回值为String的支持
+				        .addConverterFactory(ScalarsConverterFactory.create())
+				        //增加返回值为Gson的支持(以实体类返回)
+				        .addConverterFactory(GsonConverterFactory.create())
+				        //增加返回值为Oservable<T>的支持
+				        .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+				        .build();
 		
 		RequestParams param = new RequestParams(); 
 		param.addBodyParameter("phone", tel);
