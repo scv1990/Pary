@@ -8,6 +8,8 @@
 
 package com.yisa.pray.utils;
 
+import com.yisa.pray.activity.RegisterActivity;
+
 import android.content.Context;
 import android.content.Intent;
 
@@ -34,6 +36,17 @@ public class UIHelper {
 		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		// 如果intent不指定category，那么无论intent filter的内容是什么都应该是匹配的。
 		intent.addCategory(Intent.CATEGORY_HOME);
+		context.startActivity(intent);
+	}
+	/**
+	 * @Title: showRegister 
+	 * @Description: TODO(打开注册界面) 
+	 * @param @param reqestCode    判断是从什么地方打开的
+	 * @return void    返回类型 
+	 * @throws
+	 */
+	public static void showRegister(Context context, int reqestCode){
+		Intent intent = new Intent(context, RegisterActivity.class);
 		context.startActivity(intent);
 	}
 	

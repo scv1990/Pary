@@ -1,5 +1,6 @@
 package com.yisa.pray.activity;
 
+import retrofit.Retrofit;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -16,6 +17,7 @@ import com.lidroid.xutils.ui.BaseActivity;
 import com.yisa.pray.R;
 import com.yisa.pray.utils.ShowUtils;
 import com.yisa.pray.utils.UrlUtils;
+import com.yisa.pray.views.CustomHeadView;
 import com.yisa.pray.views.LoadingDialog;
 /**
  * 注册界面
@@ -24,6 +26,7 @@ import com.yisa.pray.views.LoadingDialog;
  */
 public class RegisterActivity extends BaseActivity implements OnClickListener{
 	private static final String TAG = "RegisterActivity";
+	private CustomHeadView mHeadView;
 	private EditText mUserName;
 	private EditText mTel;
 	private EditText mPwd;
@@ -41,6 +44,13 @@ public class RegisterActivity extends BaseActivity implements OnClickListener{
 	@Override
 	public void initView() {
 		mLoading = new LoadingDialog(mContext);
+		mHeadView = (CustomHeadView) getView(R.id.head_view);
+		mHeadView.setLeftIconClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				finish();
+			}
+		});
 		mUserName = (EditText) getView(R.id.reg_username);
 		mTel = (EditText) getView(R.id.reg_tel);
 		mPwd = (EditText) getView(R.id.reg_pwd);
@@ -91,6 +101,18 @@ public class RegisterActivity extends BaseActivity implements OnClickListener{
 			ShowUtils.showToast(mContext, getString(R.string.reg_invite_code_hint));
 			return;
 		}
+		
+		
+		Retrofit retrofit = new Retrofit.Builder().build();
+//						.baseUrl(UrlUtils.SERVER_ADDRESS)
+//				        //增加返回值为String的支持
+//				        .addConverterFactory(ScalarsConverterFactory.create())
+//				        //增加返回值为Gson的支持(以实体类返回)
+//				        .addConverterFactory(GsonConverterFactory.create())
+//				        //增加返回值为Oservable<T>的支持
+//				        .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+//				        .build();
+		
 		RequestParams param = new RequestParams(); 
 		param.addBodyParameter("phone", tel);
 		param.addBodyParameter("code", inviteCode);

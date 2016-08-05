@@ -30,5 +30,18 @@ public class Constants {
 	public static final int VERIFY_SUCCESS = 0x100;
 	// 验证失败
 	public static final int VERIFY_FAIL = 0x101;
+	/**
+	 * 设备类型
+	 */
+	public static final String DEVICE_TYPE = "android";
+	
+	/**
+	 * 从登录页打开注册界面请求
+	 */
+	public static final int LOGIN_TO_REGISTER_REQ_CODE = 0x301;
+	/**
+	 * 从祷告墙到注册界面请求
+	 */
+	public static final int PRAY_WALL_TO_REGISTER_REQ_CODE = 0x401;
 	
 }

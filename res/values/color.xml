@@ -15,8 +15,10 @@
     <!-- 深灰色 -->
     <color name="gray">#808080</color>
     <!-- 浅灰色 -->
-    <color name="page_backgroud_color">#D7D7D7</color>
+    <color name="page_backgroud_color">#EDEDED</color>
     
     <!-- 黄色字体 -->
     <color name="font_color_yellow">#FE5900</color>
+    
+        
 </resources>
