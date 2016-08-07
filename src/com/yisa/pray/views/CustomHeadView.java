@@ -21,6 +21,7 @@ import android.widget.TextView;
 public class CustomHeadView extends RelativeLayout {
 	private TextView mTitleTextView;
 	private TextView mRightTextView;
+	private TextView mLeftTextView;
 	private ImageView mLeftImageView;
 	private ImageView mRightImageView;
 	private ImageView mSecondRightImageView;
@@ -30,6 +31,7 @@ public class CustomHeadView extends RelativeLayout {
 		View mHeadView = LayoutInflater.from(context).inflate(R.layout.view_header, this, true);
 		mTitleTextView = (TextView) mHeadView.findViewById(R.id.header_title);
 		mRightTextView = (TextView) mHeadView.findViewById(R.id.header_right_text);
+		mLeftTextView = (TextView) mHeadView.findViewById(R.id.header_left_text);
 		mLeftImageView = (ImageView) mHeadView.findViewById(R.id.header_back);
 		mRightImageView = (ImageView) mHeadView.findViewById(R.id.header_right_icon);
 		mSecondRightImageView = (ImageView) mHeadView.findViewById(R.id.header_second_right_icon);
@@ -68,6 +70,20 @@ public class CustomHeadView extends RelativeLayout {
 			setRightTextClickListener(onRightTextClickListener);
 		}
 	}
+	
+	public void setLeftText(int resourceId, OnClickListener onLeftTextClickListener) {
+		mLeftTextView.setText(resourceId);
+		if (onLeftTextClickListener != null) {
+			setLeftTextClickListener(onLeftTextClickListener);
+		}
+	}
+
+	public void setLeftText(String text, OnClickListener onLeftTextClickListener) {
+		mLeftTextView.setText(text);
+		if (onLeftTextClickListener != null) {
+			setLeftTextClickListener(onLeftTextClickListener);
+		}
+	}
 
 	public void setLeftIconClickListener(OnClickListener onLeftIconClickListener) {
 		mLeftImageView.setVisibility(View.VISIBLE);
@@ -96,6 +112,12 @@ public class CustomHeadView extends RelativeLayout {
 		mRightTextView.setVisibility(View.VISIBLE);
 		mRightTextView.setOnClickListener(onRightTextClickListener);
 	}
+	
+	private void setLeftTextClickListener(OnClickListener onRightTextClickListener) {
+		mLeftImageView.setVisibility(View.GONE);
+		mLeftTextView.setVisibility(View.VISIBLE);
+		mLeftTextView.setOnClickListener(onRightTextClickListener);
+	}
 
 	public void setTitle(String title) {
 		mTitleTextView.setText(title);
@@ -111,6 +133,14 @@ public class CustomHeadView extends RelativeLayout {
 
 	public void setRightTextView(TextView mRightTextView) {
 		this.mRightTextView = mRightTextView;
+	}
+
+	public TextView getLeftTextView() {
+		return mLeftTextView;
+	}
+
+	public void setLeftTextView(TextView mLeftTextView) {
+		this.mLeftTextView = mLeftTextView;
 	}
 
 	public void setTitleOnClickListener(OnClickListener onClickListener) {

@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.lidroid.xutils.ui.BaseFragment;
+import com.yisa.pray.R;
 
 /**
  *
@@ -30,8 +31,7 @@ public class UserCenterFragment extends BaseFragment {
 
 	@Override
 	protected View inflaterView(LayoutInflater inflater, ViewGroup container, Bundle bundle) {
-		// TODO Auto-generated method stub
-		return null;
+		return inflater.inflate(R.layout.fragment_user_center, null);
 	}
 
 	@Override

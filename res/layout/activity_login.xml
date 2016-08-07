@@ -27,7 +27,7 @@
             android:layout_marginTop="10dp"
             android:background="@drawable/password_bg"
             android:hint="@string/reg_pwd_hint"
-            android:inputType="numberPassword"
+            android:inputType="textPassword"
             android:paddingLeft="50dp" />
 
         <Button

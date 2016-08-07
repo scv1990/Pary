@@ -8,6 +8,7 @@
 
 package com.yisa.pray.utils;
 
+import com.yisa.pray.activity.HomeActivity;
 import com.yisa.pray.activity.RegisterActivity;
 
 import android.content.Context;
@@ -36,6 +37,15 @@ public class UIHelper {
 		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		// 如果intent不指定category，那么无论intent filter的内容是什么都应该是匹配的。
 		intent.addCategory(Intent.CATEGORY_HOME);
+		context.startActivity(intent);
+	}
+	
+	/**
+	 * 打开主界面
+	 * @param context
+	 */
+	public static void showHomeActivity(Context context){
+		Intent intent = new Intent(context, HomeActivity.class);
 		context.startActivity(intent);
 	}
 	/**

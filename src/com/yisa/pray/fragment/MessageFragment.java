@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.lidroid.xutils.ui.BaseFragment;
+import com.yisa.pray.R;
 
 /**
  *
@@ -30,13 +31,11 @@ public class MessageFragment extends BaseFragment {
 
 	@Override
 	protected View inflaterView(LayoutInflater inflater, ViewGroup container, Bundle bundle) {
-		// TODO Auto-generated method stub
-		return null;
+		return inflater.inflate(R.layout.fragment_notice, null);
 	}
 
 	@Override
 	public void onInitView(View view, Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 
 	}
 

@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/header_height_size"
         android:layout_alignParentBottom="true"
-        android:background="@color/head_bg"
+        android:background="@color/white"
         android:paddingTop="3dp"
         android:paddingBottom="3dp"
         android:weightSum="3">

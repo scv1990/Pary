@@ -8,12 +8,18 @@
 
 package com.yisa.pray.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.lidroid.xutils.ui.BaseFragment;
+import com.yisa.pray.R;
+import com.yisa.pray.activity.LoginActivity;
+import com.yisa.pray.activity.RegisterActivity;
+import com.yisa.pray.utils.Constants;
+import com.yisa.pray.views.CustomHeadView;
 
 /**
  *
@@ -27,15 +33,32 @@ import com.lidroid.xutils.ui.BaseFragment;
  * 修改备注:
  */
 public class BlogMainFragment extends BaseFragment {
-
+	private CustomHeadView mHeadView;
 	@Override
 	protected View inflaterView(LayoutInflater inflater, ViewGroup container, Bundle bundle) {
-		return null;
+		return inflater.inflate(R.layout.fragment_blog_main, null);
 	}
 
 	@Override
 	public void onInitView(View view, Bundle savedInstanceState) {
-
+		mHeadView = (CustomHeadView) getView(R.id.head_view);
+		mHeadView.setLeftText(R.string.register, new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent();
+				intent.setClass(mActivity, RegisterActivity.class);
+				mActivity.startActivityForResult(intent, Constants.PRAY_WALL_TO_REGISTER_REQ_CODE);
+			}
+		});
+		
+		mHeadView.setRightText(R.string.login, new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent();
+				intent.setClass(mActivity, LoginActivity.class);
+				mActivity.startActivityForResult(intent, Constants.PRAY_WALL_TO_REGISTER_REQ_CODE);
+			}
+		});
 	}
 
 }

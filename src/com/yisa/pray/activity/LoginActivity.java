@@ -14,7 +14,14 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import retrofit.Call;
+import retrofit.Callback;
+import retrofit.GsonConverterFactory;
+import retrofit.Retrofit;
 
+import java.io.IOException;
+
+import com.google.gson.Gson;
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.RequestParams;
@@ -23,8 +30,13 @@ import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest.HttpMethod;
 import com.lidroid.xutils.ui.BaseActivity;
 import com.yisa.pray.R;
+import com.yisa.pray.entity.ErrorMessage;
+import com.yisa.pray.entity.UserInfo;
+import com.yisa.pray.imp.RequestServers;
 import com.yisa.pray.utils.Constants;
 import com.yisa.pray.utils.DeviceUtils;
+import com.yisa.pray.utils.PreferenceUtils;
+import com.yisa.pray.utils.ResponseCode;
 import com.yisa.pray.utils.ShowUtils;
 import com.yisa.pray.utils.UIHelper;
 import com.yisa.pray.utils.UrlUtils;
@@ -91,13 +103,53 @@ public class LoginActivity extends BaseActivity implements OnClickListener{
 			ShowUtils.showToast(mContext, getResources().getString(R.string.reg_pwd_hint));
 			return;
 		}
-		RequestParams param = new RequestParams();
-		param.addBodyParameter("phone", userName);
-		param.addBodyParameter("password", pwd);
-		param.addBodyParameter("device", DeviceUtils.getDeviceId(mContext));
-		param.addBodyParameter("device_model", DeviceUtils.getManufacturer() + DeviceUtils.getModel());
-		param.addBodyParameter("device_type", Constants.DEVICE_TYPE);
-		requestData(param);
+		
+		try {
+			Retrofit retrofit = new Retrofit.Builder()
+				    .baseUrl(UrlUtils.SERVER_ADDRESS)
+				    .addConverterFactory(GsonConverterFactory.create())
+				    .build();
+			
+			 
+			RequestServers service = retrofit.create(RequestServers.class);
+			
+			Call<UserInfo> call = service.login(userName, pwd);
+			call.enqueue(new Callback<UserInfo>(){
+
+				@Override
+				public void onFailure(Throwable arg0) {
+					Log.i(TAG+"onFailure", arg0.getMessage());
+				}
+
+				@Override
+				public void onResponse(retrofit.Response<UserInfo> response, Retrofit retrofit) {
+					String message = "";
+					switch (response.code()) {
+					case ResponseCode.RESPONSE_CODE_201:
+						message = new Gson().toJson(response.body());
+						Log.i(TAG + "201", message);
+//						PreferenceUtils.setPrefString(mContext, "userinfo", response.body());
+						UIHelper.showHomeActivity(mContext);
+						finish();
+						break;
+					default:
+						ErrorMessage error = new ErrorMessage();;
+						try {
+							message = response.errorBody().string();
+							Gson gson =  new Gson();
+							error = gson.fromJson(message, ErrorMessage.class);
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+						Log.i(TAG, message);
+						ShowUtils.showToast(mContext, error.getError());
+						break;
+					}
+				}
+			});
+		} catch (Exception e) {
+			Log.i(TAG +"Exception", e.getMessage());
+		}
 	}
 	
 	public void requestData(RequestParams param){

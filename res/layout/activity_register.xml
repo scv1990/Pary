@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white" 
+    android:background="@color/page_backgroud_color" 
     android:orientation="vertical">
 
      <com.yisa.pray.views.CustomHeadView
@@ -87,6 +87,29 @@
                     android:textColorHint="@android:color/darker_gray" />
             </LinearLayout>
 
+             <RelativeLayout 
+                 android:layout_width="match_parent"
+                 android:layout_height="40dp"
+                 android:layout_marginLeft="10dp"
+                 android:layout_marginRight="10dp"
+                 android:layout_marginTop="15dp"
+                  >
+
+               <Button
+                    android:id="@+id/get_code_btn"
+                    style="@style/button_corner_five"
+                    android:text="@string/reg_verification_code_btn_hint" />
+               
+                <EditText
+                    android:id="@+id/reg_verification_code"
+                    style="@style/register_edittext_style"
+                    android:hint="@string/reg_verification_code_text_hint"
+                    android:layout_toLeftOf="@id/get_code_btn"
+                    android:background="@color/white"
+                    android:layout_marginRight="10dp" />
+                
+            </RelativeLayout>
+            
             <LinearLayout style="@style/register_layout_style" >
 
                 <TextView
