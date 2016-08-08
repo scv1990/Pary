@@ -27,4 +27,5 @@
     <!-- 祷告墙 -->
 	<string name="add_blog_hint">说点什么吧。。。</string>
 	<string name="blog_categroy">帖子分类</string>
+	<string name="blog_add">发布祷告</string>
 </resources>

@@ -10,6 +10,8 @@ package com.yisa.pray.adapter;
 
 import java.util.List;
 
+import com.lidroid.xutils.util.AdapterUtils;
+import com.yisa.pray.R;
 import com.yisa.pray.entity.BlogCategroyEntity;
 
 import android.content.Context;
@@ -17,11 +19,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.TextView;
 
 /**
  *
  * 类名称: BlogCategroyAdapter.java
- * 类描述:	 
+ * 类描述:	blog 分类 
  * 创建人:  hq
  * 创建时间: 2016年8月8日下午5:08:05
  * -------------------------修订历史------------
@@ -47,22 +50,33 @@ public class BlogCategroyAdapter extends BaseAdapter {
 	
 	@Override
 	public int getCount() {
-		return 0;
+		if(data == null){
+			return 0;
+		}
+		return data.size();
 	}
 
 	@Override
-	public Object getItem(int position) {
-		return null;
+	public BlogCategroyEntity getItem(int position) {
+		if(data == null){
+			return null;
+		}
+		return data.get(position);
 	}
 
 	@Override
 	public long getItemId(int position) {
-		return 0;
+		return position;
 	}
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		return null;
+		if(convertView == null){
+			convertView = mLayoutInflater.inflate(R.layout.view_simple_item, null);
+		}
+		TextView name = (TextView) AdapterUtils.get(convertView, R.id.name);
+		name.setText(getItem(position).getName());
+		return convertView;
 	}
 
 }

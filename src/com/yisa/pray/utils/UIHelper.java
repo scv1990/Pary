@@ -8,6 +8,7 @@
 
 package com.yisa.pray.utils;
 
+import com.yisa.pray.activity.EditBlogActivity;
 import com.yisa.pray.activity.HomeActivity;
 import com.yisa.pray.activity.RegisterActivity;
 
@@ -57,6 +58,18 @@ public class UIHelper {
 	 */
 	public static void showRegister(Context context, int reqestCode){
 		Intent intent = new Intent(context, RegisterActivity.class);
+		context.startActivity(intent);
+	}
+	
+	/**
+	 * @Title: showRegister 
+	 * @Description: TODO(打开注册界面) 
+	 * @param @param reqestCode    判断是从什么地方打开的
+	 * @return void    返回类型 
+	 * @throws
+	 */
+	public static void showBlogEdit(Context context, int reqestCode){
+		Intent intent = new Intent(context, EditBlogActivity.class);
 		context.startActivity(intent);
 	}
 	

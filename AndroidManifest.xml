@@ -32,6 +32,10 @@
         </activity>
         <activity android:name="com.yisa.pray.activity.RegisterActivity" >
         </activity>
+         <activity android:name="com.yisa.pray.activity.BlogCategroyActivity" >
+        </activity>
+         <activity android:name="com.yisa.pray.activity.EditBlogActivity" >
+        </activity>
     </application>
 
 </manifest>

@@ -13,7 +13,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.lidroid.xutils.ui.BaseFragment;
 import com.yisa.pray.R;
@@ -23,6 +25,7 @@ import com.yisa.pray.entity.UserInfo;
 import com.yisa.pray.utils.Constants;
 import com.yisa.pray.utils.IntentKey;
 import com.yisa.pray.utils.PreferenceUtils;
+import com.yisa.pray.utils.UIHelper;
 import com.yisa.pray.views.CustomHeadView;
 import com.yisa.pray.views.swipe.SwipyRefreshLayout;
 
@@ -38,6 +41,7 @@ import com.yisa.pray.views.swipe.SwipyRefreshLayout;
  * 修改备注:
  */
 public class BlogMainFragment extends BaseFragment {
+	private static final int REQUEST_ADD_BLOG = 0x0001;
 	private CustomHeadView mHeadView;
 	private SwipyRefreshLayout mRefresh;
 	private ListView mListView;
@@ -75,8 +79,22 @@ public class BlogMainFragment extends BaseFragment {
 			mHeadView.setLeftTextVisibile(View.GONE);
 		}
 		
+		mRefresh = (SwipyRefreshLayout) getView(R.id.swipy);
+		mListView = (ListView) getView(R.id.blog_list);
+		addListHead(); 
+	}
+	
+	public void addListHead(){
+		LinearLayout layout =(LinearLayout) LayoutInflater.from(mActivity).inflate(R.layout.view_add_blog, null);
+		TextView addBlogBtn = (TextView) layout.findViewById(R.id.add_blog);
+		addBlogBtn.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				UIHelper.showBlogEdit(mActivity, REQUEST_ADD_BLOG);
+			}
+		});
 		
-		
+		mListView.addHeaderView(addBlogBtn);
 	}
 
 }

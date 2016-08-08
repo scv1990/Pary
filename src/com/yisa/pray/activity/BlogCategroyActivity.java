@@ -9,6 +9,7 @@
 package com.yisa.pray.activity;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit.Call;
@@ -30,10 +31,12 @@ import com.yisa.pray.adapter.BlogCategroyAdapter;
 import com.yisa.pray.entity.BlogCategroyEntity;
 import com.yisa.pray.entity.ErrorMessage;
 import com.yisa.pray.imp.BlogService;
+import com.yisa.pray.utils.IntentKey;
 import com.yisa.pray.utils.ResponseCode;
 import com.yisa.pray.utils.ShowUtils;
 import com.yisa.pray.utils.UrlUtils;
 import com.yisa.pray.views.CustomHeadView;
+import com.yisa.pray.views.LoadingDialog;
 
 /**
  *
@@ -51,6 +54,8 @@ public class BlogCategroyActivity extends BaseActivity {
 	private CustomHeadView mHeadView;
 	private ListView mCateListview;
 	private BlogCategroyAdapter mAdapter;
+	private List<BlogCategroyEntity> mCategroyList;
+	private LoadingDialog mLoading;
 	
 	@Override
 	public void setRootLayout() {
@@ -59,6 +64,8 @@ public class BlogCategroyActivity extends BaseActivity {
 
 	@Override
 	public void initView() {
+		mLoading = new LoadingDialog(mContext);
+		mCategroyList = new ArrayList<BlogCategroyEntity>();
 		mHeadView = (CustomHeadView) getView(R.id.head_view);
 		mHeadView.setLeftIconClickListener(new View.OnClickListener() {
 			@Override
@@ -72,12 +79,17 @@ public class BlogCategroyActivity extends BaseActivity {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				Intent intent = new Intent();
-				setResult(RESULT_OK);
+//				intent.setClass(mContext, HomeActivity.class);
+				String cateId = mCategroyList.get(position).getId();
+				intent.putExtra(IntentKey.ID, cateId);
+				setResult(RESULT_OK, intent);
 			}
 		});
+		getCategroy();
 	}
 	
 	public void getCategroy(){
+		mLoading.show();
 		Retrofit retrofit = new Retrofit.Builder()
 							.baseUrl(UrlUtils.SERVER_ADDRESS)
 							.addConverterFactory(GsonConverterFactory.create())
@@ -96,9 +108,9 @@ public class BlogCategroyActivity extends BaseActivity {
 				public void onResponse(Response<List<BlogCategroyEntity>> response, Retrofit arg1) {
 					switch (response.code()) {
 						case ResponseCode.RESPONSE_CODE_200:
-							List<BlogCategroyEntity> list = response.body();
-							if(list != null && list.size() > 0){
-								mAdapter = new BlogCategroyAdapter(mContext, list);
+							mCategroyList = response.body();
+							if(mCategroyList != null && mCategroyList.size() > 0){
+								mAdapter = new BlogCategroyAdapter(mContext, mCategroyList);
 								mCateListview.setAdapter(mAdapter);
 								mAdapter.notifyDataSetChanged();
 							}
@@ -123,7 +135,7 @@ public class BlogCategroyActivity extends BaseActivity {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally{
-			
+			mLoading.dismiss();
 		}
 		
 		

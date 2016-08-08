@@ -7,5 +7,7 @@ package com.yisa.pray.utils;
  */
 public class IntentKey {
 	public static final String USERINFO = "userinfo";
+	
+	public static final String ID = "id";
 
 }

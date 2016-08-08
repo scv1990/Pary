@@ -9,6 +9,8 @@
 package com.yisa.pray.activity;
 
 import com.lidroid.xutils.ui.BaseActivity;
+import com.yisa.pray.R;
+import com.yisa.pray.views.CustomHeadView;
 
 /**
  *
@@ -23,9 +25,11 @@ import com.lidroid.xutils.ui.BaseActivity;
  */
 public class EditBlogActivity extends BaseActivity{
 
+	private CustomHeadView mHeadView;
+	
 	@Override
 	public void setRootLayout() {
-		
+		setContentView(R.layout.activity_edit_blog);
 	}
 
 	@Override
