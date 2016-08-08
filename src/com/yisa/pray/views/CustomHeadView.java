@@ -143,6 +143,10 @@ public class CustomHeadView extends RelativeLayout {
 		this.mLeftTextView = mLeftTextView;
 	}
 
+	public void setLeftTextVisibile(int visibility) {
+		mLeftTextView.setVisibility(visibility);
+	}
+	
 	public void setTitleOnClickListener(OnClickListener onClickListener) {
 		mTitleTextView.setOnClickListener(onClickListener);
 	}

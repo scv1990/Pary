@@ -109,8 +109,6 @@ public class LoginActivity extends BaseActivity implements OnClickListener{
 				    .baseUrl(UrlUtils.SERVER_ADDRESS)
 				    .addConverterFactory(GsonConverterFactory.create())
 				    .build();
-			
-			 
 			RequestServers service = retrofit.create(RequestServers.class);
 			
 			Call<UserInfo> call = service.login(userName, pwd);
@@ -128,7 +126,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener{
 					case ResponseCode.RESPONSE_CODE_201:
 						message = new Gson().toJson(response.body());
 						Log.i(TAG + "201", message);
-//						PreferenceUtils.setPrefString(mContext, "userinfo", response.body());
+						PreferenceUtils.setPrefString(mContext, "userinfo", message);
 						UIHelper.showHomeActivity(mContext);
 						finish();
 						break;

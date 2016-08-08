@@ -6,6 +6,6 @@ package com.yisa.pray.utils;
  *
  */
 public class IntentKey {
-	private static final String USERINFO = "userinfo";
+	public static final String USERINFO = "userinfo";
 
 }

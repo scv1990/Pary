@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="70dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:background="@color/white"
+    android:gravity="center_vertical"
+    android:orientation="horizontal" >
+
+    <com.yisa.pray.views.CircleImageView
+        android:id="@+id/user_head_pic"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="5dp"
+        android:src="@drawable/default_user_head_pic" />
+
+    <TextView
+        android:id="@+id/add_blog"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.75"
+        android:gravity="center_vertical"
+        android:hint="@string/add_blog_hint"
+        android:paddingLeft="10dp" />
+
+</LinearLayout>
