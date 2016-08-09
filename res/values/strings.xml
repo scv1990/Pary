@@ -28,4 +28,5 @@
 	<string name="add_blog_hint">说点什么吧。。。</string>
 	<string name="blog_categroy">帖子分类</string>
 	<string name="blog_add">发布祷告</string>
+	<string name="no_blog_tips">暂时没有祷告发布</string>
 </resources>
