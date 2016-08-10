@@ -5,9 +5,6 @@ import retrofit.Callback;
 import retrofit.GsonConverterFactory;
 import retrofit.Retrofit;
 import android.annotation.SuppressLint;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
@@ -26,7 +23,6 @@ import com.yisa.pray.R;
 import com.yisa.pray.entity.ErrorMessage;
 import com.yisa.pray.entity.OperationResult;
 import com.yisa.pray.imp.RegisterService;
-import com.yisa.pray.imp.RequestServers;
 import com.yisa.pray.utils.ResponseCode;
 import com.yisa.pray.utils.ShowUtils;
 import com.yisa.pray.utils.UrlUtils;
@@ -55,7 +51,6 @@ public class RegisterActivity extends BaseActivity implements OnClickListener{
 	
 	// 定时器handler，更新按钮倒计时秒数
 	@SuppressLint("ResourceAsColor")
-	@SuppressWarnings("deprecation")
 	Handler captTimeHandle = new Handler() {
 		@Override
 		public void handleMessage(Message msg) {
@@ -145,6 +140,12 @@ public class RegisterActivity extends BaseActivity implements OnClickListener{
 			return;
 		}
 		
+		String verfiCode = mVerifiTxt.getText().toString();
+		if(verfiCode == null || "".equals(verfiCode)){
+			ShowUtils.showToast(mContext, getString(R.string.reg_verification_code_text_hint));
+			return;
+		}
+		
 		try {
 			Retrofit retrofit = new Retrofit.Builder()
 				    .baseUrl(UrlUtils.SERVER_ADDRESS)
@@ -152,9 +153,9 @@ public class RegisterActivity extends BaseActivity implements OnClickListener{
 				    .build();
 			
 			 
-			RequestServers service = retrofit.create(RequestServers.class);
-			
-			Call<ErrorMessage> call = service.getString(tel, userName, pwd, inviteCode);
+			RegisterService service = retrofit.create(RegisterService.class);
+			Log.i(TAG, inviteCode.length() + "");
+			Call<ErrorMessage> call = service.register(tel, userName, verfiCode, pwd, inviteCode);
 			mLoading.show();
 			call.enqueue(new Callback<ErrorMessage>(){
 
@@ -205,7 +206,14 @@ public class RegisterActivity extends BaseActivity implements OnClickListener{
 			return;
 		}
 		mVerifiBtn.setClickable(false);
-		mVerifiBtn.setBackgroundColor(android.R.color.darker_gray);
+		mVerifiBtn.setBackgroundColor(R.color.btn_disable);
+		// 改变按钮背景色，并且设置为不可点
+//		Bitmap bitmap = BitmapUtil.getBitmapByResId(mContext, R.drawable.captcha_btn_disable);
+//		
+//		Drawable drawable = new BitmapDrawable(bitmap);
+//		mVerifiBtn.setBackgroundDrawable(drawable);
+		
+		timer.schedule(new GetCaptchaTimer(), 0, 1000);
 		try {
 			Retrofit retrofit = new Retrofit.Builder()
 				    .baseUrl(UrlUtils.SERVER_ADDRESS)
@@ -216,7 +224,6 @@ public class RegisterActivity extends BaseActivity implements OnClickListener{
 			RegisterService service = retrofit.create(RegisterService.class);
 			
 			Call<OperationResult> call = service.getCode(tel);
-			mLoading.show();
 			call.enqueue(new Callback<OperationResult>(){
 
 				@Override
@@ -228,8 +235,12 @@ public class RegisterActivity extends BaseActivity implements OnClickListener{
 				public void onResponse(retrofit.Response<OperationResult> response, Retrofit retrofit) {
 					switch (response.code()) {
 					case ResponseCode.RESPONSE_CODE_201:
-						setResult(RESULT_OK);
 						Log.i(TAG +"201", response.message());
+						if(response.body().getResult() == 0){
+							ShowUtils.showToast(mContext, getResources().getString(R.string.reg_verfi_code_send_success));
+						}else{
+							ShowUtils.showToast(mContext, getResources().getString(R.string.reg_verfi_code_send_failed));
+						}
 						break;
 					case ResponseCode.RESPONSE_CODE_422:
 						String message = "";
@@ -263,7 +274,6 @@ public class RegisterActivity extends BaseActivity implements OnClickListener{
 	 */
 	class GetCaptchaTimer extends TimerTask {
 		int num = 59;
-
 		@Override
 		public void run() {
 			Message msg = new Message();

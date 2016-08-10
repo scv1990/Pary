@@ -20,5 +20,7 @@
     <!-- 黄色字体 -->
     <color name="font_color_yellow">#FE5900</color>
     
+    <color name="btn_disable">#7E7E7E</color>
+    
         
 </resources>

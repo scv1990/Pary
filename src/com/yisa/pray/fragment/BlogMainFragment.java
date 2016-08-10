@@ -68,6 +68,7 @@ public class BlogMainFragment extends BaseFragment implements OnRefreshListener{
 	private ListView mListView;
 	private BlogListAdapter mAdapter;
 	private List<BlogEntity> mBlogList;
+	private View mCreatPost;
 	
 	private int mPage = 0;
 	private int mPerPage = 10;
@@ -89,8 +90,6 @@ public class BlogMainFragment extends BaseFragment implements OnRefreshListener{
 		mRefresh.setDirection(SwipyRefreshLayoutDirection.BOTH);
 		mRefresh.setOnRefreshListener(this);
 		mListView = (ListView) getView(R.id.blog_list);
-		mAdapter = new BlogListAdapter(mActivity);
-		mListView.setAdapter(mAdapter);
 		addListHead(); 
 		getBlogList();
 	}
@@ -134,16 +133,15 @@ public class BlogMainFragment extends BaseFragment implements OnRefreshListener{
 	}
 	
 	public void addListHead(){
-		View layout = LayoutInflater.from(mActivity).inflate(R.layout.view_add_blog, null);
-		TextView addBlogBtn = (TextView) layout.findViewById(R.id.add_blog);
-		addBlogBtn.setOnClickListener(new View.OnClickListener() {
+		mCreatPost = LayoutInflater.from(mActivity).inflate(R.layout.view_add_blog, null);
+		mCreatPost.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				UIHelper.showBlogEdit(mActivity, REQUEST_ADD_BLOG);
 			}
 		});
 		
-		mListView.addHeaderView(layout);
+		mListView.addHeaderView(mCreatPost);
 	}
 	
 	public void getBlogList(){
@@ -181,6 +179,10 @@ public class BlogMainFragment extends BaseFragment implements OnRefreshListener{
 							e.printStackTrace();
 						} 
 						break;
+				}
+				if(mAdapter == null){
+					mAdapter = new BlogListAdapter(mActivity);
+					mListView.setAdapter(mAdapter);
 				}
 				mAdapter.setData(mBlogList);
 				mAdapter.notifyDataSetChanged();

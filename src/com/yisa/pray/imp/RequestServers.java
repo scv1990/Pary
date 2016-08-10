@@ -27,20 +27,6 @@ import retrofit.http.*;
  */
 public interface RequestServers {
 	
-	/**
-	 * 注册
-	 * @param phone  电话
-	 * @param userName  用户名
-	 * @param password 密码
-	 * @param code  邀请码
-	 * @return
-	 */
-	@Multipart
-	@POST(UrlUtils.REGISTER)
-	Call<ErrorMessage> getString( @Part("phone") String phone,
-						    @Part("username") String userName,
-						    @Part("password") String password,
-						    @Part("invitation_code") String code);
 	@POST(UrlUtils.LOGIN)
 	Call<String> login( @Query("username") String userName,
 						@Query("password") String password,
