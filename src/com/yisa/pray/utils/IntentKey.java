@@ -9,5 +9,8 @@ public class IntentKey {
 	public static final String USERINFO = "userinfo";
 	
 	public static final String ID = "id";
-
+	
+	public static final String BLOG_CATEGROY = "categroy";
+	
+	public static final String BLOG = "blog";
 }

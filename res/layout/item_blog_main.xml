@@ -3,9 +3,9 @@
     xmlns:expandableTextView="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/main_blog_bg"
     android:layout_marginLeft="@dimen/blog_item_margin"
     android:layout_marginRight="@dimen/blog_item_margin"
+    android:background="@drawable/main_blog_bg"
     android:orientation="vertical" >
 
     <RelativeLayout
@@ -50,12 +50,12 @@
                 android:layout_marginBottom="@dimen/blog_item_user_head_pic_margin"
                 android:layout_weight="1"
                 android:drawableLeft="@drawable/clock"
-                android:text="3分钟前"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/app_text_size_12"
                 android:ellipsize="end"
                 android:gravity="center_vertical"
-                android:singleLine="true" />
+                android:singleLine="true"
+                android:text="3分钟前"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/app_text_size_12" />
         </LinearLayout>
 
         <Button
@@ -66,20 +66,20 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="16dp"
             android:background="@drawable/add_attention_bg"
+            android:focusable="false"
             android:paddingLeft="10dp"
-            android:text="@string/add_attention" 
-            android:textSize="@dimen/app_text_size_12"
-            android:focusable="false"/>
-
+            android:text="@string/add_attention"
+            android:textSize="@dimen/app_text_size_12" />
     </RelativeLayout>
-    
-    <LinearLayout 
+
+    <LinearLayout
         android:id="@+id/artical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/blog_item_user_head_pic_margin"
-        android:orientation="vertical">
-         <com.yisa.pray.views.ExpandableTextView
+        android:orientation="vertical" >
+
+        <com.yisa.pray.views.ExpandableTextView
             android:id="@+id/posts_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -105,6 +105,7 @@
                 android:layout_margin="16dp"
                 android:background="@android:color/transparent" />
         </com.yisa.pray.views.ExpandableTextView>
+
         <ImageView
             android:id="@+id/single_img"
             android:layout_width="wrap_content"
@@ -125,6 +126,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" >
         </LinearLayout>
+
         <RelativeLayout
             android:id="@+id/video_layout"
             android:layout_width="fill_parent"
@@ -160,4 +162,30 @@
                 android:background="@drawable/video_play" />
         </RelativeLayout>
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:orientation="horizontal"
+        android:weightSum="2" >
+
+        <com.yisa.pray.views.DrawableCenterTextView
+            android:id="@+id/comment"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:drawableLeft="@drawable/comment"
+            android:gravity="center_vertical"
+            android:text="评论" />
+
+        <com.yisa.pray.views.DrawableCenterTextView
+            android:id="@+id/recive_pray"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:drawableLeft="@drawable/blog_recive_pray_btn"
+            android:gravity="center_vertical"
+            android:text="领取代祷(1)" />
+    </LinearLayout>
+
 </LinearLayout>

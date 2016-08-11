@@ -14,11 +14,9 @@
     </com.yisa.pray.views.CustomHeadView>
     <ListView 
         android:id="@+id/categroy_list"
-        android:dividerHeight="1dp"
-        android:divider="@color/page_backgroud_color"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        
+        android:layout_height="wrap_content"
+        android:dividerHeight="1dp"
+        android:divider="@color/page_backgroud_color">
     </ListView>
-
 </LinearLayout>

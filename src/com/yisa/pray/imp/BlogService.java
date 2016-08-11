@@ -17,6 +17,9 @@ import com.yisa.pray.utils.BlogUrlUtils;
 import retrofit.Call;
 import retrofit.http.GET;
 import retrofit.http.Header;
+import retrofit.http.Multipart;
+import retrofit.http.POST;
+import retrofit.http.Part;
 import retrofit.http.Query;
 
 /**
@@ -44,14 +47,14 @@ public interface BlogService {
 	/**
 	 * @Title: getBlogList 
 	 * @Description: 获取帖子列表
-	 * @param @param page 页码
-	 * @param @param perPage 每页数量
-	 * @param @param token Token
-	 * @param @param cateId 分类
-	 * @param @param regionId 区域
-	 * @param @param sort 排序字段
-	 * @param @param order 排列方式
-	 * @param @return    设定文件 
+	 * @param page 页码
+	 * @param perPage 每页数量
+	 * @param token Token
+	 * @param cateId 分类
+	 * @param regionId 区域
+	 * @param sort 排序字段
+	 * @param order 排列方式
+	 * @return    设定文件 
 	 * @return Call<BlogCategroyEntity[]>    返回类型 
 	 * @throws
 	 */
@@ -64,5 +67,26 @@ public interface BlogService {
 				@Query("region_id") String regionId,
 				@Query("sort") String sort,
 				@Query("order") String order
+			);
+	
+	/**
+	 * @Title: addBlog 
+	 * @Description: TODO(这里用一句话描述这个方法的作用) 
+	 * @param token
+	 * @param regionId  地区id
+	 * @param cateId  分类id
+	 * @param title  标题
+	 * @param content  内容
+	 * @return    设定文件 
+	 * @return Call<BlogEntity>    返回类型 
+	 * @throws
+	 */
+	@Multipart
+	@POST(BlogUrlUtils.GET_BLOG_LIST)
+	Call<BlogEntity> addBlog(@Header("X-Access-Token") String token,
+			@Part("region_id") int regionId,
+			@Part("category_id") int cateId,
+			@Part("title") String title,
+			@Part("content") String content
 			);
 }

@@ -8,6 +8,7 @@
 
 package com.yisa.pray.utils;
 
+import com.yisa.pray.activity.BlogCategroyActivity;
 import com.yisa.pray.activity.EditBlogActivity;
 import com.yisa.pray.activity.HomeActivity;
 import com.yisa.pray.activity.RegisterActivity;
@@ -71,6 +72,10 @@ public class UIHelper {
 	public static void showBlogEdit(Context context, int reqestCode){
 		Intent intent = new Intent(context, EditBlogActivity.class);
 		context.startActivity(intent);
+	}
+	
+	public static void showBlogCategroy(Context context, int reqestCode){
+		
 	}
 	
 }

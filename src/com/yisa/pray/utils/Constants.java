@@ -43,5 +43,9 @@ public class Constants {
 	 * 从祷告墙到注册界面请求
 	 */
 	public static final int PRAY_WALL_TO_REGISTER_REQ_CODE = 0x401;
+	/**
+	 * 从编辑帖子打开选择blog分类的界面
+	 */
+	public static final int EDIT_TO_BLOG_CATEGROY_REQ_CODE = 0x501;
 	
 }

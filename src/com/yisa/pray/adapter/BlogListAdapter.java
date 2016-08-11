@@ -10,14 +10,18 @@ package com.yisa.pray.adapter;
 
 import java.util.List;
 
+import com.lidroid.xutils.util.AdapterUtils;
 import com.yisa.pray.R;
 import com.yisa.pray.entity.BlogEntity;
+import com.yisa.pray.views.CircleImageView;
+import com.yisa.pray.views.ExpandableTextView;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.TextView;
 
 /**
  *
@@ -81,7 +85,12 @@ public class BlogListAdapter extends BaseAdapter {
 		if(convertView == null){
 			convertView = mInflater.inflate(R.layout.item_blog_main,  null);
 		}
- 		return null;
+		BlogEntity blog = getItem(position);
+		CircleImageView avatar = (CircleImageView) AdapterUtils.get(convertView, R.id.user_head_pic);
+		TextView userName = (TextView) AdapterUtils.get(convertView, R.id.user_name);
+		TextView addTime = (TextView) AdapterUtils.get(convertView, R.id.add_time);
+		ExpandableTextView content = (ExpandableTextView) AdapterUtils.get(convertView, R.id.posts_content);
+ 		return convertView;
 	}
 
 }

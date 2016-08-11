@@ -74,15 +74,14 @@ public class BlogCategroyActivity extends BaseActivity {
 			}
 		});
 		
-		mCateListview = (ListView) getView(R.id.blog_list);
+		mCateListview = (ListView) getView(R.id.categroy_list);
 		mCateListview.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				Intent intent = new Intent();
-//				intent.setClass(mContext, HomeActivity.class);
-				String cateId = mCategroyList.get(position).getId();
-				intent.putExtra(IntentKey.ID, cateId);
+				intent.putExtra(IntentKey.BLOG_CATEGROY, mCategroyList.get(position));
 				setResult(RESULT_OK, intent);
+				finish();
 			}
 		});
 		getCategroy();

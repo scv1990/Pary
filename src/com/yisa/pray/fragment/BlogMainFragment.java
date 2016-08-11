@@ -8,7 +8,6 @@
 
 package com.yisa.pray.fragment;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -23,12 +22,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonSyntaxException;
 import com.lidroid.xutils.ui.BaseFragment;
 import com.yisa.pray.R;
 import com.yisa.pray.activity.LoginActivity;
@@ -53,7 +49,7 @@ import com.yisa.pray.views.swipe.SwipyRefreshLayoutDirection;
 /**
  *
  * 类名称: BlogMainFragment.java
- * 类描述:	 
+ * 类描述:	 帖子列表页
  * 创建人:  hq
  * 创建时间: 2016年8月1日下午4:56:27
  * -------------------------修订历史------------

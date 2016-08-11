@@ -19,6 +19,7 @@ import com.yisa.pray.fragment.MessageFragment;
 import com.yisa.pray.fragment.UserCenterFragment;
 import com.yisa.pray.views.CustomHeadView;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -107,6 +108,12 @@ public class HomeActivity extends BaseActivity implements OnPageChangeListener{
 		default:
 			break;
 		}
+	}
+	
+	@Override
+	protected void onActivityResult(int requestCode, int responseCode, Intent Intent) {
+		// TODO Auto-generated method stub
+		super.onActivityResult(requestCode, responseCode, Intent);
 	}
 
 }

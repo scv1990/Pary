@@ -30,4 +30,6 @@
 	<string name="blog_categroy">帖子分类</string>
 	<string name="blog_add">发布祷告</string>
 	<string name="no_blog_tips">暂时没有祷告发布</string>
+	<string name="blog_categroy_chose_tips">请选择分类</string>
+	<string name="publish">发布</string>
 </resources>

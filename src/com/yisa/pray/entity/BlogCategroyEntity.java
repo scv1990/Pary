@@ -8,6 +8,8 @@
 
 package com.yisa.pray.entity;
 
+import java.io.Serializable;
+
 /**
  *
  * 类名称: BlogCategroyEntity.java
@@ -19,7 +21,9 @@ package com.yisa.pray.entity;
  * 修改时间:
  * 修改备注:
  */
-public class BlogCategroyEntity {
+public class BlogCategroyEntity implements Serializable{
+	private static final long serialVersionUID = 1L;
+
 	private String id;
 	
 	private String name;

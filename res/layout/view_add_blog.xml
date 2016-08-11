@@ -5,14 +5,16 @@
     android:layout_marginLeft="10dp"
     android:layout_marginRight="10dp"
     android:background="@color/white"
-    android:gravity="center_vertical"
-    android:orientation="horizontal" >
+    android:orientation="horizontal" 
+    android:descendantFocusability="afterDescendants">
 
     <com.yisa.pray.views.CircleImageView
         android:id="@+id/user_head_pic"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginLeft="5dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="30dp"
         android:src="@drawable/default_user_head_pic" />
 
     <TextView
