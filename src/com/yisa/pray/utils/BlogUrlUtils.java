@@ -23,4 +23,6 @@ public class BlogUrlUtils {
 	public static final String GET_BLOG_CATEGROY = "/api/v1/categories";
 	
 	public static final String GET_BLOG_LIST ="/api/v1/posts";
+	
+	public static final String RECIVE_PRAY = "/api/v1/posts/{id}/pray";
 }

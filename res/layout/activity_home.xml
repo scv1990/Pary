@@ -19,21 +19,24 @@
             android:layout_weight="1"
             android:gravity="center"
             android:drawableTop="@drawable/chat_blog_btn"
-            android:text="@string/pray_wall_title"/>
+            android:text="@string/pray_wall_title"
+            android:textColor="@drawable/home_tab_btn"/>
         <TextView android:id="@+id/notification_title"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
             android:drawableTop="@drawable/chat_home_btn"
-            android:text="@string/notification_title"/>
+            android:text="@string/notification_title"
+            android:textColor="@drawable/home_tab_btn"/>
         <TextView android:id="@+id/user_center_title"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
             android:text="@string/user_center_title"
-            android:drawableTop="@drawable/chat_me_btn"/>
+            android:drawableTop="@drawable/chat_me_btn"
+            android:textColor="@drawable/home_tab_btn"/>
     </LinearLayout>
     <android.support.v4.view.ViewPager
         android:id="@+id/view_page"

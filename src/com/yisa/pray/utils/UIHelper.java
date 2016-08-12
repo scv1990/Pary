@@ -11,6 +11,7 @@ package com.yisa.pray.utils;
 import com.yisa.pray.activity.BlogCategroyActivity;
 import com.yisa.pray.activity.EditBlogActivity;
 import com.yisa.pray.activity.HomeActivity;
+import com.yisa.pray.activity.LoginActivity;
 import com.yisa.pray.activity.RegisterActivity;
 
 import android.content.Context;
@@ -48,6 +49,15 @@ public class UIHelper {
 	 */
 	public static void showHomeActivity(Context context){
 		Intent intent = new Intent(context, HomeActivity.class);
+		context.startActivity(intent);
+	}
+	
+	/**
+	 * 打开登陆界面
+	 * @param context
+	 */
+	public static void showLoginActivity(Context context){
+		Intent intent = new Intent(context, LoginActivity.class);
 		context.startActivity(intent);
 	}
 	/**

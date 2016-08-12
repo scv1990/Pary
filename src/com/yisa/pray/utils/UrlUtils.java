@@ -19,4 +19,9 @@ public class UrlUtils {
 	 * 获取验证码
 	 */
 	public static final String GET_VERIFI_CODE ="/api/v1/auth_codes";
+	
+	/**
+	 * 获取在线人数
+	 */
+	public static final String GET_ON_LINE_NUMBER = "/api/v1/users/online_count";
 }

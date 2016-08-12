@@ -74,6 +74,7 @@ public class HomeActivity extends BaseActivity implements OnPageChangeListener{
 		mAdapter = new HomePageAdaper(mFm ,mFragmentList);
 		mViewPager.setAdapter(mAdapter);
 		mViewPager.setCurrentItem(0);
+		mBlogTxt.setPressed(true);
 		mViewPager.setOnPageChangeListener(this);
 	}
 

@@ -19,7 +19,9 @@ import retrofit.http.GET;
 import retrofit.http.Header;
 import retrofit.http.Multipart;
 import retrofit.http.POST;
+import retrofit.http.PUT;
 import retrofit.http.Part;
+import retrofit.http.Path;
 import retrofit.http.Query;
 
 /**
@@ -69,9 +71,18 @@ public interface BlogService {
 				@Query("order") String order
 			);
 	
+	@GET(BlogUrlUtils.GET_BLOG_LIST)
+	Call<BlogEntity[]> getBlogList(
+				@Query("page") int page,
+				@Query("per_page") int perPage,
+				@Header("X-Access-Token") String token,
+				@Query("sort") String sort,
+				@Query("order") String order
+			);
+	
 	/**
 	 * @Title: addBlog 
-	 * @Description: TODO(这里用一句话描述这个方法的作用) 
+	 * @Description: TODO  发布帖子。添加 
 	 * @param token
 	 * @param regionId  地区id
 	 * @param cateId  分类id
@@ -84,9 +95,26 @@ public interface BlogService {
 	@Multipart
 	@POST(BlogUrlUtils.GET_BLOG_LIST)
 	Call<BlogEntity> addBlog(@Header("X-Access-Token") String token,
-			@Part("region_id") int regionId,
-			@Part("category_id") int cateId,
-			@Part("title") String title,
-			@Part("content") String content
+			@Query("region_id") int regionId,
+			@Query("category_id") int cateId,
+			@Query("title") String title,
+			@Query("content") String content
 			);
+	
+	
+	/**
+	 * @Title: recivePray 
+	 * @Description: TODO(领取代祷) 
+	 * @param @param token
+	 * @param @param id 帖子id
+	 * @param @return    设定文件 
+	 * @return Call<BlogEntity>    返回类型 
+	 * @throws
+	 */
+	@PUT(BlogUrlUtils.RECIVE_PRAY)
+	Call<BlogEntity> recivePray(
+			@Header("X-Access-Token") String token,
+			@Path("id") int id
+			);
+	
 }

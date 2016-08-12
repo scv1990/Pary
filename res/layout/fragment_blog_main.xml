@@ -42,7 +42,7 @@
             android:gravity="center_vertical"
             android:text="@string/categroy"
             android:textColor="@color/font_color_yellow"
-            android:textSize="@dimen/app_text_size_10" />
+            android:textSize="@dimen/app_text_size_12" />
 
         <RelativeLayout
             android:layout_width="0dp"
@@ -101,7 +101,7 @@
                 android:gravity="center_vertical"
                 android:text="@string/all_online_count"
                 android:textColor="@color/font_color_yellow"
-                android:textSize="@dimen/app_text_size_10" />
+                android:textSize="@dimen/app_text_size_12" />
         </RelativeLayout>
     </LinearLayout>
 
@@ -110,8 +110,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/condition_area"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
         android:layout_marginTop="12dip" >
 
         <ListView

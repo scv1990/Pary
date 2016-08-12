@@ -32,4 +32,6 @@
 	<string name="no_blog_tips">暂时没有祷告发布</string>
 	<string name="blog_categroy_chose_tips">请选择分类</string>
 	<string name="publish">发布</string>
+	<string name="comment">评论(%1$s)</string>
+	<string name="recive_pray">领取代祷(%1$s)</string>
 </resources>

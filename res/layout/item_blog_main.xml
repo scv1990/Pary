@@ -3,8 +3,6 @@
     xmlns:expandableTextView="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginLeft="@dimen/blog_item_margin"
-    android:layout_marginRight="@dimen/blog_item_margin"
     android:background="@drawable/main_blog_bg"
     android:orientation="vertical" >
 
@@ -163,6 +161,11 @@
         </RelativeLayout>
     </LinearLayout>
 
+    <View android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@color/page_backgroud_color"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="30dp"
@@ -175,8 +178,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:drawableLeft="@drawable/comment"
-            android:gravity="center_vertical"
-            android:text="评论" />
+            android:gravity="center_vertical" />
 
         <com.yisa.pray.views.DrawableCenterTextView
             android:id="@+id/recive_pray"
@@ -184,8 +186,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:drawableLeft="@drawable/blog_recive_pray_btn"
-            android:gravity="center_vertical"
-            android:text="领取代祷(1)" />
+            android:gravity="center_vertical" />
     </LinearLayout>
 
 </LinearLayout>
