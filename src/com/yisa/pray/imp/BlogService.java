@@ -92,7 +92,6 @@ public interface BlogService {
 	 * @return Call<BlogEntity>    返回类型 
 	 * @throws
 	 */
-	@Multipart
 	@POST(BlogUrlUtils.GET_BLOG_LIST)
 	Call<BlogEntity> addBlog(@Header("X-Access-Token") String token,
 			@Query("region_id") int regionId,

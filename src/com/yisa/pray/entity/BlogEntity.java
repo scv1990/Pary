@@ -51,6 +51,7 @@ public class BlogEntity implements Serializable{
 	private String pray_number;
 	
 	private String created_at;
+	private boolean is_favorited;
 	
 	private List<PostImage> post_images;
 
@@ -157,5 +158,12 @@ public class BlogEntity implements Serializable{
 	public void setPost_images(List<PostImage> post_images) {
 		this.post_images = post_images;
 	}
-	
+
+	public boolean isIs_favorited() {
+		return is_favorited;
+	}
+
+	public void setIs_favorited(boolean is_favorited) {
+		this.is_favorited = is_favorited;
+	}
 }

@@ -126,7 +126,7 @@ public class EditBlogActivity extends BaseActivity implements OnClickListener{
 			Call<BlogEntity> call = service.addBlog(
 					user.getAuthentication_token(), 
 					1, 
-					Integer.parseInt(mCategroy.getId()), "", content);
+					Integer.parseInt(mCategroy.getId()), mCategroy.getName(), content);
 			Log.i(TAG, mCategroy.getId());
 			call.enqueue(new Callback<BlogEntity>() {
 				
