@@ -129,6 +129,7 @@ public class BlogListAdapter extends BaseAdapter {
 				.addConverterFactory(GsonConverterFactory.create())
 				.build();
 		Log.i("token", UserUtils.getInstance().getUser(mContext).getAuthentication_token());
+		Log.i("id", getItem(position).getId());
 		BlogService service = ret.create(BlogService.class);
 		Call<BlogEntity> call = service.recivePray(
 					UserUtils.getInstance().getUser(mContext).getAuthentication_token(),
@@ -150,6 +151,7 @@ public class BlogListAdapter extends BaseAdapter {
 						ShowUtils.showToast(mContext, error.getError());
 					} catch (Exception e) {
 						e.printStackTrace();
+						ShowUtils.showToast(mContext, mContext.getResources().getString(R.string.recive_pray_faile_tips));
 					}
 					break;
 				}

@@ -12,6 +12,7 @@ import com.yisa.pray.activity.BlogCategroyActivity;
 import com.yisa.pray.activity.EditBlogActivity;
 import com.yisa.pray.activity.HomeActivity;
 import com.yisa.pray.activity.LoginActivity;
+import com.yisa.pray.activity.PerfectUserinfoActivity;
 import com.yisa.pray.activity.RegisterActivity;
 
 import android.content.Context;
@@ -81,6 +82,20 @@ public class UIHelper {
 	 */
 	public static void showBlogEdit(Context context, int reqestCode){
 		Intent intent = new Intent(context, EditBlogActivity.class);
+		context.startActivity(intent);
+	}
+	
+	/**
+	 * @Title: showPerfectUserinfoActicity 
+	 * @Description: TODO(打开完善用户信息) 
+	 * @param context
+	 * @param userId   用户id
+	 * @return void    返回类型 
+	 * @throws
+	 */
+	public static void showPerfectUserinfoActicity(Context context, int userId){
+		Intent intent = new Intent(context, PerfectUserinfoActivity.class);
+		intent.putExtra(IntentKey.ID, userId);
 		context.startActivity(intent);
 	}
 	

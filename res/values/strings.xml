@@ -35,4 +35,30 @@
 	<string name="comment">评论(%1$s)</string>
 	<string name="recive_pray">领取代祷(%1$s)</string>
 	<string name="recive_pray_faile_tips">领取代祷失败</string>
+	
+	<!-- 完善信息 -->
+	<string name="perfect_userinfo">完善信息</string>
+	<string name="perfect_name_label">姓名</string>
+	<string name="perfect_name_hint">请输入真实姓名</string>
+	<string name="perfect_age_label">年龄</string>
+	<string name="perfect_age_hint">请输入年龄</string>
+	<string name="perfect_education_label">学历</string>
+	<string name="perfect_education_hint">请输入学历</string>
+	<string name="perfect_vocation_label">职业</string>
+	<string name="perfect_vocation_hint">请输入职业</string>
+	<string name="perfect_church_service_label">教会侍奉</string>
+	<string name="perfect_church_service_hint">请输入教会侍奉</string>
+	<string name="perfect_rebirth_label">信主年历</string>
+	<string name="perfect_rebirth_hint">请输入信主年历</string>
+	<string name="perfect_area_label">代祷地区</string>
+	<string name="perfect_area_hint">请输入代祷地区</string>
+	<string name="perfect_period_label">代祷时段</string>
+	<string name="perfect_period_hint">请输入代祷时段</string>
+	<string name="perfect_sex_label">性别</string>
+	<string name="perfect_address_label">地址</string>
+	<string name="perfect_address_hint">请输入地址</string>
+	<string name="perfect_church_label">教会</string>
+	<string name="perfect_church_hint">请输入教会</string>
+	<string name="perfect_sex_male">男</string>
+	<string name="perfect_sex_female">女</string>
 </resources>
