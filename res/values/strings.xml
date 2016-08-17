@@ -34,4 +34,5 @@
 	<string name="publish">发布</string>
 	<string name="comment">评论(%1$s)</string>
 	<string name="recive_pray">领取代祷(%1$s)</string>
+	<string name="recive_pray_faile_tips">领取代祷失败</string>
 </resources>
