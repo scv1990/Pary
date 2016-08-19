@@ -38,6 +38,10 @@
         </activity>
          <activity android:name="com.yisa.pray.activity.EditBlogActivity" >
         </activity>
+        <activity android:name="com.yisa.pray.activity.RegionActivity" >
+        </activity>
+        <activity android:name="com.yisa.pray.activity.PerfectUserinfoActivity" >
+        </activity>
     </application>
 
 </manifest>

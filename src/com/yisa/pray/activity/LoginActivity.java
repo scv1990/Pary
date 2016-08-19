@@ -124,11 +124,16 @@ public class LoginActivity extends BaseActivity implements OnClickListener{
 					String message = "";
 					switch (response.code()) {
 					case ResponseCode.RESPONSE_CODE_201:
+						UserInfo user = response.body();
 						message = new Gson().toJson(response.body());
 						Log.i(TAG + "201", message);
 						PreferenceUtils.setPrefString(mContext, "userinfo", message);
-						UIHelper.showHomeActivity(mContext);
-						finish();
+						if(user.getStatus() == 0){
+							UIHelper.showPerfectUserinfoActicity(mContext, user.getId());
+						}else{
+							UIHelper.showHomeActivity(mContext);
+							finish();
+						}
 						break;
 					default:
 						ErrorMessage error = new ErrorMessage();;

@@ -3,6 +3,8 @@ package com.yisa.pray.entity;
 public class UserInfo {
 	private int id;
 	
+	private String avatar;
+	
 	private String username;
 	
 	private String phone;
@@ -27,11 +29,15 @@ public class UserInfo {
 	
 	private int period;
 	
+	private String rebirth;
+	
 	private String created_at;
 	
 	private String invitation_code;
 	
 	private String  authentication_token;
+	
+	private int status;
 
 	public int getId() {
 		return id;
@@ -39,6 +45,14 @@ public class UserInfo {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+	
+	public String getAvatar() {
+		return avatar;
+	}
+
+	public void setAvatar(String avatar) {
+		this.avatar = avatar;
 	}
 
 	public String getUsername() {
@@ -159,5 +173,21 @@ public class UserInfo {
 
 	public void setAuthentication_token(String authentication_token) {
 		this.authentication_token = authentication_token;
+	}
+
+	public String getRebirth() {
+		return rebirth;
+	}
+
+	public void setRebirth(String rebirth) {
+		this.rebirth = rebirth;
+	}
+
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
 	}
 }

@@ -34,7 +34,7 @@ public class StartActivity extends BaseActivity {
 	@Override
 	public void initView() {
 		UserInfo user = UserUtils.getInstance().getUser(mContext);
-		if(user == null){
+		if(user == null || user.getStatus() == 0){
 			UIHelper.showLoginActivity(mContext);
 		}else{
 			UIHelper.showHomeActivity(mContext);

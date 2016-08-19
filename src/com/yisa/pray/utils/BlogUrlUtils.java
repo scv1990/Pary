@@ -20,9 +20,21 @@ package com.yisa.pray.utils;
  * 修改备注:
  */
 public class BlogUrlUtils {
+	/**
+	 * 帖子分类
+	 */
 	public static final String GET_BLOG_CATEGROY = "/api/v1/categories";
+	
 	
 	public static final String GET_BLOG_LIST ="/api/v1/posts";
 	
+	/**
+	 * 领取代祷
+	 */
 	public static final String RECIVE_PRAY = "/api/v1/posts/{id}/pray";
+	
+	/**
+	 * 获取地区
+	 */
+	public static final String GET_BLOG_AREA = "/api/v1/regions";
 }

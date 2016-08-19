@@ -13,4 +13,6 @@ public class IntentKey {
 	public static final String BLOG_CATEGROY = "categroy";
 	
 	public static final String BLOG = "blog";
+	
+	public static final String REGION = "region";
 }

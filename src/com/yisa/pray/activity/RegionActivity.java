@@ -1,7 +1,7 @@
 /**
  * 项目名称: 七七同城
  * 
- * 文件名称: BlogCategroyActivity.java
+ * 文件名称: RegionActivity.java
  * 
  * Copyright: 2015 合肥以撒网络 Inc. All rights reserved.
  */
@@ -21,15 +21,17 @@ import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
+import android.widget.AdapterView.OnItemClickListener;
 
 import com.google.gson.Gson;
 import com.lidroid.xutils.ui.BaseActivity;
 import com.yisa.pray.R;
 import com.yisa.pray.adapter.BlogCategroyAdapter;
+import com.yisa.pray.adapter.RegionAdapter;
 import com.yisa.pray.entity.BlogCategroyEntity;
 import com.yisa.pray.entity.ErrorMessage;
+import com.yisa.pray.entity.RegionEntity;
 import com.yisa.pray.imp.BlogService;
 import com.yisa.pray.utils.IntentKey;
 import com.yisa.pray.utils.ResponseCode;
@@ -40,32 +42,32 @@ import com.yisa.pray.views.LoadingDialog;
 
 /**
  *
- * 类名称: BlogCategroyActivity.java
- * 类描述: 帖子分类界面	 
+ * 类名称: RegionActivity.java
+ * 类描述:	获取区域列表
  * 创建人:  hq
- * 创建时间: 2016年8月8日下午5:07:20
+ * 创建时间: 2016年8月19日下午4:19:35
  * -------------------------修订历史------------
  * 修改人:
  * 修改时间:
  * 修改备注:
  */
-public class BlogCategroyActivity extends BaseActivity {
-	private static final String TAG = "BlogCategroyActivity";
+public class RegionActivity extends BaseActivity {
+	private static final String TAG = "RegionActivity";
 	private CustomHeadView mHeadView;
-	private ListView mCateListview;
-	private BlogCategroyAdapter mAdapter;
-	private List<BlogCategroyEntity> mCategroyList;
+	private ListView mListview;
+	private RegionAdapter mAdapter;
+	private List<RegionEntity> mRegionList;
 	private LoadingDialog mLoading;
 	
 	@Override
 	public void setRootLayout() {
-		setContentView(R.layout.activity_blog_categroy);
+		setContentView(R.layout.activity_region);
 	}
 
 	@Override
 	public void initView() {
 		mLoading = new LoadingDialog(mContext);
-		mCategroyList = new ArrayList<BlogCategroyEntity>();
+		mRegionList = new ArrayList<RegionEntity>();
 		mHeadView = (CustomHeadView) getView(R.id.head_view);
 		mHeadView.setLeftIconClickListener(new View.OnClickListener() {
 			@Override
@@ -74,12 +76,13 @@ public class BlogCategroyActivity extends BaseActivity {
 			}
 		});
 		
-		mCateListview = (ListView) getView(R.id.categroy_list);
-		mCateListview.setOnItemClickListener(new OnItemClickListener() {
+		mListview = (ListView) getView(R.id.region_list);
+		mListview.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				Intent intent = new Intent();
-				intent.putExtra(IntentKey.BLOG_CATEGROY, mCategroyList.get(position));
+				RegionEntity region = mRegionList.get(position);
+				intent.putExtra(IntentKey.REGION, region);
 				setResult(RESULT_OK, intent);
 				finish();
 			}
@@ -94,9 +97,9 @@ public class BlogCategroyActivity extends BaseActivity {
 							.addConverterFactory(GsonConverterFactory.create())
 							.build();
 		BlogService service = retrofit.create(BlogService.class);
-		Call<List<BlogCategroyEntity>> call = service.getCategroy();
+		Call<List<RegionEntity>> call = service.getRegion();
 		try {
-			call.enqueue(new Callback<List<BlogCategroyEntity>>(){
+			call.enqueue(new Callback<List<RegionEntity>>(){
 
 				@Override
 				public void onFailure(Throwable arg0) {
@@ -104,13 +107,13 @@ public class BlogCategroyActivity extends BaseActivity {
 				}
 
 				@Override
-				public void onResponse(Response<List<BlogCategroyEntity>> response, Retrofit arg1) {
+				public void onResponse(Response<List<RegionEntity>> response, Retrofit arg1) {
 					switch (response.code()) {
 						case ResponseCode.RESPONSE_CODE_200:
-							mCategroyList = response.body();
-							if(mCategroyList != null && mCategroyList.size() > 0){
-								mAdapter = new BlogCategroyAdapter(mContext, mCategroyList);
-								mCateListview.setAdapter(mAdapter);
+							mRegionList = response.body();
+							if(mRegionList != null && mRegionList.size() > 0){
+								mAdapter = new RegionAdapter(mContext, mRegionList);
+								mListview.setAdapter(mAdapter);
 								mAdapter.notifyDataSetChanged();
 							}
 							break;

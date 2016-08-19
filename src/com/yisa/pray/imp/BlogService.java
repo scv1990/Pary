@@ -12,7 +12,9 @@ import java.util.List;
 
 import com.yisa.pray.entity.BlogCategroyEntity;
 import com.yisa.pray.entity.BlogEntity;
+import com.yisa.pray.entity.RegionEntity;
 import com.yisa.pray.utils.BlogUrlUtils;
+import com.yisa.pray.utils.UrlUtils;
 
 import retrofit.Call;
 import retrofit.http.GET;
@@ -116,4 +118,13 @@ public interface BlogService {
 			@Path("id") int id
 			);
 	
+	/**
+	 * @Title: getRegion 
+	 * @Description: TODO(获取地区) 
+	 * @param @return    设定文件 
+	 * @return Call<RegionEntity>    返回类型 
+	 * @throws
+	 */
+	@GET(BlogUrlUtils.GET_BLOG_AREA)
+	Call<List<RegionEntity>> getRegion();
 }

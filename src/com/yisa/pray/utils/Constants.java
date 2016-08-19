@@ -48,4 +48,9 @@ public class Constants {
 	 */
 	public static final int EDIT_TO_BLOG_CATEGROY_REQ_CODE = 0x501;
 	
+	/**
+	 * 从更新用户信息界面到地区选择界面
+	 */
+	public static final int USER_INFO_TO_REGION_REQ_CODE = 0x601;
+	
 }

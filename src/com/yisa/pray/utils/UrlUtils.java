@@ -24,4 +24,13 @@ public class UrlUtils {
 	 * 获取在线人数
 	 */
 	public static final String GET_ON_LINE_NUMBER = "/api/v1/users/online_count";
+	
+	/**
+	 * 更新用户信息
+	 */
+	public static final String UPDATE_USER_INFO = "/api/v1/users/{id}";
+	/**
+	 * 获取用户详细信息
+	 */
+	public static final String GET_USER_INFO = "/api/v1/users/{id}";
 }
