@@ -6,7 +6,7 @@
  * Copyright: 2015 合肥以撒网络 Inc. All rights reserved.
  */
 
-package com.yisa.pray.fragment;
+package com.yisa.pray.blog.fragment;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -34,12 +34,12 @@ import com.lidroid.xutils.ui.BaseFragment;
 import com.yisa.pray.R;
 import com.yisa.pray.activity.LoginActivity;
 import com.yisa.pray.activity.RegisterActivity;
-import com.yisa.pray.adapter.BlogListAdapter;
-import com.yisa.pray.entity.BlogEntity;
+import com.yisa.pray.blog.adapter.BlogListAdapter;
+import com.yisa.pray.blog.entity.BlogEntity;
+import com.yisa.pray.blog.imp.BlogService;
 import com.yisa.pray.entity.ErrorMessage;
 import com.yisa.pray.entity.OnlineCountEntity;
 import com.yisa.pray.entity.UserInfo;
-import com.yisa.pray.imp.BlogService;
 import com.yisa.pray.imp.UserService;
 import com.yisa.pray.utils.Constants;
 import com.yisa.pray.utils.IntentKey;

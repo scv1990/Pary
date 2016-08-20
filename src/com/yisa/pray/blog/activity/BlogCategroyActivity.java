@@ -6,7 +6,7 @@
  * Copyright: 2015 合肥以撒网络 Inc. All rights reserved.
  */
 
-package com.yisa.pray.activity;
+package com.yisa.pray.blog.activity;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -27,10 +27,10 @@ import android.widget.ListView;
 import com.google.gson.Gson;
 import com.lidroid.xutils.ui.BaseActivity;
 import com.yisa.pray.R;
-import com.yisa.pray.adapter.BlogCategroyAdapter;
-import com.yisa.pray.entity.BlogCategroyEntity;
+import com.yisa.pray.blog.adapter.BlogCategroyAdapter;
+import com.yisa.pray.blog.entity.BlogCategroyEntity;
+import com.yisa.pray.blog.imp.BlogService;
 import com.yisa.pray.entity.ErrorMessage;
-import com.yisa.pray.imp.BlogService;
 import com.yisa.pray.utils.IntentKey;
 import com.yisa.pray.utils.ResponseCode;
 import com.yisa.pray.utils.ShowUtils;

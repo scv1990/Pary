@@ -14,7 +14,7 @@ import java.util.List;
 import com.lidroid.xutils.ui.BaseActivity;
 import com.yisa.pray.R;
 import com.yisa.pray.adapter.HomePageAdaper;
-import com.yisa.pray.fragment.BlogMainFragment;
+import com.yisa.pray.blog.fragment.BlogMainFragment;
 import com.yisa.pray.fragment.MessageFragment;
 import com.yisa.pray.fragment.UserCenterFragment;
 import com.yisa.pray.views.CustomHeadView;

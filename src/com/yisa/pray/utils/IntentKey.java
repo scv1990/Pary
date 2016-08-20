@@ -15,4 +15,18 @@ public class IntentKey {
 	public static final String BLOG = "blog";
 	
 	public static final String REGION = "region";
+	
+	public static final String IMAGE_PATH_LIST = "path_list";
+	
+	public static final String REDIRECT_TYPE = "redirect_type";
+	
+	public static final String IMAGE_PATH_BUNDLE = "bundle";
+	
+	public static final String IMAGE_REMARK_LIST = "remark_list";
+	
+	public static final String IMAGE_UPLOAD_CONTENT = "image_upload_content";
+	
+	public static final String IMAGE_UPLOAD_TYPE = "image_upload_type";
+	
+	public static final String IMAGE_UPLOAD_MAXSIZE = "image_upload_maxsize";
 }

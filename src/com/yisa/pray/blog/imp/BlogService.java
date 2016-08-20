@@ -6,13 +6,16 @@
  * Copyright: 2015 合肥以撒网络 Inc. All rights reserved.
  */
 
-package com.yisa.pray.imp;
+package com.yisa.pray.blog.imp;
 
+import java.io.File;
 import java.util.List;
 
-import com.yisa.pray.entity.BlogCategroyEntity;
-import com.yisa.pray.entity.BlogEntity;
-import com.yisa.pray.entity.RegionEntity;
+import com.squareup.okhttp.RequestBody;
+import com.yisa.pray.blog.entity.BlogCategroyEntity;
+import com.yisa.pray.blog.entity.BlogEntity;
+import com.yisa.pray.blog.entity.RegionEntity;
+import com.yisa.pray.entity.PostImage;
 import com.yisa.pray.utils.BlogUrlUtils;
 import com.yisa.pray.utils.UrlUtils;
 
@@ -127,4 +130,11 @@ public interface BlogService {
 	 */
 	@GET(BlogUrlUtils.GET_BLOG_AREA)
 	Call<List<RegionEntity>> getRegion();
+	
+	@Multipart
+	@POST(BlogUrlUtils.UPLOAD_BLOG_IMAGE)
+	Call<PostImage> uploadImage(
+			@Path("id") int id,
+			@Part("image\"; filename=\"avatar.jpg") RequestBody file,
+			@Header("X-Access-Token") String token);
 }

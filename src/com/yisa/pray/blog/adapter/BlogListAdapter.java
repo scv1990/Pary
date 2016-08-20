@@ -6,7 +6,7 @@
  * Copyright: 2015 合肥以撒网络 Inc. All rights reserved.
  */
 
-package com.yisa.pray.adapter;
+package com.yisa.pray.blog.adapter;
 
 import java.util.List;
 
@@ -19,9 +19,9 @@ import retrofit.Retrofit;
 import com.google.gson.Gson;
 import com.lidroid.xutils.util.AdapterUtils;
 import com.yisa.pray.R;
-import com.yisa.pray.entity.BlogEntity;
+import com.yisa.pray.blog.entity.BlogEntity;
+import com.yisa.pray.blog.imp.BlogService;
 import com.yisa.pray.entity.ErrorMessage;
-import com.yisa.pray.imp.BlogService;
 import com.yisa.pray.utils.ResponseCode;
 import com.yisa.pray.utils.ShowUtils;
 import com.yisa.pray.utils.UrlUtils;

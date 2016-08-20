@@ -37,4 +37,9 @@ public class BlogUrlUtils {
 	 * 获取地区
 	 */
 	public static final String GET_BLOG_AREA = "/api/v1/regions";
+	
+	/**
+	 * 上传帖子图片
+	 */
+	public static final String UPLOAD_BLOG_IMAGE = "/api/v1/posts/{id}/images";
 }

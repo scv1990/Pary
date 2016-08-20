@@ -1,18 +1,19 @@
 /**
  * 项目名称: 七七同城
  * 
- * 文件名称: BlogCategroyAdapter.java
+ * 文件名称: RegionAdapter.java
  * 
  * Copyright: 2015 合肥以撒网络 Inc. All rights reserved.
  */
 
-package com.yisa.pray.adapter;
+package com.yisa.pray.blog.adapter;
 
 import java.util.List;
 
 import com.lidroid.xutils.util.AdapterUtils;
 import com.yisa.pray.R;
-import com.yisa.pray.entity.BlogCategroyEntity;
+import com.yisa.pray.blog.entity.BlogCategroyEntity;
+import com.yisa.pray.blog.entity.RegionEntity;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -23,24 +24,24 @@ import android.widget.TextView;
 
 /**
  *
- * 类名称: BlogCategroyAdapter.java
- * 类描述:	blog 分类 
+ * 类名称: RegionAdapter.java
+ * 类描述:	 
  * 创建人:  hq
- * 创建时间: 2016年8月8日下午5:08:05
+ * 创建时间: 2016年8月19日下午4:19:54
  * -------------------------修订历史------------
  * 修改人:
  * 修改时间:
  * 修改备注:
  */
-public class BlogCategroyAdapter extends BaseAdapter {
+public class RegionAdapter extends BaseAdapter {
 	private Context mContext;
 	private LayoutInflater mLayoutInflater;
-	private List<BlogCategroyEntity> data;
+	private List<RegionEntity> data;
 	
 	/**
 	 * @param mContext
 	 */
-	public BlogCategroyAdapter(Context mContext, List<BlogCategroyEntity> list) {
+	public RegionAdapter(Context mContext, List<RegionEntity> list) {
 		super();
 		this.mContext = mContext;
 		this.mLayoutInflater = LayoutInflater.from(mContext);
@@ -57,7 +58,7 @@ public class BlogCategroyAdapter extends BaseAdapter {
 	}
 
 	@Override
-	public BlogCategroyEntity getItem(int position) {
+	public RegionEntity getItem(int position) {
 		if(data == null){
 			return null;
 		}

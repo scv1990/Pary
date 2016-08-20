@@ -128,12 +128,16 @@ public class LoginActivity extends BaseActivity implements OnClickListener{
 						message = new Gson().toJson(response.body());
 						Log.i(TAG + "201", message);
 						PreferenceUtils.setPrefString(mContext, "userinfo", message);
-						if(user.getStatus() == 0){
-							UIHelper.showPerfectUserinfoActicity(mContext, user.getId());
-						}else{
-							UIHelper.showHomeActivity(mContext);
-							finish();
-						}
+//						if(user.getStatus() == 0){
+//							ShowUtils.showToast(mContext, getResources().getString(R.string.user_status_0));
+//						}else{
+//							if(user.getArea() == null || "".equals(user.getArea()) || user.getPeriod() == 0 ){
+//								UIHelper.showPerfectUserinfoActicity(mContext, user.getId());
+//							}else{
+								UIHelper.showHomeActivity(mContext);
+								finish();
+//							}
+//						}
 						break;
 					default:
 						ErrorMessage error = new ErrorMessage();;

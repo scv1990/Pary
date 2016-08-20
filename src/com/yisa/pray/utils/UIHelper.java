@@ -8,15 +8,18 @@
 
 package com.yisa.pray.utils;
 
-import com.yisa.pray.activity.BlogCategroyActivity;
-import com.yisa.pray.activity.EditBlogActivity;
 import com.yisa.pray.activity.HomeActivity;
 import com.yisa.pray.activity.LoginActivity;
 import com.yisa.pray.activity.PerfectUserinfoActivity;
 import com.yisa.pray.activity.RegisterActivity;
+import com.yisa.pray.blog.activity.BlogCategroyActivity;
+import com.yisa.pray.blog.activity.EditBlogActivity;
+import com.yisa.pray.blog.activity.ImageSelectActivity;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 
 /**
  *
@@ -99,8 +102,17 @@ public class UIHelper {
 		context.startActivity(intent);
 	}
 	
-	public static void showBlogCategroy(Context context, int reqestCode){
-		
+	/**
+	 * 跳转本地图片选择
+	 * 
+	 * @param context
+	 */
+	public static void showSelectPhoto(Activity activity, Bundle bundle, int maxSize, int requestCode) {
+		Intent intent = new Intent(activity.getApplicationContext(), ImageSelectActivity.class).putExtra(
+				IntentKey.IMAGE_PATH_BUNDLE, bundle).putExtra(IntentKey.IMAGE_UPLOAD_MAXSIZE, maxSize);
+		activity.startActivityForResult(intent, requestCode);
 	}
+	
+	
 	
 }

@@ -53,4 +53,29 @@ public class Constants {
 	 */
 	public static final int USER_INFO_TO_REGION_REQ_CODE = 0x601;
 	
+	/**
+	 * 拍照
+	 */
+	public static final int UPLOAD_TAKE_PHOTO_REQ_CODE = 0x701;
+	
+	/**
+	 * 从相册中选照片
+	 */
+	public static final int UPLOAD_PICK_PHOTO_REQ_CODE = 0x702;
+	
+	/**
+	 * 剪裁照片
+	 */
+	public static final int UPLOAD_CUT_PHOTO_REQ_CODE = 0x703;
+	
+	/**
+	 *  选择图片广播
+	 */
+	public static final String REFRESH_UPLOAD_GRIDVIEW_IMAGE = "refresh_upload_gridview_image";
+	
+	/**
+	 * 上传图片最大张数
+	 */
+	public static final int IMAGE_SELECT_MAXSIZE = 9;
+	
 }

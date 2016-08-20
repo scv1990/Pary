@@ -65,4 +65,14 @@
 	
 	<!-- 选择地区 -->
 	<string name="region">地区</string>
+	
+	<!--上传图片  -->
+	<string name="pick_photo">从相册中选取</string>
+	<string name="take_photo">拍照</string>
+	<string name="cancel">取消</string>
+	<string name="image_max_warn">最多可以选九张照片</string>
+	<string name="upload_image_falie">上传图片失败</string>
+	
+	<!-- user -->
+	<string name="user_status_0">用户还未通过审核，请耐心等待</string>
 </resources>
