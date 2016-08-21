@@ -72,7 +72,7 @@ public class BlogMainFragment extends BaseFragment implements OnRefreshListener{
 	private SwipyRefreshLayout mRefresh;
 	private ListView mListView;
 	private BlogListAdapter mAdapter;
-	private List<BlogEntity> mBlogList;
+	private ArrayList<BlogEntity> mBlogList;
 	private View mCreatPost;
 	private TextView mZeroClockTxt;
 	private TextView mThreeClockTxt;

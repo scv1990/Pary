@@ -8,10 +8,13 @@
 
 package com.yisa.pray.utils;
 
+import java.util.ArrayList;
+
 import com.yisa.pray.activity.HomeActivity;
 import com.yisa.pray.activity.LoginActivity;
 import com.yisa.pray.activity.PerfectUserinfoActivity;
 import com.yisa.pray.activity.RegisterActivity;
+import com.yisa.pray.activity.ShowBigImageActivity;
 import com.yisa.pray.blog.activity.BlogCategroyActivity;
 import com.yisa.pray.blog.activity.EditBlogActivity;
 import com.yisa.pray.blog.activity.ImageSelectActivity;
@@ -113,6 +116,22 @@ public class UIHelper {
 		activity.startActivityForResult(intent, requestCode);
 	}
 	
+	
+	/**
+	 * 跳转缩略图大图展示
+	 * 
+	 * @param mContext
+	 *            搜索关键字
+	 * @param images
+	 *            展示图片链接数据
+	 * @param index
+	 *            当前点击图片数组下标
+	 */
+	public static void showBigImage(Context mContext, ArrayList<String> images, int index) {
+		Intent intent = new Intent(mContext.getApplicationContext(), ShowBigImageActivity.class);
+		intent.putStringArrayListExtra("KEY", images).putExtra("index", index);
+		mContext.startActivity(intent);
+	}
 	
 	
 }

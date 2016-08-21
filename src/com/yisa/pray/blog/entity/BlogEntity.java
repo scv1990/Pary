@@ -9,9 +9,8 @@
 package com.yisa.pray.blog.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
-
-import com.yisa.pray.entity.PostImage;
 
 /**
  *
@@ -55,7 +54,7 @@ public class BlogEntity implements Serializable{
 	private String created_at;
 	private boolean is_favorited;
 	
-	private List<PostImage> post_images;
+	private ArrayList<PostImage> post_images;
 
 	public String getId() {
 		return id;
@@ -153,11 +152,11 @@ public class BlogEntity implements Serializable{
 		this.created_at = created_at;
 	}
 
-	public List<PostImage> getPost_images() {
+	public ArrayList<PostImage> getPost_images() {
 		return post_images;
 	}
 
-	public void setPost_images(List<PostImage> post_images) {
+	public void setPost_images(ArrayList<PostImage> post_images) {
 		this.post_images = post_images;
 	}
 

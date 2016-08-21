@@ -6,7 +6,7 @@
  * Copyright: 2015 合肥以撒网络 Inc. All rights reserved.
  */
 
-package com.yisa.pray.entity;
+package com.yisa.pray.blog.entity;
 
 /**
  *
