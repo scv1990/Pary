@@ -113,8 +113,6 @@ public class EditBlogActivity extends BaseActivity implements OnClickListener{
 		mPublishBtn = (Button) getView(R.id.publish);
 		mPublishBtn.setOnClickListener(this);
 		mImageGridView = (NoScrollGridView) findViewById(R.id.upload_gridview);
-		
-		
 		mAddImage = (ImageView) getView(R.id.upload_pic);
 		mAddImage.setOnClickListener(this);
 	}
@@ -150,7 +148,7 @@ public class EditBlogActivity extends BaseActivity implements OnClickListener{
 			return ;
 		}
 		
-		if(mCategroy == null || mCategroy.getId() == null || "".equals(mCategroy.getId())){
+		if(mCategroy == null || mCategroy.getId() == 0 || "".equals(mCategroy.getId())){
 			ShowUtils.showToast(mContext, getResources().getString(R.string.blog_categroy_chose_tips));
 			return ;
 		}
@@ -170,8 +168,8 @@ public class EditBlogActivity extends BaseActivity implements OnClickListener{
 			Call<BlogEntity> call = service.addBlog(
 					user.getAuthentication_token(), 
 					1, 
-					Integer.parseInt(mCategroy.getId()), mCategroy.getName(), content);
-			Log.i(TAG, mCategroy.getId());
+					mCategroy.getId(), mCategroy.getName(), content);
+			Log.i(TAG, mCategroy.getId() + "");
 			call.enqueue(new Callback<BlogEntity>() {
 				
 				@Override
@@ -182,14 +180,16 @@ public class EditBlogActivity extends BaseActivity implements OnClickListener{
 						switch(code){
 						case ResponseCode.RESPONSE_CODE_201 :
 							BlogEntity blog = response.body();
+							Log.i(TAG, mSelectList.size() + "");
 							if(mSelectList != null && mSelectList.size() > 0){
 								uploadImage(blog.getId());
+							}else{
+								Intent intent = new Intent(mContext, HomeActivity.class);
+								intent.putExtra(IntentKey.BLOG, blog);
+								setResult(RESULT_OK, intent);
+								finish();
 							}
 							
-							Intent intent = new Intent(mContext, HomeActivity.class);
-							intent.putExtra(IntentKey.BLOG, blog);
-							setResult(RESULT_OK, intent);
-							finish();
 							break;
 						default :
 							ErrorMessage error = new ErrorMessage();;
@@ -226,7 +226,7 @@ public class EditBlogActivity extends BaseActivity implements OnClickListener{
 		if(mSelectList == null || mSelectList.size() == 0){
 			return;
 		}
-		
+		mLoading.show();
 		RequestBody requestFile;
 		Retrofit retrofit = new Retrofit.Builder().baseUrl(UrlUtils.SERVER_ADDRESS).addConverterFactory(GsonConverterFactory.create()).build();
 		BlogService service = retrofit.create(BlogService.class);
@@ -244,13 +244,16 @@ public class EditBlogActivity extends BaseActivity implements OnClickListener{
 
 				@Override
 				public void onResponse(Response<PostImage> response, Retrofit retrofit) {
+					mLoading.dismiss();
 					switch (response.code()) {
-					case ResponseCode.RESPONSE_CODE_201:
-						
-						break;
-					default:
-						ShowUtils.showToast(mContext, getResources().getString(R.string.upload_image_falie));
-						break;
+						case ResponseCode.RESPONSE_CODE_201:
+							Intent intent = new Intent(mContext, HomeActivity.class);
+							setResult(RESULT_OK, intent);
+							finish();
+							break;
+						default:
+							ShowUtils.showToast(mContext, getResources().getString(R.string.upload_image_falie));
+							break;
 					}
 				}
 			});

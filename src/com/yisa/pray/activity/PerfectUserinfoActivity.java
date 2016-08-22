@@ -14,6 +14,7 @@ import retrofit.GsonConverterFactory;
 import retrofit.Response;
 import retrofit.Retrofit;
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -25,11 +26,13 @@ import com.google.gson.Gson;
 import com.lidroid.xutils.ui.BaseActivity;
 import com.yisa.pray.R;
 import com.yisa.pray.blog.entity.RegionEntity;
+import com.yisa.pray.entity.EducationEntity;
 import com.yisa.pray.entity.ErrorMessage;
 import com.yisa.pray.entity.UserInfo;
 import com.yisa.pray.imp.UserService;
 import com.yisa.pray.utils.Constants;
 import com.yisa.pray.utils.IntentKey;
+import com.yisa.pray.utils.PropertyUtil;
 import com.yisa.pray.utils.ResponseCode;
 import com.yisa.pray.utils.ShowUtils;
 import com.yisa.pray.utils.UrlUtils;
@@ -48,6 +51,7 @@ import com.yisa.pray.views.CustomHeadView;
  * 修改备注:
  */
 public class PerfectUserinfoActivity extends BaseActivity implements OnClickListener{
+	private static final String TAG = "PerfectUserinfoActivity";
 	private CustomHeadView mHeadView;
 	private EditText mUserName;
 	private EditText mAge;
@@ -66,6 +70,7 @@ public class PerfectUserinfoActivity extends BaseActivity implements OnClickList
 	private RadioButton mFemaleRadio;
 	private UserInfo mUserInfo;
 	private String token;
+	private EducationEntity mEdu;
 	@Override
 	public void setRootLayout() {
 		setContentView(R.layout.activity_perfected_userinfo);
@@ -96,6 +101,8 @@ public class PerfectUserinfoActivity extends BaseActivity implements OnClickList
 		mMaleRadio = (RadioButton) getView(R.id.male_radio);
 		mFemaleRadio = (RadioButton) getView(R.id.female_radio);
 		mCommit = (Button) getView(R.id.commit);
+		mEducation.setOnClickListener(this);
+		mArea.setOnClickListener(this);
 		mCommit.setOnClickListener(this);
 		token = UserUtils.getInstance().getUser(mContext).getAuthentication_token();
 		getUserinfo();
@@ -104,17 +111,21 @@ public class PerfectUserinfoActivity extends BaseActivity implements OnClickList
 	@Override
 	public void onClick(View v) {
 		super.onClick(v);
+		Intent intent = new Intent();
 		switch (v.getId()) {
-		case R.id.commit:
-			commitData();
-			break;
-		case R.id.pray_area:
-			Intent intent = new Intent();
-			intent.setClass(mContext, RegionActivity.class);
-			startActivityForResult(intent, Constants.USER_INFO_TO_REGION_REQ_CODE);
-			break;
-		default:
-			break;
+			case R.id.commit:
+				commitData();
+				break;
+			case R.id.pray_area:
+				intent.setClass(mContext, RegionActivity.class);
+				startActivityForResult(intent, Constants.USER_INFO_TO_REGION_REQ_CODE);
+				break;
+			case R.id.education:
+				intent.setClass(mContext, EducationActicity.class);
+				startActivityForResult(intent, Constants.USER_INFO_TO_EDUCATION_REQ_CODE);
+				break;
+			default:
+				break;
 		}
 	}
 	
@@ -140,7 +151,8 @@ public class PerfectUserinfoActivity extends BaseActivity implements OnClickList
 					switch (response.code()) {
 					case ResponseCode.RESPONSE_CODE_200:
 						mUserInfo = response.body();
-						
+						mEdu = new EducationEntity();
+						mEdu.setId(mUserInfo.getId());
 						initUserInfo();
 						break;
 
@@ -150,6 +162,7 @@ public class PerfectUserinfoActivity extends BaseActivity implements OnClickList
 						break;
 					}
 				} catch (Exception e) {
+					e.printStackTrace();
 				}
 			}
 		});
@@ -166,12 +179,12 @@ public class PerfectUserinfoActivity extends BaseActivity implements OnClickList
 		mUserName.setText(mUserInfo.getName());
 		mAge.setText(mUserInfo.getBirth());
 		mTel.setText(mUserInfo.getPhone());
-		mEducation.setText(mUserInfo.getEducation());
+		mEducation.setText(PropertyUtil.getInstance().readProperty(mContext, mUserInfo.getEducation() +""));
 		mVocation.setText(mUserInfo.getJob());
 		mChurch.setText(mUserInfo.getChurch());
 		mChurchService.setText(mUserInfo.getChurch_service());
 		mArea.setText(mUserInfo.getArea());
-		mPeriod.setText(mUserInfo.getPeriod());
+		mPeriod.setText(mUserInfo.getPeriod() + "");
 		mRebirth.setText(mUserInfo.getRebirth());
 		mAddress.setText(mUserInfo.getAddress());
 		String gender = mUserInfo.getGender();
@@ -204,7 +217,7 @@ public class PerfectUserinfoActivity extends BaseActivity implements OnClickList
 						mAddress.getText().toString(), 
 						((RadioButton)getView(mRadioGroup.getCheckedRadioButtonId())).getText().toString(), 
 						mAge.getText().toString(), 
-						mEducation.getText().toString(), 
+						mEdu.getId(), 
 						mVocation.getText().toString(), 
 						mChurch.getText().toString(), 
 						mChurchService.getText().toString(), 
@@ -212,6 +225,7 @@ public class PerfectUserinfoActivity extends BaseActivity implements OnClickList
 						mArea.getText().toString(), 
 						mPeriod.getText().toString(), 
 						token);
+		Log.i(TAG, mAge.getText().toString());
 		call.enqueue(new Callback<UserInfo>() {
 
 			@Override
@@ -221,11 +235,12 @@ public class PerfectUserinfoActivity extends BaseActivity implements OnClickList
 
 			@Override
 			public void onResponse(Response<UserInfo> response, Retrofit ret) {
+				int code = response.code();
 				try {
-					switch (response.code()) {
-					case ResponseCode.RESPONSE_CODE_201:
+					switch (code) {
+					case ResponseCode.RESPONSE_CODE_200:
 						mUserInfo = response.body();
-						initUserInfo();
+						finish();
 						break;
 
 					default:
@@ -245,13 +260,16 @@ public class PerfectUserinfoActivity extends BaseActivity implements OnClickList
 		
 		if(responseCode == RESULT_OK){
 			switch (requestCode) {
-			case Constants.USER_INFO_TO_REGION_REQ_CODE:
-				RegionEntity region = (RegionEntity)intent.getSerializableExtra(IntentKey.REGION);
-				mArea.setText(region.getName());
-				break;
-
-			default:
-				break;
+				case Constants.USER_INFO_TO_REGION_REQ_CODE:
+					RegionEntity region = (RegionEntity)intent.getSerializableExtra(IntentKey.REGION);
+					mArea.setText(region.getName());
+					break;
+				case Constants.USER_INFO_TO_EDUCATION_REQ_CODE:
+					mEdu = (EducationEntity)intent.getSerializableExtra(IntentKey.EDUCATION);
+					mEducation.setText(mEdu.getName());
+					break;
+				default:
+					break;
 			}
 		}
 		

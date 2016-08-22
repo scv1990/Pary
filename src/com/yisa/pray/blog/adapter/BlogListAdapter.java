@@ -41,6 +41,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -61,7 +62,7 @@ public class BlogListAdapter extends BaseAdapter {
 	private Context mContext;
 	private ArrayList<BlogEntity> data;
 	private LayoutInflater mInflater;
-	private float screenWidth = ShowUtils.getScreenSize(mContext).widthPixels - ShowUtils.dip2px(mContext, 36);
+	private float screenWidth = 0;;
 	
 	/**
 	 * @param mContext
@@ -71,6 +72,7 @@ public class BlogListAdapter extends BaseAdapter {
 	public BlogListAdapter(Context mContext) {
 		super();
 		this.mContext = mContext;
+		screenWidth = ShowUtils.getScreenSize(mContext).widthPixels - ShowUtils.dip2px(mContext, 36);
 		this.mInflater = LayoutInflater.from(mContext);
 	}
 
@@ -119,6 +121,20 @@ public class BlogListAdapter extends BaseAdapter {
 		ExpandableTextView content = (ExpandableTextView) AdapterUtils.get(convertView, R.id.posts_content);
 		TextView prayNum = (TextView) AdapterUtils.get(convertView, R.id.recive_pray);
 		TextView comment = (TextView) AdapterUtils.get(convertView, R.id.comment);
+		Button addAttention = (Button) AdapterUtils.get(convertView, R.id.attention);
+		addAttention.setOnClickListener(new View.OnClickListener(){
+
+			@Override
+			public void onClick(View v) {
+				
+			}
+			
+		});
+		if(blog.getUser_id() == UserUtils.getInstance().getUser(mContext).getId()){
+			addAttention.setVisibility(View.GONE);
+		}else {
+			addAttention.setVisibility(View.VISIBLE);
+		}
 		userName.setText(blog.getUser_name());
 		addTime.setText(blog.getCreated_at());
 		content.setText(blog.getContent());
@@ -188,8 +204,10 @@ public class BlogListAdapter extends BaseAdapter {
 		horViewById.setVisibility(View.GONE);
 		verViewById.setVisibility(View.GONE);
 		int length = images.size() > 5 ? 5 : images.size();
-		float imageWidth = images.get(0).getWidth();
-		float imageHeight = images.get(0).getHeight();
+		float imageWidth = 400;
+		float imageHeight = 360;
+//		float imageWidth = images.get(0).getWidth();
+//		float imageHeight = images.get(0).getHeight();
 		if (length == 1) {
 			singleView.setVisibility(View.VISIBLE);
 			float realWidth = screenWidth;
@@ -206,7 +224,7 @@ public class BlogListAdapter extends BaseAdapter {
 			singleView.setLayoutParams(params);
 			ImageLoaderUtil.displayImageForGlide(mContext, images.get(0).getImage(), singleView);
 			singleView.setOnClickListener(new OnImageClickListener(getImageUrlList(blogItem), 0));
-		} else {
+		} else if(length > 1){
 			if (imageWidth > imageHeight) {
 				verViewById.setVisibility(View.VISIBLE);
 				verViewById.removeAllViews();

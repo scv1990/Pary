@@ -17,7 +17,7 @@ public class UserInfo {
 	
 	private String birth;
 	
-	private String education;
+	private int education;
 	
 	private String job;
 	
@@ -103,11 +103,11 @@ public class UserInfo {
 		this.birth = birth;
 	}
 
-	public String getEducation() {
+	public int getEducation() {
 		return education;
 	}
 
-	public void setEducation(String education) {
+	public void setEducation(int education) {
 		this.education = education;
 	}
 

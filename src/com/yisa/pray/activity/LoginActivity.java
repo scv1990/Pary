@@ -34,7 +34,6 @@ import com.yisa.pray.entity.ErrorMessage;
 import com.yisa.pray.entity.UserInfo;
 import com.yisa.pray.imp.RequestServers;
 import com.yisa.pray.utils.Constants;
-import com.yisa.pray.utils.DeviceUtils;
 import com.yisa.pray.utils.PreferenceUtils;
 import com.yisa.pray.utils.ResponseCode;
 import com.yisa.pray.utils.ShowUtils;
@@ -56,7 +55,6 @@ import com.yisa.pray.views.LoadingDialog;
 public class LoginActivity extends BaseActivity implements OnClickListener{
 
 	private static final String TAG = "LoginActivity";
-	private static final int REQUEST_CODE = 0x0001;
 	private EditText mUserName ;
 	private EditText mPwd;
 	private Button mLoginBtn;
@@ -128,7 +126,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener{
 						message = new Gson().toJson(response.body());
 						Log.i(TAG + "201", message);
 						PreferenceUtils.setPrefString(mContext, "userinfo", message);
-						
+						UIHelper.showPerfectUserinfoActicity(mContext, user.getId());
 						if(user.getArea() == null || "".equals(user.getArea()) || user.getPeriod() == 0 ){
 							UIHelper.showPerfectUserinfoActicity(mContext, user.getId());
 						}else{

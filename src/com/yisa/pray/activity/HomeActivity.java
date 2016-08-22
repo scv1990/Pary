@@ -14,10 +14,15 @@ import java.util.List;
 import com.lidroid.xutils.ui.BaseActivity;
 import com.yisa.pray.R;
 import com.yisa.pray.adapter.HomePageAdaper;
+import com.yisa.pray.blog.entity.BlogCategroyEntity;
+import com.yisa.pray.blog.entity.RegionEntity;
 import com.yisa.pray.blog.fragment.BlogMainFragment;
 import com.yisa.pray.fragment.MessageFragment;
 import com.yisa.pray.fragment.UserCenterFragment;
+import com.yisa.pray.utils.Constants;
+import com.yisa.pray.utils.IntentKey;
 import com.yisa.pray.views.CustomHeadView;
+import com.yisa.pray.views.swipe.SwipyRefreshLayoutDirection;
 
 import android.content.Intent;
 import android.support.v4.app.Fragment;
@@ -112,9 +117,23 @@ public class HomeActivity extends BaseActivity implements OnPageChangeListener{
 	}
 	
 	@Override
-	protected void onActivityResult(int requestCode, int responseCode, Intent Intent) {
-		// TODO Auto-generated method stub
-		super.onActivityResult(requestCode, responseCode, Intent);
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if(resultCode == RESULT_OK){
+			switch (requestCode) {
+				case Constants.PRAY_WALL_TO_EDIT_BLOG_REQ_CODE:
+					((BlogMainFragment)mBlogFragment).onRefresh(SwipyRefreshLayoutDirection.TOP);
+					break;
+				case Constants.PRAY_WALL_TO_REGION_REQ_CODE:
+					((BlogMainFragment)mBlogFragment).setRegion((RegionEntity)data.getSerializableExtra(IntentKey.REGION));
+					break;
+				case Constants.PRAY_WALL_TO_CATEGROY_REQ_CODE:
+					((BlogMainFragment)mBlogFragment).setCategroy((BlogCategroyEntity)data.getSerializableExtra(IntentKey.BLOG_CATEGROY));
+					break;
+				default:
+					break;
+			}
+		}
 	}
 
 }

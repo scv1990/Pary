@@ -89,7 +89,9 @@
                 <EditText
                     android:id="@+id/education"
                     style="@style/register_edittext_style"
-                    android:hint="@string/perfect_education_hint" />
+                    android:hint="@string/perfect_education_hint"
+                    android:editable="false"
+                    android:focusable="false" />
             </LinearLayout>
             <LinearLayout style="@style/custom_input_layout_style" >
                 <TextView

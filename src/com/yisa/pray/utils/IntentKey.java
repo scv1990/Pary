@@ -16,6 +16,8 @@ public class IntentKey {
 	
 	public static final String REGION = "region";
 	
+	public static final String EDUCATION = "education";
+	
 	public static final String IMAGE_PATH_LIST = "path_list";
 	
 	public static final String REDIRECT_TYPE = "redirect_type";

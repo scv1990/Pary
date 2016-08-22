@@ -70,8 +70,8 @@ public interface BlogService {
 				@Query("page") int page,
 				@Query("per_page") int perPage,
 				@Header("X-Access-Token") String token,
-				@Query("category_id") String cateId,
-				@Query("region_id") String regionId,
+				@Query("category_id") Integer cateId,
+				@Query("region_id") Integer regionId,
 				@Query("sort") String sort,
 				@Query("order") String order
 			);

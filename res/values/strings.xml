@@ -41,8 +41,8 @@
 	<string name="perfect_userinfo">完善信息</string>
 	<string name="perfect_name_label">姓名</string>
 	<string name="perfect_name_hint">请输入真实姓名</string>
-	<string name="perfect_age_label">年龄</string>
-	<string name="perfect_age_hint">请输入年龄</string>
+	<string name="perfect_age_label">生日</string>
+	<string name="perfect_age_hint">请输入生日(格式:1980-02-08)</string>
 	<string name="perfect_education_label">学历</string>
 	<string name="perfect_education_hint">请输入学历</string>
 	<string name="perfect_vocation_label">职业</string>
@@ -50,7 +50,7 @@
 	<string name="perfect_church_service_label">教会侍奉</string>
 	<string name="perfect_church_service_hint">请输入教会侍奉</string>
 	<string name="perfect_rebirth_label">信主年历</string>
-	<string name="perfect_rebirth_hint">请输入信主年历</string>
+	<string name="perfect_rebirth_hint">请输入信主年历(格式:1980-02-08)</string>
 	<string name="perfect_area_label">代祷地区</string>
 	<string name="perfect_area_hint">请输入代祷地区</string>
 	<string name="perfect_period_label">代祷时段</string>

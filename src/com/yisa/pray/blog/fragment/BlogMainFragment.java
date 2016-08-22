@@ -20,11 +20,13 @@ import retrofit.Callback;
 import retrofit.GsonConverterFactory;
 import retrofit.Response;
 import retrofit.Retrofit;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -33,9 +35,14 @@ import com.google.gson.Gson;
 import com.lidroid.xutils.ui.BaseFragment;
 import com.yisa.pray.R;
 import com.yisa.pray.activity.LoginActivity;
+import com.yisa.pray.activity.RegionActivity;
 import com.yisa.pray.activity.RegisterActivity;
+import com.yisa.pray.blog.activity.BlogCategroyActivity;
+import com.yisa.pray.blog.activity.EditBlogActivity;
 import com.yisa.pray.blog.adapter.BlogListAdapter;
+import com.yisa.pray.blog.entity.BlogCategroyEntity;
 import com.yisa.pray.blog.entity.BlogEntity;
+import com.yisa.pray.blog.entity.RegionEntity;
 import com.yisa.pray.blog.imp.BlogService;
 import com.yisa.pray.entity.ErrorMessage;
 import com.yisa.pray.entity.OnlineCountEntity;
@@ -50,6 +57,7 @@ import com.yisa.pray.utils.UIHelper;
 import com.yisa.pray.utils.UrlUtils;
 import com.yisa.pray.utils.UserUtils;
 import com.yisa.pray.views.CustomHeadView;
+import com.yisa.pray.views.DrawableCenterTextView;
 import com.yisa.pray.views.swipe.SwipyRefreshLayout;
 import com.yisa.pray.views.swipe.SwipyRefreshLayout.OnRefreshListener;
 import com.yisa.pray.views.swipe.SwipyRefreshLayoutDirection;
@@ -65,7 +73,7 @@ import com.yisa.pray.views.swipe.SwipyRefreshLayoutDirection;
  * 修改时间:
  * 修改备注:
  */
-public class BlogMainFragment extends BaseFragment implements OnRefreshListener{
+public class BlogMainFragment extends BaseFragment implements OnRefreshListener, OnClickListener{
 	private static final String TAG = "BlogMainFragment";
 	private static final int REQUEST_ADD_BLOG = 0x0001;
 	private CustomHeadView mHeadView;
@@ -78,12 +86,16 @@ public class BlogMainFragment extends BaseFragment implements OnRefreshListener{
 	private TextView mThreeClockTxt;
 	private TextView mSixClockTxt;
 	private TextView mNineClockTxt;
+	private DrawableCenterTextView mRegionTxt;
+	private DrawableCenterTextView mCateTxt;
 	
 	private Timer mTimer;
-	private int mPage = 0;
+	private int mPage = 1;
 	private int mPerPage = 10;
-	private String mRegionId = "0";
-	private String mCateId = "0";
+	private RegionEntity mRegion = null;
+	private BlogCategroyEntity mCategroy = null;
+	private Integer mRegionId = null;
+	private Integer mCategroyId = null;
 	private String mSort = "id";
 	private String mOrder = "desc";
 	private String mToken ="";
@@ -95,6 +107,7 @@ public class BlogMainFragment extends BaseFragment implements OnRefreshListener{
 
 	@Override
 	public void onInitView(View view, Bundle savedInstanceState) {
+		mBlogList = new ArrayList<BlogEntity>();
 		initHeadView();
 		initToolBar();
 		mRefresh = (SwipyRefreshLayout) getView(R.id.swipy);
@@ -109,6 +122,10 @@ public class BlogMainFragment extends BaseFragment implements OnRefreshListener{
 	}
 	
 	public void initToolBar(){
+		mRegionTxt = (DrawableCenterTextView) getView(R.id.area);
+		mCateTxt = (DrawableCenterTextView) getView(R.id.categroy);
+		mRegionTxt.setOnClickListener(this);
+		mCateTxt.setOnClickListener(this);
 		mZeroClockTxt = (TextView) getView(R.id.twelve_clock);
 		mThreeClockTxt = (TextView) getView(R.id.three_clock);
 		mSixClockTxt = (TextView) getView(R.id.six_clock);
@@ -152,12 +169,31 @@ public class BlogMainFragment extends BaseFragment implements OnRefreshListener{
 		}
 	}
 	
+	@Override
+	public void onClick(View v) {
+		super.onClick(v);
+		switch (v.getId()) {
+			case R.id.area:
+				Intent intent = new Intent(mActivity, RegionActivity.class);
+				mActivity.startActivityForResult(intent, Constants.PRAY_WALL_TO_REGION_REQ_CODE);
+				break;
+			case R.id.categroy:
+				Intent intent2 = new Intent(mActivity, BlogCategroyActivity.class);
+				mActivity.startActivityForResult(intent2, Constants.PRAY_WALL_TO_CATEGROY_REQ_CODE);
+				break;
+			default:
+				break;
+		}
+	}
+	
 	public void addListHead(){
 		mCreatPost = LayoutInflater.from(mActivity).inflate(R.layout.view_add_blog, null);
 		mCreatPost.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				UIHelper.showBlogEdit(mActivity, REQUEST_ADD_BLOG);
+				Intent intent = new Intent(mActivity, EditBlogActivity.class);
+				mActivity.startActivityForResult(intent, Constants.PRAY_WALL_TO_EDIT_BLOG_REQ_CODE);
+//				UIHelper.showBlogEdit(mActivity, REQUEST_ADD_BLOG);
 			}
 		});
 		
@@ -177,16 +213,30 @@ public class BlogMainFragment extends BaseFragment implements OnRefreshListener{
 								.addConverterFactory(GsonConverterFactory.create())
 								.build();
 		BlogService service = retrofit.create(BlogService.class);
+		if(mRegion == null){
+			mRegionId = null;
+		}else{
+			mRegionId = mRegion.getId();
+			Log.i(TAG + "mRegionId", mRegionId + "");
+		}
+		if(mCategroy == null){
+			mCategroyId = null;
+		}else{
+			mCategroyId = mCategroy.getId();
+			Log.i(TAG + "mCategroyId", mCategroyId + "");
+		}
+		
 		Call<BlogEntity[]> call = service.getBlogList(  mPage, 
 														mPerPage,  
 														mToken, 
+														mCategroyId,
+														mRegionId,
 														mSort, 
 														mOrder);
 		
 		call.enqueue(new Callback<BlogEntity[]>() {
 			@Override
 			public void onResponse(Response<BlogEntity[]> response, Retrofit arg1) {
-				mBlogList = new ArrayList<BlogEntity>();
 				switch(response.code()){
 					case ResponseCode.RESPONSE_CODE_200 :
 						BlogEntity[] blogs = response.body();
@@ -309,11 +359,46 @@ public class BlogMainFragment extends BaseFragment implements OnRefreshListener{
 	@Override
 	public void onRefresh(SwipyRefreshLayoutDirection direction) {
 		if(direction == SwipyRefreshLayoutDirection.TOP){
-			mPage = 0;
+			mBlogList = new ArrayList<BlogEntity>();
+			mPage = 1;
 		}else{
 			mPage ++;
 		}
 		getBlogList();
+	}
+	
+//	@Override
+//	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+//		super.onActivityResult(requestCode, resultCode, data);
+//		if(resultCode == Activity.RESULT_OK){
+//			switch (requestCode) {
+//				case Constants.PRAY_WALL_TO_EDIT_BLOG_REQ_CODE:
+//					onRefresh(SwipyRefreshLayoutDirection.TOP);
+//					break;
+//				case Constants.PRAY_WALL_TO_REGION_REQ_CODE:
+//					mRegion = (RegionEntity) data.getSerializableExtra(IntentKey.REGION);
+//					mRegionTxt.setText(mRegion.getName());
+//					break;
+//				case Constants.PRAY_WALL_TO_CATEGROY_REQ_CODE:
+//					mCategroy = (BlogCategroyEntity) data.getSerializableExtra(IntentKey.BLOG_CATEGROY);
+//					mCateTxt.setText(mCategroy.getName());
+//					break;
+//				default:
+//					break;
+//			}
+//		}
+//	}
+	
+	public void setRegion(RegionEntity region){
+		mRegion = region;
+		mRegionTxt.setText(mRegion.getName());
+		onRefresh(SwipyRefreshLayoutDirection.TOP);
+	}
+	
+	public void setCategroy(BlogCategroyEntity cate){
+		mCategroy = cate;
+		mCateTxt.setText(mCategroy.getName());
+		onRefresh(SwipyRefreshLayoutDirection.TOP);
 	}
 
 }

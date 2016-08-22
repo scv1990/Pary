@@ -39,7 +39,7 @@ public class BlogEntity implements Serializable{
 	
 	private String region_name;
 	
-	private String user_id;
+	private int user_id;
 	
 	private String user_name;
 	
@@ -95,12 +95,12 @@ public class BlogEntity implements Serializable{
 	public void setRegion_name(String region_name) {
 		this.region_name = region_name;
 	}
-	
-	public String getUser_id() {
+
+	public int getUser_id() {
 		return user_id;
 	}
 
-	public void setUser_id(String user_id) {
+	public void setUser_id(int user_id) {
 		this.user_id = user_id;
 	}
 

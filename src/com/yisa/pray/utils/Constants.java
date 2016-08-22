@@ -44,6 +44,18 @@ public class Constants {
 	 */
 	public static final int PRAY_WALL_TO_REGISTER_REQ_CODE = 0x401;
 	/**
+	 * 从祷告墙到选择地区界面
+	 */
+	public static final int PRAY_WALL_TO_REGION_REQ_CODE = 0x403;
+	/**
+	 * 从祷告墙到选择分类界面请求
+	 */
+	public static final int PRAY_WALL_TO_CATEGROY_REQ_CODE = 0x404;
+	/**
+	 * 从祷告墙到发帖子界面请求
+	 */
+	public static final int PRAY_WALL_TO_EDIT_BLOG_REQ_CODE = 0x402;
+	/**
 	 * 从编辑帖子打开选择blog分类的界面
 	 */
 	public static final int EDIT_TO_BLOG_CATEGROY_REQ_CODE = 0x501;
@@ -52,6 +64,11 @@ public class Constants {
 	 * 从更新用户信息界面到地区选择界面
 	 */
 	public static final int USER_INFO_TO_REGION_REQ_CODE = 0x601;
+	
+	/**
+	 * 从更新用户信息界面到学历选择界面
+	 */
+	public static final int USER_INFO_TO_EDUCATION_REQ_CODE = 0x602;
 	
 	/**
 	 * 拍照

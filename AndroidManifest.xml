@@ -48,6 +48,10 @@
         </activity>
         <activity android:name="com.yisa.pray.activity.PerfectUserinfoActivity" >
         </activity>
+        <activity android:name="com.yisa.pray.activity.EducationActicity" >
+            </activity>
+        <activity android:name="com.yisa.pray.activity.ShowBigImageActivity" >
+        </activity>
     </application>
 
 </manifest>

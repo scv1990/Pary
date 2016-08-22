@@ -87,10 +87,10 @@ public class RegionActivity extends BaseActivity {
 				finish();
 			}
 		});
-		getCategroy();
+		getRegion();
 	}
 	
-	public void getCategroy(){
+	public void getRegion(){
 		mLoading.show();
 		Retrofit retrofit = new Retrofit.Builder()
 							.baseUrl(UrlUtils.SERVER_ADDRESS)

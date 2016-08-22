@@ -56,7 +56,7 @@ public interface UserService {
 			@Query("address") String address,
 			@Query("gender") String gender,
 			@Query("birth") String birth,
-			@Query("education") String education,
+			@Query("education") int education,
 			@Query("job") String job,
 			@Query("church") String church,
 			@Query("church_service") String churchService,
