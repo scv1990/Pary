@@ -127,7 +127,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener{
 						Log.i(TAG + "201", message);
 						PreferenceUtils.setPrefString(mContext, "userinfo", message);
 						UIHelper.showPerfectUserinfoActicity(mContext, user.getId());
-						if(user.getArea() == null || "".equals(user.getArea()) || user.getPeriod() == 0 ){
+						if(user.getRegion_id()== 0 || "".equals(user.getRegion_name()) || user.getPeriod_id() == 0 ){
 							UIHelper.showPerfectUserinfoActicity(mContext, user.getId());
 						}else{
 							if(user.getStatus() == 0)

@@ -15,7 +15,6 @@
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    
 
     <application
         android:name="com.yisa.pray.base.MyApplication"
@@ -34,13 +33,13 @@
         </activity>
         <activity android:name="com.yisa.pray.activity.HomeActivity" >
         </activity>
-         <activity android:name="com.yisa.pray.activity.LoginActivity" >
+        <activity android:name="com.yisa.pray.activity.LoginActivity" >
         </activity>
         <activity android:name="com.yisa.pray.activity.RegisterActivity" >
         </activity>
-         <activity android:name="com.yisa.pray.blog.activity.BlogCategroyActivity" >
+        <activity android:name="com.yisa.pray.blog.activity.BlogCategroyActivity" >
         </activity>
-         <activity android:name="com.yisa.pray.blog.activity.EditBlogActivity" >
+        <activity android:name="com.yisa.pray.blog.activity.EditBlogActivity" >
         </activity>
         <activity android:name="com.yisa.pray.blog.activity.ImageSelectActivity" >
         </activity>
@@ -49,7 +48,9 @@
         <activity android:name="com.yisa.pray.activity.PerfectUserinfoActivity" >
         </activity>
         <activity android:name="com.yisa.pray.activity.EducationActicity" >
-            </activity>
+        </activity>
+        <activity android:name="com.yisa.pray.activity.SimpleDataActivity" >
+        </activity>
         <activity android:name="com.yisa.pray.activity.ShowBigImageActivity" >
         </activity>
     </application>

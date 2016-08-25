@@ -25,9 +25,13 @@ public class UserInfo {
 	
 	private String church_service;
 	
-	private String area;
+	private int region_id;
 	
-	private int period;
+	private String region_name;
+	
+	private int period_id;
+	
+	private String period_text;
 	
 	private String rebirth;
 	
@@ -134,21 +138,37 @@ public class UserInfo {
 	public void setChurch_service(String church_service) {
 		this.church_service = church_service;
 	}
-
-	public String getArea() {
-		return area;
-	}
-
-	public void setArea(String area) {
-		this.area = area;
-	}
 	
-	public int getPeriod() {
-		return period;
+	public int getRegion_id() {
+		return region_id;
 	}
 
-	public void setPeriod(int period) {
-		this.period = period;
+	public void setRegion_id(int region_id) {
+		this.region_id = region_id;
+	}
+
+	public String getRegion_name() {
+		return region_name;
+	}
+
+	public void setRegion_name(String region_name) {
+		this.region_name = region_name;
+	}
+
+	public int getPeriod_id() {
+		return period_id;
+	}
+
+	public void setPeriod_id(int period_id) {
+		this.period_id = period_id;
+	}
+
+	public String getPeriod_text() {
+		return period_text;
+	}
+
+	public void setPeriod_text(String period_text) {
+		this.period_text = period_text;
 	}
 
 	public String getCreated_at() {

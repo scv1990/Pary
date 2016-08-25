@@ -16,6 +16,12 @@ public class IntentKey {
 	
 	public static final String REGION = "region";
 	
+	public static final String TITLE = "title";
+	
+	public static final String URL = "url";
+	
+	public static final String DATA = "data";
+	
 	public static final String EDUCATION = "education";
 	
 	public static final String IMAGE_PATH_LIST = "path_list";

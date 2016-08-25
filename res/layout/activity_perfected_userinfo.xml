@@ -152,7 +152,8 @@
                 <EditText
                     android:id="@+id/pray_period"
                     style="@style/register_edittext_style"
-                    android:hint="@string/perfect_period_hint" />
+                    android:hint="@string/perfect_period_hint" 
+                    android:editable="false" />
             </LinearLayout>
             <LinearLayout style="@style/custom_input_layout_style" >
                 <TextView

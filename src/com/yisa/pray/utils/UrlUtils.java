@@ -33,4 +33,9 @@ public class UrlUtils {
 	 * 获取用户详细信息
 	 */
 	public static final String GET_USER_INFO = "/api/v1/users/{id}";
+	
+	/**
+	 * 获取祷告时间
+	 */
+	public static final String GET_PERIOD = "/v1/users/periods";
 }

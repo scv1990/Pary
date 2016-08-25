@@ -61,8 +61,8 @@ public interface UserService {
 			@Query("church") String church,
 			@Query("church_service") String churchService,
 			@Query("rebirth") String rebirth,
-			@Query("area") String area,
-			@Query("period") String period,
+			@Query("region_id") int area,
+			@Query("period") int period,
 			@Header("X-Access-Token") String token);
 	
 	@GET(UrlUtils.GET_USER_INFO)

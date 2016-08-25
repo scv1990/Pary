@@ -69,6 +69,10 @@ public class Constants {
 	 * 从更新用户信息界面到学历选择界面
 	 */
 	public static final int USER_INFO_TO_EDUCATION_REQ_CODE = 0x602;
+	/**
+	 * 从更新用户信息界面到学历选择界面
+	 */
+	public static final int USER_INFO_TO_PERIOD_REQ_CODE = 0x603;
 	
 	/**
 	 * 拍照

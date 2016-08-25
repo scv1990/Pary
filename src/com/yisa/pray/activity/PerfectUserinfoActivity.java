@@ -28,6 +28,7 @@ import com.yisa.pray.R;
 import com.yisa.pray.blog.entity.RegionEntity;
 import com.yisa.pray.entity.EducationEntity;
 import com.yisa.pray.entity.ErrorMessage;
+import com.yisa.pray.entity.Period;
 import com.yisa.pray.entity.UserInfo;
 import com.yisa.pray.imp.UserService;
 import com.yisa.pray.utils.Constants;
@@ -71,6 +72,8 @@ public class PerfectUserinfoActivity extends BaseActivity implements OnClickList
 	private UserInfo mUserInfo;
 	private String token;
 	private EducationEntity mEdu;
+	private RegionEntity mRegion;
+	private Period mPeriodEn;
 	@Override
 	public void setRootLayout() {
 		setContentView(R.layout.activity_perfected_userinfo);
@@ -95,6 +98,7 @@ public class PerfectUserinfoActivity extends BaseActivity implements OnClickList
 		mArea = (EditText) getView(R.id.pray_area);
 		mArea.setOnClickListener(this);
 		mPeriod = (EditText) getView(R.id.pray_period);
+		mPeriod.setOnClickListener(this);
 		mRebirth = (EditText) getView(R.id.rebirth);
 		mAddress = (EditText) getView(R.id.address);
 		mRadioGroup = (RadioGroup) getView(R.id.sex_radio_group);
@@ -119,6 +123,12 @@ public class PerfectUserinfoActivity extends BaseActivity implements OnClickList
 			case R.id.pray_area:
 				intent.setClass(mContext, RegionActivity.class);
 				startActivityForResult(intent, Constants.USER_INFO_TO_REGION_REQ_CODE);
+				break;
+			case R.id.pray_period:
+				intent.putExtra(IntentKey.TITLE, getResources().getString(R.string.perfect_period_label));
+				intent.putExtra(IntentKey.URL, UrlUtils.GET_PERIOD);
+				intent.setClass(mContext, SimpleDataActivity.class);
+				startActivityForResult(intent, Constants.USER_INFO_TO_PERIOD_REQ_CODE);
 				break;
 			case R.id.education:
 				intent.setClass(mContext, EducationActicity.class);
@@ -183,8 +193,8 @@ public class PerfectUserinfoActivity extends BaseActivity implements OnClickList
 		mVocation.setText(mUserInfo.getJob());
 		mChurch.setText(mUserInfo.getChurch());
 		mChurchService.setText(mUserInfo.getChurch_service());
-		mArea.setText(mUserInfo.getArea());
-		mPeriod.setText(mUserInfo.getPeriod() + "");
+		mArea.setText(mUserInfo.getRegion_name());
+		mPeriod.setText(mUserInfo.getPeriod_text());
 		mRebirth.setText(mUserInfo.getRebirth());
 		mAddress.setText(mUserInfo.getAddress());
 		String gender = mUserInfo.getGender();
@@ -222,8 +232,8 @@ public class PerfectUserinfoActivity extends BaseActivity implements OnClickList
 						mChurch.getText().toString(), 
 						mChurchService.getText().toString(), 
 						mRebirth.getText().toString(), 
-						mArea.getText().toString(), 
-						mPeriod.getText().toString(), 
+						mRegion.getId(), 
+						Integer.parseInt(mPeriodEn.getId()), 
 						token);
 		Log.i(TAG, mAge.getText().toString());
 		call.enqueue(new Callback<UserInfo>() {
@@ -261,13 +271,18 @@ public class PerfectUserinfoActivity extends BaseActivity implements OnClickList
 		if(responseCode == RESULT_OK){
 			switch (requestCode) {
 				case Constants.USER_INFO_TO_REGION_REQ_CODE:
-					RegionEntity region = (RegionEntity)intent.getSerializableExtra(IntentKey.REGION);
-					mArea.setText(region.getName());
+					mRegion = (RegionEntity)intent.getSerializableExtra(IntentKey.REGION);
+					mArea.setText(mRegion.getName());
 					break;
 				case Constants.USER_INFO_TO_EDUCATION_REQ_CODE:
 					mEdu = (EducationEntity)intent.getSerializableExtra(IntentKey.EDUCATION);
 					mEducation.setText(mEdu.getName());
 					break;
+				case Constants.USER_INFO_TO_PERIOD_REQ_CODE:
+					mPeriodEn = (Period)intent.getSerializableExtra(IntentKey.DATA);
+					mPeriod.setText(mPeriodEn.getName());
+					break;
+					
 				default:
 					break;
 			}

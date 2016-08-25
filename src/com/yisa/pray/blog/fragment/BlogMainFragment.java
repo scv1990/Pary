@@ -75,7 +75,6 @@ import com.yisa.pray.views.swipe.SwipyRefreshLayoutDirection;
  */
 public class BlogMainFragment extends BaseFragment implements OnRefreshListener, OnClickListener{
 	private static final String TAG = "BlogMainFragment";
-	private static final int REQUEST_ADD_BLOG = 0x0001;
 	private CustomHeadView mHeadView;
 	private SwipyRefreshLayout mRefresh;
 	private ListView mListView;
