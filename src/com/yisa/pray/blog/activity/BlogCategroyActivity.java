@@ -12,11 +12,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import retrofit.Call;
-import retrofit.Callback;
-import retrofit.GsonConverterFactory;
-import retrofit.Response;
-import retrofit.Retrofit;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 import android.content.Intent;
 import android.util.Log;
 import android.view.View;
@@ -30,6 +29,7 @@ import com.yisa.pray.R;
 import com.yisa.pray.blog.adapter.BlogCategroyAdapter;
 import com.yisa.pray.blog.entity.BlogCategroyEntity;
 import com.yisa.pray.blog.imp.BlogService;
+import com.yisa.pray.converter.gson.GsonConverterFactory;
 import com.yisa.pray.entity.ErrorMessage;
 import com.yisa.pray.utils.IntentKey;
 import com.yisa.pray.utils.ResponseCode;
@@ -41,8 +41,8 @@ import com.yisa.pray.views.LoadingDialog;
 /**
  *
  * 类名称: BlogCategroyActivity.java
- * 类描述: 帖子分类界面	 
- * 创建人:  hq
+ * 类描述: 帖子分类界面
+ * 创建人: hq
  * 创建时间: 2016年8月8日下午5:07:20
  * -------------------------修订历史------------
  * 修改人:
@@ -56,7 +56,7 @@ public class BlogCategroyActivity extends BaseActivity {
 	private BlogCategroyAdapter mAdapter;
 	private List<BlogCategroyEntity> mCategroyList;
 	private LoadingDialog mLoading;
-	
+
 	@Override
 	public void setRootLayout() {
 		setContentView(R.layout.activity_blog_categroy);
@@ -73,7 +73,7 @@ public class BlogCategroyActivity extends BaseActivity {
 				finish();
 			}
 		});
-		
+
 		mCateListview = (ListView) getView(R.id.categroy_list);
 		mCateListview.setOnItemClickListener(new OnItemClickListener() {
 			@Override
@@ -86,54 +86,53 @@ public class BlogCategroyActivity extends BaseActivity {
 		});
 		getCategroy();
 	}
-	
-	public void getCategroy(){
+
+	public void getCategroy() {
 		mLoading.show();
-		Retrofit retrofit = new Retrofit.Builder()
-							.baseUrl(UrlUtils.SERVER_ADDRESS)
-							.addConverterFactory(GsonConverterFactory.create())
-							.build();
+		Retrofit retrofit = new Retrofit.Builder().baseUrl(UrlUtils.SERVER_ADDRESS)
+				.addConverterFactory(GsonConverterFactory.create()).build();
 		BlogService service = retrofit.create(BlogService.class);
 		Call<List<BlogCategroyEntity>> call = service.getCategroy();
 		try {
-			call.enqueue(new Callback<List<BlogCategroyEntity>>(){
-
+			call.enqueue(new Callback<List<BlogCategroyEntity>>() {
 				@Override
-				public void onFailure(Throwable arg0) {
-					Log.i(TAG+"onFailure", arg0.getMessage());
+				public void onFailure(Call<List<BlogCategroyEntity>> arg0, Throwable arg1) {
+					Log.i(TAG + "onFailure", arg1.getMessage());
 				}
 
 				@Override
-				public void onResponse(Response<List<BlogCategroyEntity>> response, Retrofit arg1) {
+				public void onResponse(Call<List<BlogCategroyEntity>> arg0, Response<List<BlogCategroyEntity>> response) {
 					switch (response.code()) {
-						case ResponseCode.RESPONSE_CODE_200:
-							mCategroyList = response.body();
-							if(mCategroyList != null && mCategroyList.size() > 0){
-								mAdapter = new BlogCategroyAdapter(mContext, mCategroyList);
-								mCateListview.setAdapter(mAdapter);
-								mAdapter.notifyDataSetChanged();
-							}
-							break;
-						default:
-							String message = "";
-							ErrorMessage error = new ErrorMessage();;
-							try {
-								message = response.errorBody().string();
-								Gson gson =  new Gson();
-								error = gson.fromJson(message, ErrorMessage.class);
-							} catch (IOException e) {
-								e.printStackTrace();
-							}
-							Log.i(TAG, message);
-							ShowUtils.showToast(mContext, error.getError());
-							break;
+					case ResponseCode.RESPONSE_CODE_200:
+						mCategroyList = response.body();
+						if (mCategroyList != null && mCategroyList.size() > 0) {
+							mAdapter = new BlogCategroyAdapter(mContext, mCategroyList);
+							mCateListview.setAdapter(mAdapter);
+							mAdapter.notifyDataSetChanged();
+						}
+						break;
+					default:
+						String message = "";
+						ErrorMessage error = new ErrorMessage();
+						;
+						try {
+							message = response.errorBody().string();
+							Gson gson = new Gson();
+							error = gson.fromJson(message, ErrorMessage.class);
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+						Log.i(TAG, message);
+						ShowUtils.showToast(mContext, error.getError());
+						break;
 					}
+					
 				}
-				
+
 			});
 		} catch (Exception e) {
 			e.printStackTrace();
-		}finally{
+		} finally {
 			mLoading.dismiss();
 		}
 	}

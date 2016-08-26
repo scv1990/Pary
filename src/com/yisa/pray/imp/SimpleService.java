@@ -8,14 +8,11 @@
 
 package com.yisa.pray.imp;
 
-import java.util.List;
-
-import com.yisa.pray.entity.SimpleData;
-
-import retrofit.Call;
-import retrofit.http.GET;
-import retrofit.http.Path;
-import retrofit.http.Query;
+import retrofit2.Call;
+import retrofit2.http.GET;
+import retrofit2.http.Header;
+import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 /**
  *
@@ -29,9 +26,11 @@ import retrofit.http.Query;
  * 修改备注:
  */
 public interface SimpleService {
-	@GET("/{path}")
-	Call<List<SimpleData>> getData(
-			@Path("path") String path,
-			@Query("X-Access-Token") String token);
+	@GET("/api/{version}/{model}/{function}")
+	Call<String> getData(
+			@Path("version") String version,
+			@Path("model") String model,
+			@Path("function") String function,
+			@Header("X-Access-Token") String token);
 
 }

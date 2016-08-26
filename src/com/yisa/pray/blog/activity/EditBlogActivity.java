@@ -16,12 +16,12 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import retrofit.Call;
-import retrofit.Callback;
-import retrofit.GsonConverterFactory;
-import retrofit.Response;
-import retrofit.Retrofit;
-import retrofit.http.Multipart;
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -38,9 +38,6 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.lidroid.xutils.ui.BaseActivity;
 import com.lidroid.xutils.util.SystemTool;
-import com.squareup.okhttp.MediaType;
-import com.squareup.okhttp.MultipartBuilder;
-import com.squareup.okhttp.RequestBody;
 import com.yisa.pray.R;
 import com.yisa.pray.activity.HomeActivity;
 import com.yisa.pray.blog.adapter.ImageShowAdapter;
@@ -49,6 +46,7 @@ import com.yisa.pray.blog.entity.BlogEntity;
 import com.yisa.pray.blog.entity.PostImage;
 import com.yisa.pray.blog.imp.BlogService;
 import com.yisa.pray.blog.listener.OnImageDelteListener;
+import com.yisa.pray.converter.gson.GsonConverterFactory;
 import com.yisa.pray.entity.ErrorMessage;
 import com.yisa.pray.entity.UserInfo;
 import com.yisa.pray.popupwindow.SelectUserPicPopupwindow;
@@ -171,9 +169,15 @@ public class EditBlogActivity extends BaseActivity implements OnClickListener{
 					mCategroy.getId(), mCategroy.getName(), content);
 			Log.i(TAG, mCategroy.getId() + "");
 			call.enqueue(new Callback<BlogEntity>() {
-				
+
 				@Override
-				public void onResponse(Response<BlogEntity> response, Retrofit arg1) {
+				public void onFailure(Call<BlogEntity> arg0, Throwable arg1) {
+					ShowUtils.showToast(mContext, arg1.getMessage());
+					
+				}
+
+				@Override
+				public void onResponse(Call<BlogEntity> arg0, Response<BlogEntity> response) {
 					int code = response.code();
 					String message = "";
 					try {
@@ -209,11 +213,6 @@ public class EditBlogActivity extends BaseActivity implements OnClickListener{
 					}
 					
 				}
-				
-				@Override
-				public void onFailure(Throwable arg0) {
-					ShowUtils.showToast(mContext, arg0.getMessage());
-				}
 			});
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -237,13 +236,14 @@ public class EditBlogActivity extends BaseActivity implements OnClickListener{
 			requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), new File(path));
 			call = service.uploadImage(id, requestFile, token);
 			call.enqueue(new Callback<PostImage>() {
+
 				@Override
-				public void onFailure(Throwable arg0) {
-					ShowUtils.showToast(mContext, arg0.getMessage());
+				public void onFailure(Call<PostImage> arg0, Throwable arg1) {
+					ShowUtils.showToast(mContext, arg1.getMessage());
 				}
 
 				@Override
-				public void onResponse(Response<PostImage> response, Retrofit retrofit) {
+				public void onResponse(Call<PostImage> arg0, Response<PostImage> response) {
 					mLoading.dismiss();
 					switch (response.code()) {
 						case ResponseCode.RESPONSE_CODE_201:
@@ -255,6 +255,7 @@ public class EditBlogActivity extends BaseActivity implements OnClickListener{
 							ShowUtils.showToast(mContext, getResources().getString(R.string.upload_image_falie));
 							break;
 					}
+					
 				}
 			});
 		}

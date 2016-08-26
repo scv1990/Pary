@@ -18,7 +18,11 @@ public class IntentKey {
 	
 	public static final String TITLE = "title";
 	
-	public static final String URL = "url";
+	public static final String API_VERSION = "api_version";
+	
+	public static final String API_FUNCTION = "api_function";
+	
+	public static final String API_MODEL = "api_model";
 	
 	public static final String DATA = "data";
 	

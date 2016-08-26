@@ -15,11 +15,10 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import retrofit.Call;
-import retrofit.Callback;
-import retrofit.GsonConverterFactory;
-import retrofit.Response;
-import retrofit.Retrofit;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -44,6 +43,7 @@ import com.yisa.pray.blog.entity.BlogCategroyEntity;
 import com.yisa.pray.blog.entity.BlogEntity;
 import com.yisa.pray.blog.entity.RegionEntity;
 import com.yisa.pray.blog.imp.BlogService;
+import com.yisa.pray.converter.gson.GsonConverterFactory;
 import com.yisa.pray.entity.ErrorMessage;
 import com.yisa.pray.entity.OnlineCountEntity;
 import com.yisa.pray.entity.UserInfo;
@@ -234,38 +234,40 @@ public class BlogMainFragment extends BaseFragment implements OnRefreshListener,
 														mOrder);
 		
 		call.enqueue(new Callback<BlogEntity[]>() {
+
 			@Override
-			public void onResponse(Response<BlogEntity[]> response, Retrofit arg1) {
-				switch(response.code()){
-					case ResponseCode.RESPONSE_CODE_200 :
-						BlogEntity[] blogs = response.body();
-						Collections.addAll(mBlogList, blogs);
-						if(mBlogList == null || mBlogList.size() == 0){
-							ShowUtils.showToast(mActivity, getResources().getString(R.string.no_blog_tips));
-						}
-						break;
-					default :
-						ErrorMessage error = new ErrorMessage();
-						try {
-							error = new Gson().fromJson(response.errorBody().string(), ErrorMessage.class);
-							ShowUtils.showToast(mActivity, error.getError());
-						} catch (Exception e) {
-							e.printStackTrace();
-						} 
-						break;
-				}
-				if(mAdapter == null){
-					mAdapter = new BlogListAdapter(mActivity);
-					mListView.setAdapter(mAdapter);
-				}
-				mAdapter.setData(mBlogList);
-				mAdapter.notifyDataSetChanged();
-				mRefresh.setRefreshing(false);
+			public void onFailure(Call<BlogEntity[]> arg0, Throwable arg1) {
+				ShowUtils.showToast(mActivity, arg1.getMessage());
 			}
-			
+
 			@Override
-			public void onFailure(Throwable arg0) {
-				ShowUtils.showToast(mActivity, arg0.getMessage());
+			public void onResponse(Call<BlogEntity[]> arg0, Response<BlogEntity[]> response) {
+				switch(response.code()){
+				case ResponseCode.RESPONSE_CODE_200 :
+					BlogEntity[] blogs = response.body();
+					Collections.addAll(mBlogList, blogs);
+					if(mBlogList == null || mBlogList.size() == 0){
+						ShowUtils.showToast(mActivity, getResources().getString(R.string.no_blog_tips));
+					}
+					break;
+				default :
+					ErrorMessage error = new ErrorMessage();
+					try {
+						error = new Gson().fromJson(response.errorBody().string(), ErrorMessage.class);
+						ShowUtils.showToast(mActivity, error.getError());
+					} catch (Exception e) {
+						e.printStackTrace();
+					} 
+					break;
+			}
+			if(mAdapter == null){
+				mAdapter = new BlogListAdapter(mActivity);
+				mListView.setAdapter(mAdapter);
+			}
+			mAdapter.setData(mBlogList);
+			mAdapter.notifyDataSetChanged();
+			mRefresh.setRefreshing(false);
+				
 			}
 		});
 				
@@ -294,12 +296,13 @@ public class BlogMainFragment extends BaseFragment implements OnRefreshListener,
 			call.enqueue(new Callback<OnlineCountEntity>() {
 
 				@Override
-				public void onFailure(Throwable arg0) {
-					ShowUtils.showToast(mActivity, arg0.getMessage());
+				public void onFailure(Call<OnlineCountEntity> arg0, Throwable arg1) {
+					ShowUtils.showToast(mActivity, arg1.getMessage());
+					
 				}
 
 				@Override
-				public void onResponse(Response<OnlineCountEntity> response, Retrofit ret) {
+				public void onResponse(Call<OnlineCountEntity> arg0, Response<OnlineCountEntity> response) {
 					try {
 						switch (response.code()) {
 						case ResponseCode.RESPONSE_CODE_200:
@@ -314,6 +317,7 @@ public class BlogMainFragment extends BaseFragment implements OnRefreshListener,
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
+					
 				}
 			});
 		}

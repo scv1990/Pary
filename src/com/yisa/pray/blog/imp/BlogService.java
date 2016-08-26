@@ -8,26 +8,25 @@
 
 package com.yisa.pray.blog.imp;
 
-import java.io.File;
 import java.util.List;
 
-import com.squareup.okhttp.RequestBody;
+import okhttp3.RequestBody;
+
 import com.yisa.pray.blog.entity.BlogCategroyEntity;
 import com.yisa.pray.blog.entity.BlogEntity;
 import com.yisa.pray.blog.entity.PostImage;
 import com.yisa.pray.blog.entity.RegionEntity;
 import com.yisa.pray.utils.BlogUrlUtils;
-import com.yisa.pray.utils.UrlUtils;
 
-import retrofit.Call;
-import retrofit.http.GET;
-import retrofit.http.Header;
-import retrofit.http.Multipart;
-import retrofit.http.POST;
-import retrofit.http.PUT;
-import retrofit.http.Part;
-import retrofit.http.Path;
-import retrofit.http.Query;
+import retrofit2.Call;
+import retrofit2.http.GET;
+import retrofit2.http.Header;
+import retrofit2.http.Multipart;
+import retrofit2.http.POST;
+import retrofit2.http.PUT;
+import retrofit2.http.Part;
+import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 /**
  *

@@ -12,11 +12,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import retrofit.Call;
-import retrofit.Callback;
-import retrofit.GsonConverterFactory;
-import retrofit.Response;
-import retrofit.Retrofit;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 import android.content.Intent;
 import android.util.Log;
 import android.view.View;
@@ -32,6 +31,7 @@ import com.yisa.pray.blog.adapter.RegionAdapter;
 import com.yisa.pray.blog.entity.BlogCategroyEntity;
 import com.yisa.pray.blog.entity.RegionEntity;
 import com.yisa.pray.blog.imp.BlogService;
+import com.yisa.pray.converter.gson.GsonConverterFactory;
 import com.yisa.pray.entity.ErrorMessage;
 import com.yisa.pray.utils.IntentKey;
 import com.yisa.pray.utils.ResponseCode;
@@ -102,12 +102,13 @@ public class RegionActivity extends BaseActivity {
 			call.enqueue(new Callback<List<RegionEntity>>(){
 
 				@Override
-				public void onFailure(Throwable arg0) {
-					Log.i(TAG+"onFailure", arg0.getMessage());
+				public void onFailure(Call<List<RegionEntity>> arg0, Throwable arg1) {
+					Log.i(TAG+"onFailure", arg1.getMessage());
+					
 				}
 
 				@Override
-				public void onResponse(Response<List<RegionEntity>> response, Retrofit arg1) {
+				public void onResponse(Call<List<RegionEntity>> arg0, Response<List<RegionEntity>> response) {
 					switch (response.code()) {
 						case ResponseCode.RESPONSE_CODE_200:
 							mRegionList = response.body();

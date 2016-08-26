@@ -38,4 +38,14 @@ public class UrlUtils {
 	 * 获取祷告时间
 	 */
 	public static final String GET_PERIOD = "/v1/users/periods";
+	
+	/**
+	 * 版本号
+	 */
+	public static final String API_VERSION = "v1";
+	
+	/**
+	 * 模块名
+	 */
+	public static final String API_MODEL_USER ="users";
 }

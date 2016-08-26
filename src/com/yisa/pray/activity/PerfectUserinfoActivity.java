@@ -8,11 +8,10 @@
 
 package com.yisa.pray.activity;
 
-import retrofit.Call;
-import retrofit.Callback;
-import retrofit.GsonConverterFactory;
-import retrofit.Response;
-import retrofit.Retrofit;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 import android.content.Intent;
 import android.util.Log;
 import android.view.View;
@@ -26,13 +25,16 @@ import com.google.gson.Gson;
 import com.lidroid.xutils.ui.BaseActivity;
 import com.yisa.pray.R;
 import com.yisa.pray.blog.entity.RegionEntity;
+import com.yisa.pray.converter.gson.GsonConverterFactory;
 import com.yisa.pray.entity.EducationEntity;
 import com.yisa.pray.entity.ErrorMessage;
 import com.yisa.pray.entity.Period;
+import com.yisa.pray.entity.SimpleData;
 import com.yisa.pray.entity.UserInfo;
 import com.yisa.pray.imp.UserService;
 import com.yisa.pray.utils.Constants;
 import com.yisa.pray.utils.IntentKey;
+import com.yisa.pray.utils.PreferenceUtils;
 import com.yisa.pray.utils.PropertyUtil;
 import com.yisa.pray.utils.ResponseCode;
 import com.yisa.pray.utils.ShowUtils;
@@ -126,7 +128,9 @@ public class PerfectUserinfoActivity extends BaseActivity implements OnClickList
 				break;
 			case R.id.pray_period:
 				intent.putExtra(IntentKey.TITLE, getResources().getString(R.string.perfect_period_label));
-				intent.putExtra(IntentKey.URL, UrlUtils.GET_PERIOD);
+				intent.putExtra(IntentKey.API_VERSION, UrlUtils.API_VERSION);
+				intent.putExtra(IntentKey.API_MODEL, UrlUtils.API_MODEL_USER);
+				intent.putExtra(IntentKey.API_FUNCTION, "periods");
 				intent.setClass(mContext, SimpleDataActivity.class);
 				startActivityForResult(intent, Constants.USER_INFO_TO_PERIOD_REQ_CODE);
 				break;
@@ -151,16 +155,19 @@ public class PerfectUserinfoActivity extends BaseActivity implements OnClickList
 		call.enqueue(new Callback<UserInfo>() {
 
 			@Override
-			public void onFailure(Throwable arg0) {
-				ShowUtils.showToast(mContext, arg0.getMessage());
+			public void onFailure(Call<UserInfo> arg0, Throwable arg1) {
+				ShowUtils.showToast(mContext, arg1.getMessage());
+				
 			}
 
 			@Override
-			public void onResponse(Response<UserInfo> response, Retrofit ret) {
+			public void onResponse(Call<UserInfo> arg0, Response<UserInfo> response) {
 				try {
 					switch (response.code()) {
 					case ResponseCode.RESPONSE_CODE_200:
 						mUserInfo = response.body();
+						mUserInfo.setAuthentication_token(token);
+						PreferenceUtils.setPrefString(mContext, "userinfo", new Gson().toJson(mUserInfo));
 						mEdu = new EducationEntity();
 						mEdu.setId(mUserInfo.getId());
 						initUserInfo();
@@ -174,6 +181,7 @@ public class PerfectUserinfoActivity extends BaseActivity implements OnClickList
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
+				
 			}
 		});
 	}
@@ -237,14 +245,14 @@ public class PerfectUserinfoActivity extends BaseActivity implements OnClickList
 						token);
 		Log.i(TAG, mAge.getText().toString());
 		call.enqueue(new Callback<UserInfo>() {
-
 			@Override
-			public void onFailure(Throwable arg0) {
-				ShowUtils.showToast(mContext, arg0.getMessage());
+			public void onFailure(Call<UserInfo> arg0, Throwable arg1) {
+				ShowUtils.showToast(mContext, arg1.getMessage());
+				
 			}
 
 			@Override
-			public void onResponse(Response<UserInfo> response, Retrofit ret) {
+			public void onResponse(Call<UserInfo> arg0, Response<UserInfo> response) {
 				int code = response.code();
 				try {
 					switch (code) {
@@ -260,12 +268,13 @@ public class PerfectUserinfoActivity extends BaseActivity implements OnClickList
 					}
 				} catch (Exception e) {
 				}
+				
 			}
 		});
 	}
 	
 	@Override
-	protected void onActivityResult(int requestCode, int responseCode, Intent intent) {
+	protected void onActivityResult(int requestCode, int responseCode, Intent intent){
 		super.onActivityResult(requestCode, responseCode, intent);
 		
 		if(responseCode == RESULT_OK){
@@ -279,8 +288,14 @@ public class PerfectUserinfoActivity extends BaseActivity implements OnClickList
 					mEducation.setText(mEdu.getName());
 					break;
 				case Constants.USER_INFO_TO_PERIOD_REQ_CODE:
-					mPeriodEn = (Period)intent.getSerializableExtra(IntentKey.DATA);
-					mPeriod.setText(mPeriodEn.getName());
+					try {
+						SimpleData data = (SimpleData)intent.getSerializableExtra(IntentKey.DATA);
+						mPeriodEn = (Period) data.clone();
+						mPeriod.setText(mPeriodEn.getName());
+					} catch (CloneNotSupportedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					break;
 					
 				default:

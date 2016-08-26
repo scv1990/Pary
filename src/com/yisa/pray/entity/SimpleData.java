@@ -21,7 +21,7 @@ import java.io.Serializable;
  * 修改时间:
  * 修改备注:
  */
-public class SimpleData implements Serializable{
+public class SimpleData implements Serializable, Cloneable{
 	/**
 	 * 
 	 */
@@ -40,4 +40,5 @@ public class SimpleData implements Serializable{
 	public void setId(String id) {
 		this.id = id;
 	}
+	
 }

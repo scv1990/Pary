@@ -11,11 +11,16 @@ package com.yisa.pray.blog.adapter;
 import java.util.ArrayList;
 import java.util.List;
 
-import retrofit.Call;
-import retrofit.Callback;
-import retrofit.GsonConverterFactory;
-import retrofit.Response;
-import retrofit.Retrofit;
+
+
+
+
+
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 import com.google.gson.Gson;
 import com.lidroid.xutils.util.AdapterUtils;
@@ -23,6 +28,7 @@ import com.yisa.pray.R;
 import com.yisa.pray.blog.entity.BlogEntity;
 import com.yisa.pray.blog.entity.PostImage;
 import com.yisa.pray.blog.imp.BlogService;
+import com.yisa.pray.converter.gson.GsonConverterFactory;
 import com.yisa.pray.entity.ErrorMessage;
 import com.yisa.pray.utils.ImageLoaderUtil;
 import com.yisa.pray.utils.ResponseCode;
@@ -163,31 +169,32 @@ public class BlogListAdapter extends BaseAdapter {
 					UserUtils.getInstance().getUser(mContext).getAuthentication_token(),
 					Integer.parseInt(getItem(position).getId()));
 		call.enqueue(new Callback<BlogEntity>() {
-			
-			@Override
-			public void onResponse(Response<BlogEntity> response, Retrofit arg1) {
-				switch (response.code()) {
-				case ResponseCode.RESPONSE_CODE_200:
-					BlogEntity blog = response.body();
-					data.set(pos, blog);
-					notifyDataSetChanged();
-					break;
 
-				default:
-					try {
-						ErrorMessage error = new Gson().fromJson(response.errorBody().string(), ErrorMessage.class);
-						ShowUtils.showToast(mContext, error.getError());
-					} catch (Exception e) {
-						e.printStackTrace();
-						ShowUtils.showToast(mContext, mContext.getResources().getString(R.string.recive_pray_faile_tips));
-					}
+			@Override
+			public void onFailure(Call<BlogEntity> arg0, Throwable arg1) {
+				ShowUtils.showToast(mContext, arg1.getMessage());
+				
+			}
+
+			@Override
+			public void onResponse(Call<BlogEntity> arg0, Response<BlogEntity> response) {
+				switch (response.code()) {
+					case ResponseCode.RESPONSE_CODE_200:
+						BlogEntity blog = response.body();
+						data.set(pos, blog);
+						notifyDataSetChanged();
+						break;
+	
+					default:
+						try {
+							ErrorMessage error = new Gson().fromJson(response.errorBody().string(), ErrorMessage.class);
+							ShowUtils.showToast(mContext, error.getError());
+						} catch (Exception e) {
+							e.printStackTrace();
+							ShowUtils.showToast(mContext, mContext.getResources().getString(R.string.recive_pray_faile_tips));
+						}
 					break;
 				}
-			}
-			
-			@Override
-			public void onFailure(Throwable arg0) {
-				ShowUtils.showToast(mContext, arg0.getMessage());
 			}
 		});
 	}

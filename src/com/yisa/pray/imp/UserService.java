@@ -12,12 +12,12 @@ import com.yisa.pray.entity.OnlineCountEntity;
 import com.yisa.pray.entity.UserInfo;
 import com.yisa.pray.utils.UrlUtils;
 
-import retrofit.Call;
-import retrofit.http.GET;
-import retrofit.http.Header;
-import retrofit.http.PUT;
-import retrofit.http.Path;
-import retrofit.http.Query;
+import retrofit2.Call;
+import retrofit2.http.GET;
+import retrofit2.http.Header;
+import retrofit2.http.PUT;
+import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 /**
  *
