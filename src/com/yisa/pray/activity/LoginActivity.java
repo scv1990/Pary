@@ -14,10 +14,10 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import retrofit.Call;
-import retrofit.Callback;
-import retrofit.GsonConverterFactory;
-import retrofit.Retrofit;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 import java.io.IOException;
 
@@ -30,11 +30,11 @@ import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest.HttpMethod;
 import com.lidroid.xutils.ui.BaseActivity;
 import com.yisa.pray.R;
+import com.yisa.pray.converter.gson.GsonConverterFactory;
 import com.yisa.pray.entity.ErrorMessage;
 import com.yisa.pray.entity.UserInfo;
 import com.yisa.pray.imp.RequestServers;
 import com.yisa.pray.utils.Constants;
-import com.yisa.pray.utils.DeviceUtils;
 import com.yisa.pray.utils.PreferenceUtils;
 import com.yisa.pray.utils.ResponseCode;
 import com.yisa.pray.utils.ShowUtils;
@@ -56,7 +56,6 @@ import com.yisa.pray.views.LoadingDialog;
 public class LoginActivity extends BaseActivity implements OnClickListener{
 
 	private static final String TAG = "LoginActivity";
-	private static final int REQUEST_CODE = 0x0001;
 	private EditText mUserName ;
 	private EditText mPwd;
 	private Button mLoginBtn;
@@ -115,20 +114,31 @@ public class LoginActivity extends BaseActivity implements OnClickListener{
 			call.enqueue(new Callback<UserInfo>(){
 
 				@Override
-				public void onFailure(Throwable arg0) {
-					Log.i(TAG+"onFailure", arg0.getMessage());
+				public void onFailure(Call<UserInfo> arg0, Throwable arg1) {
+					Log.i(TAG+"onFailure", arg1.getMessage());
+					
 				}
 
 				@Override
-				public void onResponse(retrofit.Response<UserInfo> response, Retrofit retrofit) {
+				public void onResponse(Call<UserInfo> arg0, Response<UserInfo> response) {
 					String message = "";
 					switch (response.code()) {
 					case ResponseCode.RESPONSE_CODE_201:
+						UserInfo user = response.body();
 						message = new Gson().toJson(response.body());
 						Log.i(TAG + "201", message);
 						PreferenceUtils.setPrefString(mContext, "userinfo", message);
-						UIHelper.showHomeActivity(mContext);
-						finish();
+						if(user.getRegion_id()== 0 || "".equals(user.getRegion_name()) || user.getPeriod_id() == 0 ){
+							UIHelper.showPerfectUserinfoActicity(mContext, user.getId());
+						}else{
+							if(user.getStatus() == 0)
+							{
+								ShowUtils.showToast(mContext, getResources().getString(R.string.user_status_0));
+							}else{
+								UIHelper.showHomeActivity(mContext);
+								finish();
+							}
+						}
 						break;
 					default:
 						ErrorMessage error = new ErrorMessage();;
@@ -143,6 +153,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener{
 						ShowUtils.showToast(mContext, error.getError());
 						break;
 					}
+					
 				}
 			});
 		} catch (Exception e) {

@@ -20,7 +20,7 @@
         android:layout_below="@id/head_view"
         android:background="@android:color/white"
         android:orientation="horizontal"
-        android:weightSum="3" >
+        android:weightSum="2" >
 
         <com.yisa.pray.views.DrawableCenterTextView
             android:id="@+id/area"
@@ -45,16 +45,8 @@
             android:textSize="@dimen/app_text_size_12" />
 
         <RelativeLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1" >
-
-            <ImageView
-                android:id="@+id/church_flag"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_centerInParent="true"
-                android:src="@drawable/church_flag" />
+            android:layout_width="150dp"
+            android:layout_height="match_parent" >
 
             <TextView
                 android:id="@+id/nine_clock"
@@ -62,9 +54,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_alignParentLeft="true"
-                android:layout_toLeftOf="@id/church_flag"
                 android:gravity="center_vertical|right"
                 android:paddingRight="3dp" />
+            
+            <ImageView
+                android:id="@+id/church_flag"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/nine_clock"
+                android:src="@drawable/church_flag" />
+
 
             <TextView
                 android:id="@+id/three_clock"
@@ -93,15 +93,32 @@
                 android:layout_below="@id/church_flag"
                 android:gravity="center" />
 
-            <TextView
-                android:id="@+id/on_line_count"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="100dp"
                 android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
                 android:layout_toRightOf="@id/three_clock"
-                android:gravity="center_vertical"
-                android:text="@string/all_online_count"
-                android:textColor="@color/font_color_yellow"
-                android:textSize="@dimen/app_text_size_12" />
+                android:orientation="vertical"
+                android:weightSum="2" >
+
+                <TextView
+                    android:id="@+id/region_line_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0sp"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/app_text_size_12" />
+
+                <TextView
+                    android:id="@+id/on_line_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0sp"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/app_text_size_12" />
+            </LinearLayout>
         </RelativeLayout>
     </LinearLayout>
 
@@ -123,6 +140,6 @@
             android:listSelector="#00000000"
             android:scrollbars="none" >
         </ListView>
-    </com.yisa.pray.views.swipe.SwipyRefreshLayout>
+    </com.yisa.pray.views.swipe.SwipyRefreshLayout>
 
 </RelativeLayout>

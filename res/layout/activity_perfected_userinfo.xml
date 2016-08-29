@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" 
+    android:orientation="vertical">
+
+    <com.yisa.pray.views.CustomHeadView 
+        android:id="@+id/head_view"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/header_height_size"
+        app:headTitle="@string/perfect_userinfo">
+    </com.yisa.pray.views.CustomHeadView>
+	<ScrollView 
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:scrollbars="none">
+	    <LinearLayout 
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:orientation="vertical">
+	        <LinearLayout style="@style/custom_input_layout_style" >
+                <TextView
+                    style="@style/custom_input_label_style"
+                    android:text="@string/perfect_name_label" />
+                <View style="@style/vertical_sep_line_short" />
+                <EditText
+                    android:id="@+id/name"
+                    style="@style/register_edittext_style"
+                    android:hint="@string/perfect_name_hint" />
+            </LinearLayout>
+            
+            <LinearLayout style="@style/custom_input_layout_style" >
+                <TextView
+                    style="@style/custom_input_label_style"
+                    android:text="@string/reg_tel_label" />
+                <View style="@style/vertical_sep_line_short" />
+                <EditText
+                    android:id="@+id/tel"
+                    style="@style/register_edittext_style"
+                    android:hint="@string/reg_tel_hint" />
+            </LinearLayout>
+            
+            <LinearLayout style="@style/custom_input_layout_style" >
+                <TextView
+                    style="@style/custom_input_label_style"
+                    android:text="@string/perfect_age_label" />
+                <View style="@style/vertical_sep_line_short" />
+                <EditText
+                    android:id="@+id/age"
+                    style="@style/register_edittext_style"
+                    android:hint="@string/perfect_age_hint" />
+            </LinearLayout>
+            
+            <LinearLayout style="@style/custom_input_layout_style" >
+                <TextView
+                    style="@style/custom_input_label_style"
+                    android:text="@string/perfect_sex_label" />
+                <View style="@style/vertical_sep_line_short" />
+                <RadioGroup android:id="@+id/sex_radio_group"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <RadioButton android:id="@+id/male_radio"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/male"
+                        android:textSize="@dimen/app_text_size_14"
+                        android:textColor="@android:color/black"
+                        android:checked="true"/>
+
+                    <RadioButton
+                        android:id="@+id/female_radio"
+                        android:layout_width="wrap_content"
+                        android:text="@string/female"
+                        android:textSize="@dimen/app_text_size_14"
+                        android:textColor="@android:color/black"
+                        android:layout_marginLeft="20dp"/>
+
+                </RadioGroup>
+            </LinearLayout>
+            
+            
+            <LinearLayout style="@style/custom_input_layout_style" >
+                <TextView
+                    style="@style/custom_input_label_style"
+                    android:text="@string/perfect_education_label" />
+                <View style="@style/vertical_sep_line_short" />
+                <EditText
+                    android:id="@+id/education"
+                    style="@style/register_edittext_style"
+                    android:hint="@string/perfect_education_hint"
+                    android:editable="false"
+                    android:focusable="false" />
+            </LinearLayout>
+            <LinearLayout style="@style/custom_input_layout_style" >
+                <TextView
+                    style="@style/custom_input_label_style"
+                    android:text="@string/perfect_vocation_label" />
+                <View style="@style/vertical_sep_line_short" />
+                <EditText
+                    android:id="@+id/vocation"
+                    style="@style/register_edittext_style"
+                    android:hint="@string/perfect_vocation_hint" />
+            </LinearLayout>
+            <LinearLayout style="@style/custom_input_layout_style" >
+                <TextView
+                    style="@style/custom_input_label_style"
+                    android:text="@string/perfect_church_service_label" />
+                <View style="@style/vertical_sep_line_short" />
+                <EditText
+                    android:id="@+id/church_service"
+                    style="@style/register_edittext_style"
+                    android:hint="@string/perfect_church_service_hint" />
+            </LinearLayout>
+            <LinearLayout style="@style/custom_input_layout_style" >
+                <TextView
+                    style="@style/custom_input_label_style"
+                    android:text="@string/perfect_church_label" />
+                <View style="@style/vertical_sep_line_short" />
+                <EditText
+                    android:id="@+id/church"
+                    style="@style/register_edittext_style"
+                    android:hint="@string/perfect_church_hint" />
+            </LinearLayout>
+            <LinearLayout style="@style/custom_input_layout_style" >
+                <TextView
+                    style="@style/custom_input_label_style"
+                    android:text="@string/perfect_rebirth_label" />
+                <View style="@style/vertical_sep_line_short" />
+                <EditText
+                    android:id="@+id/rebirth"
+                    style="@style/register_edittext_style"
+                    android:hint="@string/perfect_rebirth_hint" />
+            </LinearLayout>
+            <LinearLayout style="@style/custom_input_layout_style" >
+                <TextView
+                    style="@style/custom_input_label_style"
+                    android:text="@string/perfect_area_label" />
+                <View style="@style/vertical_sep_line_short" />
+                <EditText
+                    android:id="@+id/pray_area"
+                    style="@style/register_edittext_style"
+                    android:hint="@string/perfect_area_hint"
+                    android:editable="false" />
+            </LinearLayout>
+            <LinearLayout style="@style/custom_input_layout_style" >
+                <TextView
+                    style="@style/custom_input_label_style"
+                    android:text="@string/perfect_period_label" />
+                <View style="@style/vertical_sep_line_short" />
+                <EditText
+                    android:id="@+id/pray_period"
+                    style="@style/register_edittext_style"
+                    android:hint="@string/perfect_period_hint" 
+                    android:editable="false" />
+            </LinearLayout>
+            <LinearLayout style="@style/custom_input_layout_style" >
+                <TextView
+                    style="@style/custom_input_label_style"
+                    android:text="@string/perfect_address_label" />
+                <View style="@style/vertical_sep_line_short" />
+                <EditText
+                    android:id="@+id/address"
+                    style="@style/register_edittext_style"
+                    android:hint="@string/perfect_address_hint" />
+            </LinearLayout>
+            <Button 
+                android:id="@+id/commit"
+	        	android:layout_width="match_parent"
+	        	android:layout_height="45dp"
+	        	android:gravity="center"
+	        	android:text="@string/commit"
+	        	android:layout_marginTop="15dp"
+	        	android:layout_marginBottom="15dp"
+	        	android:layout_marginLeft="10dp"
+	        	android:layout_marginRight="10dp"
+	        	android:background="@color/head_bg"
+	        	android:textColor="@color/white"
+	        	android:textSize="@dimen/app_text_size_14"/>
+	    </LinearLayout>
+	    
+	</ScrollView>    
+	
+</LinearLayout>

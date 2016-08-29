@@ -4,11 +4,11 @@ import com.yisa.pray.entity.ErrorMessage;
 import com.yisa.pray.entity.OperationResult;
 import com.yisa.pray.utils.UrlUtils;
 
-import retrofit.Call;
-import retrofit.http.Multipart;
-import retrofit.http.POST;
-import retrofit.http.Part;
-import retrofit.http.Query;
+import retrofit2.Call;
+import retrofit2.http.Multipart;
+import retrofit2.http.POST;
+import retrofit2.http.Part;
+import retrofit2.http.Query;
 
 public interface RegisterService {
 	/**

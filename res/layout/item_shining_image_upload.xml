@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <com.yisa.pray.views.MyImageView
+            android:id="@+id/image_select"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignTop="@+id/image_del"
+            android:layout_marginTop="14dp"
+            android:background="@drawable/custom_select_image_bg"
+            android:scaleType="centerCrop" />
+
+        <ImageView
+            android:id="@+id/image_del"
+            android:layout_width="30dip"
+            android:layout_height="30dip"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="55dp"
+            android:padding="5dip"
+            android:src="@drawable/ic_close_btn" />
+    </RelativeLayout>
+
+</LinearLayout>

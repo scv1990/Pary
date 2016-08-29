@@ -8,6 +8,11 @@
 
 package com.yisa.pray.base;
 
+import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
+
 import android.app.Application;
 
 /**
@@ -39,5 +44,21 @@ public class MyApplication extends Application {
 	public static void setActive(boolean isActive) {
 		MyApplication.isActive = isActive;
 	}
+	
+	@Override
+	public void onCreate() {
+		super.onCreate();
+		instance = this;
+		initImageLoader();
+	}
 
+	@SuppressWarnings("deprecation")
+	public void initImageLoader() {
+		ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(this)
+				.threadPriority(Thread.NORM_PRIORITY - 2).denyCacheImageMultipleSizesInMemory()
+				.discCacheFileNameGenerator(new Md5FileNameGenerator()).tasksProcessingOrder(QueueProcessingType.LIFO)
+				.writeDebugLogs() // Remove for release app
+				.build();
+		ImageLoader.getInstance().init(config);
+	}
 }

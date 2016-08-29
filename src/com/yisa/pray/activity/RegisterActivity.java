@@ -1,9 +1,9 @@
 package com.yisa.pray.activity;
 
-import retrofit.Call;
-import retrofit.Callback;
-import retrofit.GsonConverterFactory;
-import retrofit.Retrofit;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 import android.annotation.SuppressLint;
 import android.os.Handler;
 import android.os.Message;
@@ -20,6 +20,7 @@ import java.util.TimerTask;
 import com.google.gson.Gson;
 import com.lidroid.xutils.ui.BaseActivity;
 import com.yisa.pray.R;
+import com.yisa.pray.converter.gson.GsonConverterFactory;
 import com.yisa.pray.entity.ErrorMessage;
 import com.yisa.pray.entity.OperationResult;
 import com.yisa.pray.imp.RegisterService;
@@ -160,35 +161,35 @@ public class RegisterActivity extends BaseActivity implements OnClickListener{
 			call.enqueue(new Callback<ErrorMessage>(){
 
 				@Override
-				public void onFailure(Throwable arg0) {
-					Log.i(TAG+"onFailure", arg0.getMessage());
+				public void onFailure(Call<ErrorMessage> arg0, Throwable arg1) {
+					Log.i(TAG+"onFailure", arg1.getMessage());
 				}
 
 				@Override
-				public void onResponse(retrofit.Response<ErrorMessage> response, Retrofit retrofit) {
+				public void onResponse(Call<ErrorMessage> arg0, Response<ErrorMessage> response) {
 					switch (response.code()) {
-					case ResponseCode.RESPONSE_CODE_201:
-						setResult(RESULT_OK);
-						Log.i(TAG +"201", response.message());
-						finish();
-						break;
-					case ResponseCode.RESPONSE_CODE_422:
-						String message = "";
-						ErrorMessage error = new ErrorMessage();;
-						try {
-							message = response.errorBody().string();
-							Gson gson =  new Gson();
-							error = gson.fromJson(message, ErrorMessage.class);
-						} catch (IOException e) {
-							e.printStackTrace();
+						case ResponseCode.RESPONSE_CODE_201:
+							setResult(RESULT_OK);
+							Log.i(TAG +"201", response.message());
+							finish();
+							break;
+						case ResponseCode.RESPONSE_CODE_422:
+							String message = "";
+							ErrorMessage error = new ErrorMessage();;
+							try {
+								message = response.errorBody().string();
+								Gson gson =  new Gson();
+								error = gson.fromJson(message, ErrorMessage.class);
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
+							Log.i(TAG, message);
+							ShowUtils.showToast(mContext, error.getError());
+							break;
+						default:
+							break;
 						}
-						Log.i(TAG, message);
-						ShowUtils.showToast(mContext, error.getError());
-						break;
-					default:
-						break;
 					}
-				}
 			});
 		} catch (Exception e) {
 			Log.i(TAG +"Exception", e.getMessage());
@@ -227,37 +228,39 @@ public class RegisterActivity extends BaseActivity implements OnClickListener{
 			call.enqueue(new Callback<OperationResult>(){
 
 				@Override
-				public void onFailure(Throwable arg0) {
-					Log.i(TAG+"onFailure", arg0.getMessage());
+				public void onFailure(Call<OperationResult> arg0, Throwable arg1) {
+					Log.i(TAG+"onFailure", arg1.getMessage());
+					
 				}
 
 				@Override
-				public void onResponse(retrofit.Response<OperationResult> response, Retrofit retrofit) {
+				public void onResponse(Call<OperationResult> arg0, Response<OperationResult> response) {
 					switch (response.code()) {
-					case ResponseCode.RESPONSE_CODE_201:
-						Log.i(TAG +"201", response.message());
-						if(response.body().getResult() == 0){
-							ShowUtils.showToast(mContext, getResources().getString(R.string.reg_verfi_code_send_success));
-						}else{
-							ShowUtils.showToast(mContext, getResources().getString(R.string.reg_verfi_code_send_failed));
-						}
-						break;
-					case ResponseCode.RESPONSE_CODE_422:
-						String message = "";
-						ErrorMessage error = new ErrorMessage();;
-						try {
-							message = response.errorBody().string();
-							Gson gson =  new Gson();
-							error = gson.fromJson(message, ErrorMessage.class);
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
-						Log.i(TAG, message);
-						ShowUtils.showToast(mContext, error.getError());
-						break;
-					default:
-						break;
+						case ResponseCode.RESPONSE_CODE_201:
+							Log.i(TAG +"201", response.message());
+							if(response.body().getResult() == 0){
+								ShowUtils.showToast(mContext, getResources().getString(R.string.reg_verfi_code_send_success));
+							}else{
+								ShowUtils.showToast(mContext, getResources().getString(R.string.reg_verfi_code_send_failed));
+							}
+							break;
+						case ResponseCode.RESPONSE_CODE_422:
+							String message = "";
+							ErrorMessage error = new ErrorMessage();;
+							try {
+								message = response.errorBody().string();
+								Gson gson =  new Gson();
+								error = gson.fromJson(message, ErrorMessage.class);
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
+							Log.i(TAG, message);
+							ShowUtils.showToast(mContext, error.getError());
+							break;
+						default:
+							break;
 					}
+					
 				}
 			});
 		} catch (Exception e) {

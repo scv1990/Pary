@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="pray_wall_title">祷告墙</string>
+
+    <string name="pray_wall_title">基督祷告军</string>
+    <string name="pray_wall_bottom_title">祷告墙</string>
     <string name="add_attention">关注</string>
-    <string name="all_online_count">全国在线</string>
+    <string name="all_online_count">全国在线%1$s</string>
+    <string name="regions_online_count">本地在线%1$s</string>
     <string name="area">地区</string>
     <string name="categroy">分类</string>
+
 </resources>

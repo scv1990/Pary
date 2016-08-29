@@ -22,5 +22,8 @@
     
     <color name="btn_disable">#7E7E7E</color>
     
+    <!-- blog -->
+    <color name="list_item_4f4f4f">#4f4f4f</color>
+    <color name="blog_background">#F3F4F5</color>
         
 </resources>

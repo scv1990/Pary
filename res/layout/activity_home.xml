@@ -19,7 +19,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:drawableTop="@drawable/chat_blog_btn"
-            android:text="@string/pray_wall_title"
+            android:text="@string/pray_wall_bottom_title"
             android:textColor="@drawable/home_tab_btn"/>
         <TextView android:id="@+id/notification_title"
             android:layout_width="0dp"

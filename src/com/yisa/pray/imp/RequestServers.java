@@ -7,12 +7,11 @@
  */
 
 package com.yisa.pray.imp;
-import com.yisa.pray.entity.ErrorMessage;
 import com.yisa.pray.entity.UserInfo;
 import com.yisa.pray.utils.UrlUtils;
 
-import retrofit.Call;
-import retrofit.http.*;
+import retrofit2.Call;
+import retrofit2.http.*;
 
 /**
  *
