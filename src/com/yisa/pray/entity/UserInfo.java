@@ -3,6 +3,8 @@ package com.yisa.pray.entity;
 public class UserInfo {
 	private int id;
 	
+	private String avatar;
+	
 	private String username;
 	
 	private String phone;
@@ -15,7 +17,7 @@ public class UserInfo {
 	
 	private String birth;
 	
-	private String education;
+	private int education;
 	
 	private String job;
 	
@@ -23,15 +25,23 @@ public class UserInfo {
 	
 	private String church_service;
 	
-	private String area;
+	private int region_id;
+	
+	private String region_name;
 	
 	private int period;
+	
+	private String period_text;
+	
+	private String rebirth;
 	
 	private String created_at;
 	
 	private String invitation_code;
 	
 	private String  authentication_token;
+	
+	private int status;
 
 	public int getId() {
 		return id;
@@ -39,6 +49,14 @@ public class UserInfo {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+	
+	public String getAvatar() {
+		return avatar;
+	}
+
+	public void setAvatar(String avatar) {
+		this.avatar = avatar;
 	}
 
 	public String getUsername() {
@@ -89,11 +107,11 @@ public class UserInfo {
 		this.birth = birth;
 	}
 
-	public String getEducation() {
+	public int getEducation() {
 		return education;
 	}
 
-	public void setEducation(String education) {
+	public void setEducation(int education) {
 		this.education = education;
 	}
 
@@ -120,21 +138,37 @@ public class UserInfo {
 	public void setChurch_service(String church_service) {
 		this.church_service = church_service;
 	}
-
-	public String getArea() {
-		return area;
-	}
-
-	public void setArea(String area) {
-		this.area = area;
-	}
 	
-	public int getPeriod() {
+	public int getRegion_id() {
+		return region_id;
+	}
+
+	public void setRegion_id(int region_id) {
+		this.region_id = region_id;
+	}
+
+	public String getRegion_name() {
+		return region_name;
+	}
+
+	public void setRegion_name(String region_name) {
+		this.region_name = region_name;
+	}
+
+	public int getPeriod_id() {
 		return period;
 	}
 
-	public void setPeriod(int period) {
-		this.period = period;
+	public void setPeriod_id(int period_id) {
+		this.period = period_id;
+	}
+
+	public String getPeriod_text() {
+		return period_text;
+	}
+
+	public void setPeriod_text(String period_text) {
+		this.period_text = period_text;
 	}
 
 	public String getCreated_at() {
@@ -159,5 +193,21 @@ public class UserInfo {
 
 	public void setAuthentication_token(String authentication_token) {
 		this.authentication_token = authentication_token;
+	}
+
+	public String getRebirth() {
+		return rebirth;
+	}
+
+	public void setRebirth(String rebirth) {
+		this.rebirth = rebirth;
+	}
+
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
 	}
 }
