@@ -29,7 +29,7 @@ public class UserInfo {
 	
 	private String region_name;
 	
-	private int period_id;
+	private int period;
 	
 	private String period_text;
 	
@@ -156,11 +156,11 @@ public class UserInfo {
 	}
 
 	public int getPeriod_id() {
-		return period_id;
+		return period;
 	}
 
 	public void setPeriod_id(int period_id) {
-		this.period_id = period_id;
+		this.period = period_id;
 	}
 
 	public String getPeriod_text() {

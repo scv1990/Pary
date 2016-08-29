@@ -87,7 +87,8 @@ public class BlogMainFragment extends BaseFragment implements OnRefreshListener,
 	private TextView mNineClockTxt;
 	private DrawableCenterTextView mRegionTxt;
 	private DrawableCenterTextView mCateTxt;
-	
+	private TextView mAllOnlineTxt;
+	private TextView mRegionOnlineTxt;
 	private Timer mTimer;
 	private int mPage = 1;
 	private int mPerPage = 10;
@@ -129,6 +130,8 @@ public class BlogMainFragment extends BaseFragment implements OnRefreshListener,
 		mThreeClockTxt = (TextView) getView(R.id.three_clock);
 		mSixClockTxt = (TextView) getView(R.id.six_clock);
 		mNineClockTxt = (TextView) getView(R.id.nine_clock);
+		mAllOnlineTxt = (TextView) getView(R.id.on_line_count);
+		mRegionOnlineTxt = (TextView) getView(R.id.region_line_count);
 	}
 	
 	/**
@@ -331,6 +334,8 @@ public class BlogMainFragment extends BaseFragment implements OnRefreshListener,
 	 * @throws
 	 */
 	public void setOnlineNum(String onlineNum){
+		mAllOnlineTxt.setText(String.format(getResources().getString(R.string.all_online_count), onlineNum));
+		mRegionOnlineTxt.setText(String.format(getResources().getString(R.string.regions_online_count), onlineNum));
 		int time = Calendar.getInstance().get(Calendar.HOUR);
 		if (time < 3) {
 			mZeroClockTxt.setText(onlineNum);

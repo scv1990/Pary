@@ -69,4 +69,9 @@ public interface UserService {
 	Call<UserInfo> getUserInfo(
 			@Header("X-Access-Token") String token,
 			@Path("id") int userId);
+	
+	@GET(UrlUtils.GET_USER_INFO)
+	Call<UserInfo> addAttention(
+			@Header("X-Access-Token") String token,
+			@Path("id") int userId);
 }

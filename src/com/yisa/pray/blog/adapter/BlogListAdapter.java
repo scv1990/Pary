@@ -17,6 +17,7 @@ import java.util.List;
 
 
 
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -24,6 +25,7 @@ import retrofit2.Retrofit;
 
 import com.google.gson.Gson;
 import com.lidroid.xutils.util.AdapterUtils;
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.yisa.pray.R;
 import com.yisa.pray.blog.entity.BlogEntity;
 import com.yisa.pray.blog.entity.PostImage;
@@ -122,6 +124,9 @@ public class BlogListAdapter extends BaseAdapter {
 		BlogEntity blog = getItem(position);
 		showFacebookImage(convertView, blog);
 		CircleImageView avatar = (CircleImageView) AdapterUtils.get(convertView, R.id.user_head_pic);
+		if(blog.getUser_avatar() != null && !"".equals(blog.getUser_avatar())){
+			ImageLoader.getInstance().displayImage(blog.getUser_avatar(), avatar);
+		}
 		TextView userName = (TextView) AdapterUtils.get(convertView, R.id.user_name);
 		TextView addTime = (TextView) AdapterUtils.get(convertView, R.id.add_time);
 		ExpandableTextView content = (ExpandableTextView) AdapterUtils.get(convertView, R.id.posts_content);
@@ -199,6 +204,10 @@ public class BlogListAdapter extends BaseAdapter {
 		});
 	}
 	
+	
+	public void addAttention(int position){
+		
+	}
 	/**
 	 * 展示类似facebook图片展示
 	 */

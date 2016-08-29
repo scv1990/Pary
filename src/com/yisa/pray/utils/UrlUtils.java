@@ -6,6 +6,15 @@ public class UrlUtils {
 	 */
 	public static final String SERVER_ADDRESS = "http://jcalliance.org";
 	/**
+	 * 版本号
+	 */
+	public static final String API_VERSION = "v1";
+	
+	/**
+	 * 模块名
+	 */
+	public static final String API_MODEL_USER ="users";
+	/**
 	 * 注册
 	 */
 	public static final String REGISTER = "/api/v1/accounts/register";
@@ -39,13 +48,4 @@ public class UrlUtils {
 	 */
 	public static final String GET_PERIOD = "/v1/users/periods";
 	
-	/**
-	 * 版本号
-	 */
-	public static final String API_VERSION = "v1";
-	
-	/**
-	 * 模块名
-	 */
-	public static final String API_MODEL_USER ="users";
 }

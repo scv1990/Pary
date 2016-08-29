@@ -167,6 +167,7 @@ public class PerfectUserinfoActivity extends BaseActivity implements OnClickList
 					case ResponseCode.RESPONSE_CODE_200:
 						mUserInfo = response.body();
 						mUserInfo.setAuthentication_token(token);
+						Log.i(TAG + "SUERINFO--=", new Gson().toJson(mUserInfo));
 						PreferenceUtils.setPrefString(mContext, "userinfo", new Gson().toJson(mUserInfo));
 						mEdu = new EducationEntity();
 						mEdu.setId(mUserInfo.getId());
@@ -228,7 +229,6 @@ public class PerfectUserinfoActivity extends BaseActivity implements OnClickList
 					.addConverterFactory(GsonConverterFactory.create())
 					.build();
 		UserService service = retrofit.create(UserService.class);
-		
 		Call<UserInfo> call = service.upateUserInfo(
 						mUserInfo.getId(), 
 						mUserName.getText().toString(), 
@@ -240,8 +240,8 @@ public class PerfectUserinfoActivity extends BaseActivity implements OnClickList
 						mChurch.getText().toString(), 
 						mChurchService.getText().toString(), 
 						mRebirth.getText().toString(), 
-						mRegion.getId(), 
-						Integer.parseInt(mPeriodEn.getId()), 
+						mUserInfo.getRegion_id(), 
+						mUserInfo.getPeriod_id(), 
 						token);
 		Log.i(TAG, mAge.getText().toString());
 		call.enqueue(new Callback<UserInfo>() {
@@ -274,13 +274,15 @@ public class PerfectUserinfoActivity extends BaseActivity implements OnClickList
 	}
 	
 	@Override
-	protected void onActivityResult(int requestCode, int responseCode, Intent intent){
+	protected void onActivityResult(int requestCode, int responseCode, Intent intent) {
 		super.onActivityResult(requestCode, responseCode, intent);
 		
 		if(responseCode == RESULT_OK){
 			switch (requestCode) {
 				case Constants.USER_INFO_TO_REGION_REQ_CODE:
 					mRegion = (RegionEntity)intent.getSerializableExtra(IntentKey.REGION);
+					mUserInfo.setRegion_id(mRegion.getId());
+					mUserInfo.setRegion_name(mRegion.getName());
 					mArea.setText(mRegion.getName());
 					break;
 				case Constants.USER_INFO_TO_EDUCATION_REQ_CODE:
@@ -288,14 +290,13 @@ public class PerfectUserinfoActivity extends BaseActivity implements OnClickList
 					mEducation.setText(mEdu.getName());
 					break;
 				case Constants.USER_INFO_TO_PERIOD_REQ_CODE:
-					try {
-						SimpleData data = (SimpleData)intent.getSerializableExtra(IntentKey.DATA);
-						mPeriodEn = (Period) data.clone();
-						mPeriod.setText(mPeriodEn.getName());
-					} catch (CloneNotSupportedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
+					SimpleData data = (SimpleData)intent.getSerializableExtra(IntentKey.DATA);
+					SimpleData father = new Period();
+					father.setId(data.getId());
+					father.setName(data.getName());
+					mUserInfo.setPeriod_id(Integer.parseInt(data.getId()));
+					mUserInfo.setPeriod_text(data.getName());
+					mPeriod.setText(mUserInfo.getPeriod_text());
 					break;
 					
 				default:
