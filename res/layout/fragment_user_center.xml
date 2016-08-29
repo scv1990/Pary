@@ -21,48 +21,156 @@
         android:scrollbars="none" >
 
         <RelativeLayout
-            android:id="@+id/rl_user_info"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:background="@color/user_info_background" >
+            android:layout_height="wrap_content" >
 
-            <com.yisa.pray.views.CircleImageView
-                android:id="@+id/user_head_pic"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="35dp"
-                android:src="@drawable/default_user_head_pic" >
-            </com.yisa.pray.views.CircleImageView>
+            <RelativeLayout
+                android:id="@+id/rl_user_info"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_alignParentTop="true"
+                android:background="@color/user_info_background" >
+
+                <com.yisa.pray.views.CircleImageView
+                    android:id="@+id/user_head_pic"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="35dp"
+                    android:src="@drawable/default_user_head_pic" >
+                </com.yisa.pray.views.CircleImageView>
+
+                <LinearLayout
+                    android:id="@+id/ll_user_info"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_toRightOf="@id/user_head_pic"
+                    android:orientation="vertical"
+                    android:weightSum="3" >
+
+                    <TextView
+                        android:id="@+id/user_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical" />
+
+                    <TextView
+                        android:id="@+id/user_point"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical" />
+
+                    <TextView
+                        android:id="@+id/user_level"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical" />
+                </LinearLayout>
+            </RelativeLayout>
 
             <LinearLayout
-                android:id="@+id/ll_user_info"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_toRightOf="@id/user_head_pic"
-                android:orientation="vertical"
-                android:weightSum="3" >
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rl_user_info"
+                android:orientation="vertical" >
 
-                <TextView
-                    android:id="@+id/user_name"
+                <View
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical" />
+                    android:layout_height="1sp"
+                    android:layout_marginTop="20dp"
+                    android:background="@color/seperator_line_color" />
 
-                <TextView
-                    android:id="@+id/user_point"
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical" />
+                    android:layout_height="40dp"
+                    android:layout_gravity="center_vertical" >
 
-                <TextView
-                    android:id="@+id/user_level"
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentLeft="true"
+                        android:layout_marginLeft="10dp"
+                        android:gravity="center_vertical"
+                        android:text="@string/thanks_pray"
+                        android:textSize="@dimen/app_text_size_14" />
+
+                    <ImageView style="@style/UserCenterBackStyle" />
+                </RelativeLayout>
+                <include layout="@layout/view_horizontal_full_seperator_line" />
+
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical" />
+                    android:layout_height="40dp"
+                    android:layout_gravity="center_vertical" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentLeft="true"
+                        android:layout_marginLeft="10dp"
+                        android:gravity="center_vertical"
+                        android:text="@string/user_info"
+                        android:textSize="@dimen/app_text_size_14" />
+
+                    <ImageView style="@style/UserCenterBackStyle" />
+                </RelativeLayout>
+               <include layout="@layout/view_horizontal_full_seperator_line" />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center_vertical" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentLeft="true"
+                        android:layout_marginLeft="10dp"
+                        android:gravity="center_vertical"
+                        android:text="@string/my_attention"
+                        android:textSize="@dimen/app_text_size_14" />
+
+                    <ImageView style="@style/UserCenterBackStyle" />
+                </RelativeLayout>
+                <include layout="@layout/view_horizontal_full_seperator_line" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center_vertical" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentLeft="true"
+                        android:layout_marginLeft="10dp"
+                        android:gravity="center_vertical"
+                        android:text="@string/reg_invite_code_label"
+                        android:textSize="@dimen/app_text_size_14" />
+
+                    <ImageView style="@style/UserCenterBackStyle" />
+                </RelativeLayout>
+                <include layout="@layout/view_horizontal_full_seperator_line" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center_vertical" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentLeft="true"
+                        android:layout_marginLeft="10dp"
+                        android:gravity="center_vertical"
+                        android:text="@string/setting"
+                        android:textSize="@dimen/app_text_size_14" />
+
+                    <ImageView style="@style/UserCenterBackStyle" />
+                </RelativeLayout>
+                <include layout="@layout/view_horizontal_full_seperator_line" />
             </LinearLayout>
         </RelativeLayout>
     </ScrollView>

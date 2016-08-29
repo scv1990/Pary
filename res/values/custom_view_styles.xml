@@ -91,4 +91,13 @@
         <item name="android:singleLine">true</item>
     </style>
     
+    <style name="UserCenterBackStyle">
+        <item name="android:layout_width">12dp</item>
+        <item name="android:layout_height">20dp</item>
+        <item name="android:layout_marginRight">10dp</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:src">@drawable/arrow</item>
+    </style>
+    
 </resources>
