@@ -11,9 +11,13 @@ public class UrlUtils {
 	public static final String API_VERSION = "v1";
 	
 	/**
-	 * 模块名
+	 * 模块名用户模块
 	 */
 	public static final String API_MODEL_USER ="users";
+	/**
+	 * 模块名通知模块
+	 */
+	public static final String API_MODEL_NOTICE ="notifications";
 	/**
 	 * 注册
 	 */
@@ -46,6 +50,12 @@ public class UrlUtils {
 	/**
 	 * 获取祷告时间
 	 */
-	public static final String GET_PERIOD = "/v1/users/periods";
+	public static final String GET_PERIOD = "/api/v1/users/periods";
+	
+	/**
+	 * 获取通知
+	 */
+	public static final String GET_NOTICE = "/api/" + API_VERSION + "/" + API_MODEL_NOTICE;
+	
 	
 }

@@ -99,9 +99,8 @@ public class UIHelper {
 	 * @return void    返回类型 
 	 * @throws
 	 */
-	public static void showPerfectUserinfoActicity(Context context, int userId){
+	public static void showPerfectUserinfoActicity(Context context){
 		Intent intent = new Intent(context, PerfectUserinfoActivity.class);
-		intent.putExtra(IntentKey.ID, userId);
 		context.startActivity(intent);
 	}
 	

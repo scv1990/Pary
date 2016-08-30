@@ -49,5 +49,16 @@ public class UserUtils {
 		}
 		return new Gson().fromJson(userStr, UserInfo.class);
 	}
+	/**
+	 * @Title: getToken 
+	 * @Description: TODO(获取token) 
+	 * @param @param context
+	 * @param @return    设定文件 
+	 * @return String    返回类型 
+	 * @throws
+	 */
+	public String getToken(Context context){
+		return getUser(context).getAuthentication_token();
+	}
 	
 }
