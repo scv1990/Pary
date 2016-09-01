@@ -24,6 +24,7 @@ import android.widget.ListView;
 import com.lidroid.xutils.ui.BaseFragment;
 import com.yisa.pray.R;
 import com.yisa.pray.converter.gson.GsonConverterFactory;
+import com.yisa.pray.notification.adapter.NoticeAdapter;
 import com.yisa.pray.notification.entity.Notification;
 import com.yisa.pray.notification.imp.NoticeService;
 import com.yisa.pray.utils.ShowUtils;
@@ -47,7 +48,7 @@ import com.yisa.pray.views.swipe.SwipyRefreshLayoutDirection;
 public class MessageFragment extends BaseFragment implements OnRefreshListener{
 	private SwipyRefreshLayout mSwipy;
 	private ListView mListView;
-	
+	private NoticeAdapter mAdapter;
 	private int mPage = 1;
 	private int mPageCount = 10;
 	private List<Notification> mNoticeList;
@@ -73,7 +74,7 @@ public class MessageFragment extends BaseFragment implements OnRefreshListener{
 		}else if(direction == SwipyRefreshLayoutDirection.BOTTOM){
 			mPage++;
 		}
-		
+		getNotice();
 	}
 	
 	public void getNotice(){
@@ -94,6 +95,12 @@ public class MessageFragment extends BaseFragment implements OnRefreshListener{
 			public void onResponse(Call<List<Notification>> call, Response<List<Notification>> response) {
 				try {
 					mNoticeList.addAll(response.body());
+					if(mAdapter == null){
+						mAdapter = new NoticeAdapter(mActivity);
+						mListView.setAdapter(mAdapter);
+					}
+					mAdapter.setmNoticeList(mNoticeList);
+					mAdapter.notifyDataSetChanged();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
