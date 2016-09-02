@@ -42,4 +42,14 @@ public class BlogUrlUtils {
 	 * 上传帖子图片
 	 */
 	public static final String UPLOAD_BLOG_IMAGE = "/api/v1/posts/{id}/images";
+	
+	/**
+	 * 感谢代祷
+	 */
+	public static final String THANK_PRAY_SINGLE = "/api/v1/posts/{id}/prays/{history_id}/thank";
+	
+	/**
+	 * 感谢代祷列表
+	 */
+	public static final String THANK_PRAY_LIST = "/api/v1/posts/{id}/prays";
 }

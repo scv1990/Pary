@@ -16,6 +16,7 @@ import com.yisa.pray.blog.entity.BlogCategroyEntity;
 import com.yisa.pray.blog.entity.BlogEntity;
 import com.yisa.pray.blog.entity.PostImage;
 import com.yisa.pray.blog.entity.RegionEntity;
+import com.yisa.pray.blog.entity.ThankPrayEntity;
 import com.yisa.pray.utils.BlogUrlUtils;
 
 import retrofit2.Call;
@@ -121,6 +122,37 @@ public interface BlogService {
 			);
 	
 	/**
+	 * @Title: thankPraySingle 
+	 * @Description: TODO(单一的感谢代祷) 
+	 * @param @param blogId
+	 * @param @param id
+	 * @param @param token
+	 * @param @return    设定文件 
+	 * @return Call<ThankPrayEntity>    返回类型 
+	 * @throws
+	 */
+	@PUT(BlogUrlUtils.THANK_PRAY_SINGLE)
+	Call<ThankPrayEntity> thankPraySingle(
+			@Path("id") int blogId,
+			@Path("histroy_id") int id,
+			@Header("X-Access-Token") String token
+			);
+	/**
+	 * @Title: getPrayList 
+	 * @Description: TODO(获取感谢代祷列表) 
+	 * @param @param id
+	 * @param @param token
+	 * @param @return    设定文件 
+	 * @return Call<List<ThankPrayEntity>>    返回类型 
+	 * @throws
+	 */
+	@GET(BlogUrlUtils.THANK_PRAY_LIST)
+	Call<List<ThankPrayEntity>> getPrayList(
+			@Header("X-Access-Token") String token,
+			@Query("page") int page,
+			@Query("per_page") int perPage
+			);
+	/**
 	 * @Title: getRegion 
 	 * @Description: TODO(获取地区) 
 	 * @param @return    设定文件 
@@ -130,6 +162,16 @@ public interface BlogService {
 	@GET(BlogUrlUtils.GET_BLOG_AREA)
 	Call<List<RegionEntity>> getRegion();
 	
+	/**
+	 * @Title: uploadImage 
+	 * @Description: TODO(上传图片) 
+	 * @param @param id
+	 * @param @param file
+	 * @param @param token
+	 * @param @return    设定文件 
+	 * @return Call<PostImage>    返回类型 
+	 * @throws
+	 */
 	@Multipart
 	@POST(BlogUrlUtils.UPLOAD_BLOG_IMAGE)
 	Call<PostImage> uploadImage(

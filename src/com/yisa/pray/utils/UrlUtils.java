@@ -57,5 +57,8 @@ public class UrlUtils {
 	 */
 	public static final String GET_NOTICE = "/api/" + API_VERSION + "/" + API_MODEL_NOTICE;
 	
-	
+	/**
+	 * 获取我的关注列表
+	 */
+	public static final String GET_ATTENTION_LIST = "/api/v1/favorited_users";
 }

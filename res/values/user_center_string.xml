@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="user_center_title">我</string>
-    <string name="thanks_pray">感谢代祷</string>
     <string name="user_info">个人资料</string>
     <string name="my_attention">我的关注</string>
     <string name="setting">设置</string>

@@ -37,6 +37,7 @@ public class UserCenterFragment extends BaseFragment implements OnClickListener 
 	private RelativeLayout mAttentionLayout;
 	private RelativeLayout mSettingLayout;
 	private RelativeLayout mInviteCodeLayout;
+	
 
 	@Override
 	protected View inflaterView(LayoutInflater inflater, ViewGroup container, Bundle bundle) {

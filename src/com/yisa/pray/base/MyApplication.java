@@ -8,6 +8,8 @@
 
 package com.yisa.pray.base;
 
+import cn.jpush.android.api.JPushInterface;
+
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
@@ -50,6 +52,7 @@ public class MyApplication extends Application {
 		super.onCreate();
 		instance = this;
 		initImageLoader();
+		JPushInterface.init(this);
 	}
 
 	@SuppressWarnings("deprecation")

@@ -8,6 +8,8 @@
 
 package com.yisa.pray.imp;
 
+import java.util.List;
+
 import com.yisa.pray.entity.OnlineCountEntity;
 import com.yisa.pray.entity.UserInfo;
 import com.yisa.pray.utils.UrlUtils;
@@ -70,8 +72,20 @@ public interface UserService {
 			@Header("X-Access-Token") String token,
 			@Path("id") int userId);
 	
-	@GET(UrlUtils.GET_USER_INFO)
-	Call<UserInfo> addAttention(
+	/**
+	 * @Title: addAttention 
+	 * @Description: TODO(获取我的关注列表) 
+	 * @param @param token
+	 * @param @param page 页数
+	 * @param @param perPage 每页数量
+	 * @param @return    设定文件 
+	 * @return Call<UserInfo>    返回类型 
+	 * @throws
+	 */
+	@GET(UrlUtils.GET_ATTENTION_LIST)
+	Call<List<UserInfo>> getAttentionList(
 			@Header("X-Access-Token") String token,
-			@Path("id") int userId);
+			@Query("page") int page,
+			@Query("per_page") int perPage);
+	
 }

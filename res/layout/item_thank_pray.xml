@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    android:orientation="horizontal"
+    android:weightSum="1" >
+
+    <com.yisa.pray.views.CircleImageView
+        android:id="@+id/avator"
+        android:layout_width="50dp"
+        android:layout_height="70dp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="15dp"
+        android:src="@drawable/default_user_head_pic" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_marginTop="15dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:weightSum="1" >
+
+        <TextView
+            android:id="@+id/username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:textSize="@dimen/app_text_size_12" >
+        </TextView>
+
+        <TextView
+            android:id="@+id/content"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:textSize="@dimen/app_text_size_14" 
+            android:lines="2"
+            android:ellipsize="end"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/thank_pray_btn"
+        android:layout_width="70dp"
+        android:layout_height="30dp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginRight="10dp"
+        android:background="@color/head_bg"
+        android:gravity="center"
+        android:text="@string/thanks_pray"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/app_text_size_14"
+        android:visibility="gone" />
+
+    <CheckBox
+        android:id="@+id/check_box"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:background="@drawable/checkbox_style"
+        android:layout_gravity="center"
+        android:layout_marginRight="10dp"
+        android:checked="true" />
+
+</LinearLayout>

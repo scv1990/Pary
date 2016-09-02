@@ -8,5 +8,7 @@
     <string name="regions_online_count">本地在线%1$s</string>
     <string name="area">地区</string>
     <string name="categroy">分类</string>
-
+    <string name="thanks_pray">感谢代祷</string>
+	<string name="thank_pray_content">%1$s为你代祷</string>
+	<string name="thank_pray_batch">批量感谢</string>
 </resources>
