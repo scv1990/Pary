@@ -8,12 +8,21 @@ public class UrlUtils {
 	/**
 	 * 版本号
 	 */
-	public static final String API_VERSION = "v1";
+	public static final String API_VERSION = "/v1";
+	
+	/**
+	 * api
+	 */
+	public static final String API = "/api";
 	
 	/**
 	 * 模块名用户模块
 	 */
 	public static final String API_MODEL_USER ="users";
+	/**
+	 * 代祷模块
+	 */
+	public static final String API_MODEL_PRAYS = "/prays";
 	/**
 	 * 模块名通知模块
 	 */

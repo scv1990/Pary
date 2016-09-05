@@ -25,9 +25,6 @@ import com.yisa.pray.blog.adapter.ThankPrayAdapter;
 import com.yisa.pray.blog.entity.ThankPrayEntity;
 import com.yisa.pray.blog.imp.BlogService;
 import com.yisa.pray.converter.gson.GsonConverterFactory;
-import com.yisa.pray.entity.UserInfo;
-import com.yisa.pray.imp.UserService;
-import com.yisa.pray.user.adapter.UserAttentionAdapter;
 import com.yisa.pray.utils.ShowUtils;
 import com.yisa.pray.utils.UrlUtils;
 import com.yisa.pray.utils.UserUtils;
@@ -39,7 +36,7 @@ import com.yisa.pray.views.swipe.SwipyRefreshLayout.OnRefreshListener;
 /**
  *
  * 类名称: ThankPrayActivity.java
- * 类描述:	 
+ * 类描述:	感谢代祷
  * 创建人:  hq
  * 创建时间: 2016年9月2日下午3:49:03
  * -------------------------修订历史------------
@@ -61,7 +58,6 @@ public class ThankPrayActivity extends BaseActivity implements OnRefreshListener
 	@Override
 	public void setRootLayout() {
 		setContentView(R.layout.activity_thank_pray);
-
 	}
 
 	@Override
@@ -93,6 +89,7 @@ public class ThankPrayActivity extends BaseActivity implements OnRefreshListener
 		mSwipy.setOnRefreshListener(this);
 		mListView = (ListView) getView(R.id.notice_list);
 		mPrayList = new ArrayList<ThankPrayEntity>();
+		getList();
 	}
 
 	@Override

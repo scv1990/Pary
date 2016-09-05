@@ -37,6 +37,10 @@ public class UserInfo {
 	
 	private String created_at;
 	
+	private String score;
+	
+	private String level;
+	
 	private String invitation_code;
 	
 	private String  authentication_token;
@@ -209,5 +213,21 @@ public class UserInfo {
 
 	public void setStatus(int status) {
 		this.status = status;
+	}
+
+	public String getScore() {
+		return score;
+	}
+
+	public void setScore(String score) {
+		this.score = score;
+	}
+
+	public String getLevel() {
+		return level;
+	}
+
+	public void setLevel(String level) {
+		this.level = level;
 	}
 }

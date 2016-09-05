@@ -16,6 +16,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,7 +52,8 @@ public class MessageFragment extends BaseFragment implements OnRefreshListener{
 	private NoticeAdapter mAdapter;
 	private int mPage = 1;
 	private int mPageCount = 10;
-	private List<Notification> mNoticeList;
+	private List<Notification> mNoticeList  = new ArrayList<Notification>();
+	private boolean mHasLoadedOnce = false;
 	@Override
 	protected View inflaterView(LayoutInflater inflater, ViewGroup container, Bundle bundle) {
 		return inflater.inflate(R.layout.fragment_notice, null);
@@ -59,13 +61,26 @@ public class MessageFragment extends BaseFragment implements OnRefreshListener{
 
 	@Override
 	public void onInitView(View view, Bundle savedInstanceState) {
+		Log.i("MessageFragment" , "MessageFragment init");
 		mSwipy = (SwipyRefreshLayout) getView(R.id.swipy);
 		mSwipy.setDirection(SwipyRefreshLayoutDirection.BOTH);
 		mSwipy.setOnRefreshListener(this);
 		mListView = (ListView) getView(R.id.notice_list);
-		mNoticeList = new ArrayList<Notification>();
+		mAdapter = new NoticeAdapter(mActivity);
+		mAdapter.setmNoticeList(mNoticeList);
+		mListView.setAdapter(mAdapter);
+		mAdapter.notifyDataSetChanged();
 	}
 
+	@Override
+	public void setUserVisibleHint(boolean isVisibleToUser) {
+		if (isVisibleToUser && !mHasLoadedOnce && mNoticeList.size() == 0) {
+			getNotice();
+            mHasLoadedOnce = true;
+        }
+		super.setUserVisibleHint(isVisibleToUser);
+	}
+	
 	@Override
 	public void onRefresh(SwipyRefreshLayoutDirection direction) {
 		if(direction == SwipyRefreshLayoutDirection.TOP){
@@ -94,10 +109,11 @@ public class MessageFragment extends BaseFragment implements OnRefreshListener{
 			@Override
 			public void onResponse(Call<List<Notification>> call, Response<List<Notification>> response) {
 				try {
-					mNoticeList.addAll(response.body());
-					if(mAdapter == null){
-						mAdapter = new NoticeAdapter(mActivity);
-						mListView.setAdapter(mAdapter);
+					List<Notification> notice = response.body();
+					if(notice == null || notice.size() ==0){
+						ShowUtils.showToast(mActivity, getResources().getString(R.string.notice_no_tips));
+					}else{
+						mNoticeList.addAll(response.body());
 					}
 					mAdapter.setmNoticeList(mNoticeList);
 					mAdapter.notifyDataSetChanged();

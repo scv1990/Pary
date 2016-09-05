@@ -11,7 +11,6 @@ package com.yisa.pray.blog.fragment;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
-import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -19,7 +18,6 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -79,7 +77,7 @@ public class BlogMainFragment extends BaseFragment implements OnRefreshListener,
 	private SwipyRefreshLayout mRefresh;
 	private ListView mListView;
 	private BlogListAdapter mAdapter;
-	private ArrayList<BlogEntity> mBlogList;
+	private ArrayList<BlogEntity> mBlogList  = new ArrayList<BlogEntity>();
 	private View mCreatPost;
 	private TextView mZeroClockTxt;
 	private TextView mThreeClockTxt;
@@ -100,25 +98,36 @@ public class BlogMainFragment extends BaseFragment implements OnRefreshListener,
 	private String mOrder = "desc";
 	private String mToken ="";
 	private UserInfo mUserInfo;
+	private boolean mHasLoadedOnce = false;
+	
+	public BlogMainFragment(String token){
+		this.mToken = token;
+	}
+	
 	@Override
 	protected View inflaterView(LayoutInflater inflater, ViewGroup container, Bundle bundle) {
+		setUserVisibleHint(true);
+		Log.i(TAG , "BlogMainFragment inflaterView");
 		return inflater.inflate(R.layout.fragment_blog_main, null);
 	}
 
 	@Override
 	public void onInitView(View view, Bundle savedInstanceState) {
-		mBlogList = new ArrayList<BlogEntity>();
+		Log.i(TAG , "BlogMainFragment init");
 		initHeadView();
 		initToolBar();
-		mRefresh = (SwipyRefreshLayout) getView(R.id.swipy);
+		mRefresh = (SwipyRefreshLayout) getView(R.id.blog_swipy);
 		mRefresh.setDirection(SwipyRefreshLayoutDirection.BOTH);
 		mRefresh.setOnRefreshListener(this);
 		mListView = (ListView) getView(R.id.blog_list);
 		addListHead(); 
-		getBlogList();
+//		getBlogList();
 		mTimer = new Timer();
 		mTimer.schedule(new getOnlineNumTask(), 60*1000);
-		Log.i(TAG,UserUtils.getInstance().getUser(mActivity).getAuthentication_token());
+		mAdapter = new BlogListAdapter(mActivity);
+		mListView.setAdapter(mAdapter);
+		mAdapter.setData(mBlogList);
+		mAdapter.notifyDataSetChanged();
 	}
 	
 	public void initToolBar(){
@@ -143,7 +152,6 @@ public class BlogMainFragment extends BaseFragment implements OnRefreshListener,
 	 */
 	public void initHeadView(){
 		mHeadView = (CustomHeadView) getView(R.id.head_view);
-		String userStr = PreferenceUtils.getPrefString(mActivity, IntentKey.USERINFO, null);
 		mHeadView.setLeftText(R.string.register, new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -160,15 +168,22 @@ public class BlogMainFragment extends BaseFragment implements OnRefreshListener,
 				mActivity.startActivityForResult(intent, Constants.PRAY_WALL_TO_REGISTER_REQ_CODE);
 			}
 		});
+		String userStr = PreferenceUtils.getPrefString(mActivity, IntentKey.USERINFO, null);
 		if(userStr == null || "".equals(userStr)){
 			mHeadView.setRightTextVisibile(View.VISIBLE);
 			mHeadView.setLeftTextVisibile(View.VISIBLE);
 		}else{
-			mUserInfo = new Gson().fromJson(userStr, UserInfo.class);
-			mToken = mUserInfo.getAuthentication_token();
-			mHeadView.setRightTextVisibile(View.GONE);
+			mHeadView.setRightTextVisibile(View.GONE); 
 			mHeadView.setLeftTextVisibile(View.GONE);
 		}
+	}
+	@Override
+	public void setUserVisibleHint(boolean isVisibleToUser) {
+        if (isVisibleToUser && !mHasLoadedOnce && mBlogList.size() == 0) {
+            getBlogList();
+            mHasLoadedOnce = true;
+        }
+		super.setUserVisibleHint(isVisibleToUser);
 	}
 	
 	@Override
@@ -210,6 +225,7 @@ public class BlogMainFragment extends BaseFragment implements OnRefreshListener,
 	 * @throws
 	 */
 	public void getBlogList(){
+		Log.i(TAG, "getBlogList");
 		Retrofit retrofit = new Retrofit.Builder()
 								.baseUrl(UrlUtils.SERVER_ADDRESS)
 								.addConverterFactory(GsonConverterFactory.create())
@@ -235,43 +251,54 @@ public class BlogMainFragment extends BaseFragment implements OnRefreshListener,
 														mRegionId,
 														mSort, 
 														mOrder);
+		Log.i(TAG + "mPage", mPage +"");
+		Log.i(TAG + "mPerPage", mPerPage +"");
+		Log.i(TAG + "mToken", mToken);
+		Log.i(TAG + "mCategroyId", mCategroyId + "");
+		Log.i(TAG + "mRegionId", mRegionId +"");
+		Log.i(TAG + "mSort", mSort);
+		Log.i(TAG + "mOrder", mOrder);
 		
 		call.enqueue(new Callback<BlogEntity[]>() {
 
 			@Override
 			public void onFailure(Call<BlogEntity[]> arg0, Throwable arg1) {
 				ShowUtils.showToast(mActivity, arg1.getMessage());
+				Log.i(TAG, arg1.getMessage());
 			}
 
 			@Override
 			public void onResponse(Call<BlogEntity[]> arg0, Response<BlogEntity[]> response) {
-				switch(response.code()){
-				case ResponseCode.RESPONSE_CODE_200 :
-					BlogEntity[] blogs = response.body();
-					Collections.addAll(mBlogList, blogs);
-					if(mBlogList == null || mBlogList.size() == 0){
-						ShowUtils.showToast(mActivity, getResources().getString(R.string.no_blog_tips));
-					}
-					break;
-				default :
-					ErrorMessage error = new ErrorMessage();
-					try {
-						error = new Gson().fromJson(response.errorBody().string(), ErrorMessage.class);
-						ShowUtils.showToast(mActivity, error.getError());
-					} catch (Exception e) {
-						e.printStackTrace();
-					} 
-					break;
+				Log.i(TAG, response.code() + "");
+				try {
+					switch(response.code()){
+					case ResponseCode.RESPONSE_CODE_200 :
+						BlogEntity[] blogs = response.body();
+						if(blogs == null || blogs.length == 0){
+							ShowUtils.showToast(mActivity, getResources().getString(R.string.no_blog_tips));
+						}else{
+							Collections.addAll(mBlogList, blogs);
+						}
+						break;
+					default :
+						ErrorMessage error = new ErrorMessage();
+						try {
+							error = new Gson().fromJson(response.errorBody().string(), ErrorMessage.class);
+							ShowUtils.showToast(mActivity, error.getError());
+						} catch (Exception e) {
+							e.printStackTrace();
+						} 
+						break;
+				}
+				mAdapter.setData(mBlogList);
+				mAdapter.notifyDataSetChanged();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}finally{
+					mRefresh.setRefreshing(false);
+				}
 			}
-			if(mAdapter == null){
-				mAdapter = new BlogListAdapter(mActivity);
-				mListView.setAdapter(mAdapter);
-			}
-			mAdapter.setData(mBlogList);
-			mAdapter.notifyDataSetChanged();
-			mRefresh.setRefreshing(false);
-				
-			}
+			
 		});
 				
 	}
@@ -310,11 +337,9 @@ public class BlogMainFragment extends BaseFragment implements OnRefreshListener,
 						switch (response.code()) {
 						case ResponseCode.RESPONSE_CODE_200:
 							OnlineCountEntity data = response.body();
-							Log.i(TAG, data.getCount());
 							setOnlineNum(data.getCount());
 							break;
 						default:
-//							ErrorMessage error = new Gson().fromJson(response.errorBody().string(), ErrorMessage.class);
 							break;
 						}
 					} catch (Exception e) {

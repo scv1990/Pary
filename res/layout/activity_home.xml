@@ -2,48 +2,55 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent" >
 
-    <LinearLayout 
+    <LinearLayout
         android:id="@+id/footer"
         android:layout_width="match_parent"
         android:layout_height="@dimen/header_height_size"
         android:layout_alignParentBottom="true"
         android:background="@color/white"
-        android:paddingTop="3dp"
         android:paddingBottom="3dp"
-        android:weightSum="3">
-        <TextView android:id="@+id/pray_wall_title"
+        android:paddingTop="3dp"
+        android:weightSum="3" >
+
+        <TextView
+            android:id="@+id/pray_wall_title"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:gravity="center"
             android:drawableTop="@drawable/chat_blog_btn"
-            android:text="@string/pray_wall_bottom_title"
-            android:textColor="@drawable/home_tab_btn"/>
-        <TextView android:id="@+id/notification_title"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
             android:gravity="center"
-            android:drawableTop="@drawable/chat_home_btn"
-            android:text="@string/notification_title"
-            android:textColor="@drawable/home_tab_btn"/>
-        <TextView android:id="@+id/user_center_title"
+            android:text="@string/pray_wall_bottom_title"
+            android:textColor="@drawable/home_tab_btn" />
+
+        <TextView
+            android:id="@+id/notification_title"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:drawableTop="@drawable/chat_home_btn"
+            android:gravity="center"
+            android:text="@string/notification_title"
+            android:textColor="@drawable/home_tab_btn" />
+
+        <TextView
+            android:id="@+id/user_center_title"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/chat_me_btn"
             android:gravity="center"
             android:text="@string/user_center_title"
-            android:drawableTop="@drawable/chat_me_btn"
-            android:textColor="@drawable/home_tab_btn"/>
+            android:textColor="@drawable/home_tab_btn" />
     </LinearLayout>
+
     <android.support.v4.view.ViewPager
         android:id="@+id/view_page"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
-        android:layout_above="@id/footer">
+        android:layout_above="@id/footer"
+        android:layout_alignParentTop="true" >
     </android.support.v4.view.ViewPager>
-    
+
 </RelativeLayout>

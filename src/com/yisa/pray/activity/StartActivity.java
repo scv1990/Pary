@@ -8,6 +8,8 @@
 
 package com.yisa.pray.activity;
 
+import android.util.Log;
+
 import com.lidroid.xutils.ui.BaseActivity;
 import com.yisa.pray.entity.UserInfo;
 import com.yisa.pray.utils.UIHelper;
@@ -39,6 +41,7 @@ public class StartActivity extends BaseActivity {
 				|| user.getPeriod_id() == 0 || user.getPeriod_text() == null || "".equals(user.getPeriod_text())){
 			UIHelper.showLoginActivity(mContext);
 		}else{
+			Log.i("start", user.getAuthentication_token());
 			UIHelper.showHomeActivity(mContext);
 		}
 		finish();

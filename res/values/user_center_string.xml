@@ -4,4 +4,6 @@
     <string name="user_info">个人资料</string>
     <string name="my_attention">我的关注</string>
     <string name="setting">设置</string>
+    <string name="user_point_format">积分:%1$s</string>
+    <string name="user_level_format">等级:%1$s</string>
 </resources>

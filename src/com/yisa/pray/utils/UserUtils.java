@@ -61,4 +61,39 @@ public class UserUtils {
 		return getUser(context).getAuthentication_token();
 	}
 	
+	/**
+	 * @Title: getScore 
+	 * @Description: TODO(获取用户积分) 
+	 * @param @param context
+	 * @param @return    设定文件 
+	 * @return String    返回类型 
+	 * @throws
+	 */
+	public String getScore(Context context){
+		return getUser(context).getScore();
+	}
+	
+	/**
+	 * @Title: getLevel 
+	 * @Description: TODO(获取用户等级) 
+	 * @param @param context
+	 * @param @return    设定文件 
+	 * @return String    返回类型 
+	 * @throws
+	 */
+	public String getLevel(Context context){
+		return getUser(context).getLevel();
+	}
+	
+	/**
+	 * @Title: getLevel 
+	 * @Description: TODO(获取用户等级) 
+	 * @param @param context
+	 * @param @return    设定文件 
+	 * @return String    返回类型 
+	 * @throws
+	 */
+	public String getUserName(Context context){
+		return getUser(context).getName();
+	}
 }

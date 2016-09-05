@@ -18,6 +18,7 @@ import com.yisa.pray.blog.entity.PostImage;
 import com.yisa.pray.blog.entity.RegionEntity;
 import com.yisa.pray.blog.entity.ThankPrayEntity;
 import com.yisa.pray.utils.BlogUrlUtils;
+import com.yisa.pray.utils.PrayUrlUtils;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -146,7 +147,7 @@ public interface BlogService {
 	 * @return Call<List<ThankPrayEntity>>    返回类型 
 	 * @throws
 	 */
-	@GET(BlogUrlUtils.THANK_PRAY_LIST)
+	@GET(PrayUrlUtils.PRAY_LIST)
 	Call<List<ThankPrayEntity>> getPrayList(
 			@Header("X-Access-Token") String token,
 			@Query("page") int page,

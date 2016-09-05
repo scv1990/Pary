@@ -18,6 +18,7 @@ import com.yisa.pray.activity.ShowBigImageActivity;
 import com.yisa.pray.blog.activity.BlogCategroyActivity;
 import com.yisa.pray.blog.activity.EditBlogActivity;
 import com.yisa.pray.blog.activity.ImageSelectActivity;
+import com.yisa.pray.blog.activity.ThankPrayActivity;
 
 import android.app.Activity;
 import android.content.Context;
@@ -132,5 +133,16 @@ public class UIHelper {
 		mContext.startActivity(intent);
 	}
 	
+	/**
+	 * @Title: showThankPray 
+	 * @Description: TODO(打开感谢代祷界面) 
+	 * @param @param context    设定文件 
+	 * @return void    返回类型 
+	 * @throws
+	 */
+	public static void showThankPray(Context context){
+		Intent intent = new Intent(context, ThankPrayActivity.class);
+		context.startActivity(intent);
+	}
 	
 }

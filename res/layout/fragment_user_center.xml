@@ -44,6 +44,9 @@
                     android:id="@+id/ll_user_info"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="35dp"
+                    android:layout_marginBottom="35dp"
                     android:layout_toRightOf="@id/user_head_pic"
                     android:orientation="vertical"
                     android:weightSum="3" >
@@ -53,21 +56,27 @@
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="1"
-                        android:gravity="center_vertical" />
+                        android:gravity="center_vertical"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/app_text_size_14"/>
 
                     <TextView
                         android:id="@+id/user_point"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="1"
-                        android:gravity="center_vertical" />
+                        android:gravity="center_vertical"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/app_text_size_14" />
 
                     <TextView
                         android:id="@+id/user_level"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="1"
-                        android:gravity="center_vertical" />
+                        android:gravity="center_vertical"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/app_text_size_14" />
                 </LinearLayout>
             </RelativeLayout>
 
@@ -100,6 +109,7 @@
 
                     <ImageView style="@style/UserCenterBackStyle" />
                 </RelativeLayout>
+
                 <include layout="@layout/view_horizontal_full_seperator_line" />
 
                 <RelativeLayout
@@ -119,7 +129,9 @@
 
                     <ImageView style="@style/UserCenterBackStyle" />
                 </RelativeLayout>
-               <include layout="@layout/view_horizontal_full_seperator_line" />
+
+                <include layout="@layout/view_horizontal_full_seperator_line" />
+
                 <RelativeLayout
                     android:id="@+id/my_attention"
                     android:layout_width="match_parent"
@@ -137,6 +149,7 @@
 
                     <ImageView style="@style/UserCenterBackStyle" />
                 </RelativeLayout>
+
                 <include layout="@layout/view_horizontal_full_seperator_line" />
 
                 <RelativeLayout
@@ -156,6 +169,7 @@
 
                     <ImageView style="@style/UserCenterBackStyle" />
                 </RelativeLayout>
+
                 <include layout="@layout/view_horizontal_full_seperator_line" />
 
                 <RelativeLayout
@@ -175,6 +189,7 @@
 
                     <ImageView style="@style/UserCenterBackStyle" />
                 </RelativeLayout>
+
                 <include layout="@layout/view_horizontal_full_seperator_line" />
             </LinearLayout>
         </RelativeLayout>

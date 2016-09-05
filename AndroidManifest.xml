@@ -86,6 +86,8 @@
         </activity>
         <activity android:name="com.yisa.pray.activity.ShowBigImageActivity" >
         </activity>
+         <activity android:name="com.yisa.pray.blog.activity.ThankPrayActivity" >
+        </activity>
 
         <!-- jpush -->
         <!-- Required SDK核心功能 -->

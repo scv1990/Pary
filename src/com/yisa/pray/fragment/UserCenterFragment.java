@@ -9,15 +9,18 @@
 package com.yisa.pray.fragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.lidroid.xutils.ui.BaseFragment;
 import com.yisa.pray.R;
 import com.yisa.pray.utils.UIHelper;
+import com.yisa.pray.utils.UserUtils;
 
 /**
  *
@@ -37,7 +40,9 @@ public class UserCenterFragment extends BaseFragment implements OnClickListener 
 	private RelativeLayout mAttentionLayout;
 	private RelativeLayout mSettingLayout;
 	private RelativeLayout mInviteCodeLayout;
-	
+	private TextView mUserName;
+	private TextView mUserLevel;
+	private TextView mUserScore;
 
 	@Override
 	protected View inflaterView(LayoutInflater inflater, ViewGroup container, Bundle bundle) {
@@ -46,6 +51,16 @@ public class UserCenterFragment extends BaseFragment implements OnClickListener 
 
 	@Override
 	public void onInitView(View view, Bundle savedInstanceState) {
+		Log.i("UserCenterFragment" , "UserCenterFragment init");
+		
+		mUserName = (TextView) getView(R.id.user_name);
+		mUserLevel = (TextView) getView(R.id.user_level);
+		mUserScore = (TextView) getView(R.id.user_point);
+		Log.i("user_center", UserUtils.getInstance().getUserName(mActivity));
+		String username = UserUtils.getInstance().getUserName(mActivity);
+		mUserName.setText(username);
+		mUserLevel.setText(String.format(getResources().getString(R.string.user_level_format),UserUtils.getInstance().getLevel(mActivity)));
+		mUserScore.setText(String.format(getResources().getString(R.string.user_point_format), UserUtils.getInstance().getScore(mActivity)));
 		mThanksPrayLayout = (RelativeLayout) getView(R.id.thanks_pray);
 		mUserInfoLayout = (RelativeLayout) getView(R.id.perfect_user_info);
 		mAttentionLayout = (RelativeLayout) getView(R.id.my_attention);
@@ -63,7 +78,7 @@ public class UserCenterFragment extends BaseFragment implements OnClickListener 
 		super.onClick(v);
 		switch (v.getId()) {
 		case R.id.thanks_pray:
-
+			UIHelper.showThankPray(mActivity);
 			break;
 		case R.id.perfect_user_info:
 			UIHelper.showPerfectUserinfoActicity(mActivity);
