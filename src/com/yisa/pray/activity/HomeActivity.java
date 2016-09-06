@@ -48,6 +48,7 @@ import android.widget.TextView;
  * 修改备注:
  */
 public class HomeActivity extends BaseActivity implements OnPageChangeListener, OnClickListener{
+	private static final String TAG = "HomeActivity";
 	private TextView mBlogTxt;
 	private TextView mNotiTxt;
 	private TextView mUserCenterTxt;
@@ -178,4 +179,12 @@ public class HomeActivity extends BaseActivity implements OnPageChangeListener, 
 		}
 	}
 
+	@Override
+	public void finish() {
+		Log.i(TAG, "finish");
+		mFm.beginTransaction().remove(mBlogFragment);
+		mFm.beginTransaction().remove(mNotiFragment);
+		mFm.beginTransaction().remove(mUserCenterFragment);
+		super.finish();
+	}
 }

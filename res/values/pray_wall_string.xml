@@ -11,4 +11,5 @@
     <string name="thanks_pray">感谢代祷</string>
 	<string name="thank_pray_content">%1$s为你代祷</string>
 	<string name="thank_pray_batch">批量感谢</string>
+	<string name="thank_pray_success">感谢代祷成功</string>
 </resources>

@@ -26,6 +26,7 @@ public class ThankPrayEntity {
 	private String user_avator;
 	private String creat_at;
 	private boolean is_thanked;
+	private boolean isChecked = true;
 	/**
 	 * 用于指明item中显示的是button还是checkbox
 	 * true: 显示button
@@ -73,5 +74,11 @@ public class ThankPrayEntity {
 	}
 	public void setHidden(boolean isHidden) {
 		this.isHidden = isHidden;
+	}
+	public boolean isChecked() {
+		return isChecked;
+	}
+	public void setChecked(boolean isChecked) {
+		this.isChecked = isChecked;
 	}
 }

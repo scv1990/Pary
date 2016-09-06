@@ -19,6 +19,9 @@ import com.yisa.pray.blog.activity.BlogCategroyActivity;
 import com.yisa.pray.blog.activity.EditBlogActivity;
 import com.yisa.pray.blog.activity.ImageSelectActivity;
 import com.yisa.pray.blog.activity.ThankPrayActivity;
+import com.yisa.pray.user.activity.InviteCodeActivity;
+import com.yisa.pray.user.activity.SettingActivity;
+import com.yisa.pray.user.activity.UserFavoriteActivity;
 
 import android.app.Activity;
 import android.content.Context;
@@ -142,6 +145,41 @@ public class UIHelper {
 	 */
 	public static void showThankPray(Context context){
 		Intent intent = new Intent(context, ThankPrayActivity.class);
+		context.startActivity(intent);
+	}
+	/**
+	 * @Title: showAttention 
+	 * @Description: TODO(打开关注界面) 
+	 * @param @param context    设定文件 
+	 * @return void    返回类型 
+	 * @throws
+	 */
+	public static void showAttention(Context context){
+		Intent intent = new Intent(context, UserFavoriteActivity.class);
+		context.startActivity(intent);
+	}
+	
+	/**
+	 * @Title: showAttention 
+	 * @Description: TODO(打开用户邀请码界面) 
+	 * @param @param context    设定文件 
+	 * @return void    返回类型 
+	 * @throws
+	 */
+	public static void showInviteCodeActivity(Context context){
+		Intent intent = new Intent(context, InviteCodeActivity.class);
+		context.startActivity(intent);
+	}
+	
+	/**
+	 * @Title: showAttention 
+	 * @Description: TODO(打开设置界面) 
+	 * @param @param context    设定文件 
+	 * @return void    返回类型 
+	 * @throws
+	 */
+	public static void showSettingActivity(Context context){
+		Intent intent = new Intent(context, SettingActivity.class);
 		context.startActivity(intent);
 	}
 	

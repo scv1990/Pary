@@ -26,4 +26,14 @@ public class PrayUrlUtils {
 	 * 代祷列表（GET请求）
 	 */
 	public static final String PRAY_LIST = ROOT_PATH;
+	
+	/**
+	 * 感谢代祷（单个）
+	 */
+	public static final String THANK_PRAY_SINGLE = ROOT_PATH + "/{history_id}/thank";
+	
+	/**
+	 * 感谢代祷（批量）
+	 */
+	public static final String THANK_PRAY_BATCH = ROOT_PATH + "/batch_thank";
 }

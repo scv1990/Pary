@@ -16,6 +16,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ListView;
 
@@ -25,6 +26,7 @@ import com.yisa.pray.blog.adapter.ThankPrayAdapter;
 import com.yisa.pray.blog.entity.ThankPrayEntity;
 import com.yisa.pray.blog.imp.BlogService;
 import com.yisa.pray.converter.gson.GsonConverterFactory;
+import com.yisa.pray.entity.OperationResult;
 import com.yisa.pray.utils.ShowUtils;
 import com.yisa.pray.utils.UrlUtils;
 import com.yisa.pray.utils.UserUtils;
@@ -36,15 +38,15 @@ import com.yisa.pray.views.swipe.SwipyRefreshLayout.OnRefreshListener;
 /**
  *
  * 类名称: ThankPrayActivity.java
- * 类描述:	感谢代祷
- * 创建人:  hq
+ * 类描述: 感谢代祷
+ * 创建人: hq
  * 创建时间: 2016年9月2日下午3:49:03
  * -------------------------修订历史------------
  * 修改人:
  * 修改时间:
  * 修改备注:
  */
-public class ThankPrayActivity extends BaseActivity implements OnRefreshListener{
+public class ThankPrayActivity extends BaseActivity implements OnRefreshListener, OnClickListener {
 	private CustomHeadView mHeadView;
 	private SwipyRefreshLayout mSwipy;
 	private ListView mListView;
@@ -53,8 +55,7 @@ public class ThankPrayActivity extends BaseActivity implements OnRefreshListener
 	private int mPage = 1;
 	private int mPageCount = 10;
 	private List<ThankPrayEntity> mPrayList;
-	
-	
+
 	@Override
 	public void setRootLayout() {
 		setContentView(R.layout.activity_thank_pray);
@@ -64,6 +65,7 @@ public class ThankPrayActivity extends BaseActivity implements OnRefreshListener
 	public void initView() {
 		mHeadView = (CustomHeadView) getView(R.id.head_view);
 		mThankPrayBatchBtn = (Button) getView(R.id.thank_pray_batch_btn);
+		mThankPrayBatchBtn.setOnClickListener(this);
 		mHeadView.setLeftIconClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -73,17 +75,18 @@ public class ThankPrayActivity extends BaseActivity implements OnRefreshListener
 		mHeadView.setRightText(getResources().getString(R.string.thank_pray_batch), new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				boolean isHidden = mAdapter.isHidden();
-				mAdapter.setHidden(!isHidden);
-				if(isHidden){
-					mThankPrayBatchBtn.setVisibility(View.VISIBLE);
-				}else{
-					mThankPrayBatchBtn.setVisibility(View.GONE);
-				}
-				mAdapter.notifyDataSetChanged();
+//				boolean isHidden = mAdapter.isHidden();
+//				mAdapter.setHidden(!isHidden);
+//				if (isHidden) {
+//					mThankPrayBatchBtn.setVisibility(View.VISIBLE);
+//				} else {
+//					mThankPrayBatchBtn.setVisibility(View.GONE);
+//				}
+//				mAdapter.notifyDataSetChanged();
+				thankPrayBatch();
 			}
 		});
-		
+
 		mSwipy = (SwipyRefreshLayout) getView(R.id.swipy);
 		mSwipy.setDirection(SwipyRefreshLayoutDirection.BOTH);
 		mSwipy.setOnRefreshListener(this);
@@ -93,35 +96,45 @@ public class ThankPrayActivity extends BaseActivity implements OnRefreshListener
 	}
 
 	@Override
+	public void onClick(View v) {
+		super.onClick(v);
+		switch (v.getId()) {
+		case R.id.thank_pray_batch_btn:
+			thankPrayBatch();
+			break;
+
+		default:
+			break;
+		}
+	}
+
+	@Override
 	public void onRefresh(SwipyRefreshLayoutDirection direction) {
-		if(direction == SwipyRefreshLayoutDirection.TOP){
+		if (direction == SwipyRefreshLayoutDirection.TOP) {
 			mPage = 1;
 			mPrayList.removeAll(mPrayList);
-		}else if(direction == SwipyRefreshLayoutDirection.BOTTOM){
+		} else if (direction == SwipyRefreshLayoutDirection.BOTTOM) {
 			mPage++;
 		}
 		getList();
-		
+
 	}
-	public void getList(){
-		Retrofit retrofit = new Retrofit.Builder()
-				.baseUrl(UrlUtils.SERVER_ADDRESS)
-				.addConverterFactory(GsonConverterFactory.create())
-				.build();
-		
+
+	public void getList() {
+		Retrofit retrofit = new Retrofit.Builder().baseUrl(UrlUtils.SERVER_ADDRESS)
+				.addConverterFactory(GsonConverterFactory.create()).build();
+
 		BlogService service = retrofit.create(BlogService.class);
-		
-		Call<List<ThankPrayEntity>> call = service.getPrayList(
-						UserUtils.getInstance().getToken(mActivity), 
-						mPage, 
-						mPageCount);
+
+		Call<List<ThankPrayEntity>> call = service.getPrayList(UserUtils.getInstance().getToken(mActivity), mPage,
+				mPageCount);
 		call.enqueue(new Callback<List<ThankPrayEntity>>() {
-			
+
 			@Override
 			public void onResponse(Call<List<ThankPrayEntity>> call, Response<List<ThankPrayEntity>> response) {
 				try {
 					mPrayList.addAll(response.body());
-					if(mAdapter == null){
+					if (mAdapter == null) {
 						mAdapter = new ThankPrayAdapter(mActivity);
 						mListView.setAdapter(mAdapter);
 					}
@@ -131,11 +144,37 @@ public class ThankPrayActivity extends BaseActivity implements OnRefreshListener
 					e.printStackTrace();
 				}
 			}
-			
+
 			@Override
 			public void onFailure(Call<List<ThankPrayEntity>> call, Throwable throwable) {
 				ShowUtils.showToast(mActivity, throwable.getMessage());
 			}
 		});
+	}
+
+	public void thankPrayBatch() {
+		try {
+			Retrofit retrofit = new Retrofit.Builder().baseUrl(UrlUtils.SERVER_ADDRESS)
+					.addConverterFactory(GsonConverterFactory.create()).build();
+
+			BlogService service = retrofit.create(BlogService.class);
+
+			Call<OperationResult> call = service.thankPrayBatch(UserUtils.getInstance().getToken(mActivity));
+			call.enqueue(new Callback<OperationResult>() {
+
+				@Override
+				public void onResponse(Call<OperationResult> call, Response<OperationResult> response) {
+//					ShowUtils.showToast(mContext, getResources().getString(R.string.thanks_pray_success));
+					onRefresh(SwipyRefreshLayoutDirection.TOP);
+				}
+
+				@Override
+				public void onFailure(Call<OperationResult> call, Throwable throwable) {
+					ShowUtils.showToast(mActivity, throwable.getMessage());
+				}
+			});
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

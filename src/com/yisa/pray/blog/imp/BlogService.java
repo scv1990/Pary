@@ -17,6 +17,7 @@ import com.yisa.pray.blog.entity.BlogEntity;
 import com.yisa.pray.blog.entity.PostImage;
 import com.yisa.pray.blog.entity.RegionEntity;
 import com.yisa.pray.blog.entity.ThankPrayEntity;
+import com.yisa.pray.entity.OperationResult;
 import com.yisa.pray.utils.BlogUrlUtils;
 import com.yisa.pray.utils.PrayUrlUtils;
 
@@ -132,10 +133,23 @@ public interface BlogService {
 	 * @return Call<ThankPrayEntity>    返回类型 
 	 * @throws
 	 */
-	@PUT(BlogUrlUtils.THANK_PRAY_SINGLE)
+	@PUT(PrayUrlUtils.THANK_PRAY_SINGLE)
 	Call<ThankPrayEntity> thankPraySingle(
-			@Path("id") int blogId,
 			@Path("histroy_id") int id,
+			@Header("X-Access-Token") String token
+			);
+	
+	/**
+	 * 
+	 * @Title: thankPrayBatch 
+	 * @Description: TODO(批量感谢代祷) 
+	 * @param @param token
+	 * @param @return    设定文件 
+	 * @return Call<OperationResult>    返回类型 
+	 * @throws
+	 */
+	@PUT(PrayUrlUtils.THANK_PRAY_BATCH)
+	Call<OperationResult> thankPrayBatch(
 			@Header("X-Access-Token") String token
 			);
 	/**

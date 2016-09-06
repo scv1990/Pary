@@ -433,5 +433,11 @@ public class BlogMainFragment extends BaseFragment implements OnRefreshListener,
 		mCateTxt.setText(mCategroy.getName());
 		onRefresh(SwipyRefreshLayoutDirection.TOP);
 	}
+	
+	@Override
+	public void onDestroy() {
+		mTimer.cancel();
+		super.onDestroy();
+	}
 
 }

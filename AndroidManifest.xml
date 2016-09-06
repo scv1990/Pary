@@ -88,6 +88,12 @@
         </activity>
          <activity android:name="com.yisa.pray.blog.activity.ThankPrayActivity" >
         </activity>
+        <activity android:name="com.yisa.pray.user.activity.UserFavoriteActivity" >
+        </activity>
+        <activity android:name="com.yisa.pray.user.activity.SettingActivity" >
+        </activity>
+        <activity android:name="com.yisa.pray.user.activity.InviteCodeActivity" >
+        </activity>
 
         <!-- jpush -->
         <!-- Required SDK核心功能 -->

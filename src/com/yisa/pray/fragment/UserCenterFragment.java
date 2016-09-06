@@ -9,6 +9,7 @@
 package com.yisa.pray.fragment;
 
 import android.os.Bundle;
+import android.provider.Contacts.Intents.UI;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -84,13 +85,13 @@ public class UserCenterFragment extends BaseFragment implements OnClickListener 
 			UIHelper.showPerfectUserinfoActicity(mActivity);
 			break;
 		case R.id.my_attention:
-
+			UIHelper.showAttention(mActivity);
 			break;
 		case R.id.setting:
-
+			UIHelper.showSettingActivity(mActivity);
 			break;
 		case R.id.invited_code:
-
+			UIHelper.showInviteCodeActivity(mActivity);
 			break;
 		default:
 			break;

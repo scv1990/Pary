@@ -10,12 +10,22 @@ package com.yisa.pray.blog.adapter;
 
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+
 import com.lidroid.xutils.util.AdapterUtils;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.yisa.pray.R;
 import com.yisa.pray.blog.entity.BlogCategroyEntity;
 import com.yisa.pray.blog.entity.ThankPrayEntity;
+import com.yisa.pray.blog.imp.BlogService;
+import com.yisa.pray.converter.gson.GsonConverterFactory;
 import com.yisa.pray.utils.ImageLoaderUtil;
+import com.yisa.pray.utils.ShowUtils;
+import com.yisa.pray.utils.UrlUtils;
+import com.yisa.pray.utils.UserUtils;
 import com.yisa.pray.views.CircleImageView;
 
 import android.content.Context;
@@ -25,6 +35,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.TextView;
 
 /**
@@ -91,6 +103,7 @@ public class ThankPrayAdapter extends BaseAdapter {
 		if(convertView == null){
 			convertView = mInflater.inflate(R.layout.item_thank_pray, null);
 		}
+		final int pos = position;
 		ThankPrayEntity entity = getItem(position);
 		TextView userName = AdapterUtils.get(convertView, R.id.username);
 		TextView content = AdapterUtils.get(convertView, R.id.content);
@@ -105,22 +118,61 @@ public class ThankPrayAdapter extends BaseAdapter {
 		button.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				
+				thankPray(pos);
 			}
 		});
-		if(isHidden){
-			checkbox.setVisibility(View.GONE);
-			button.setVisibility(View.VISIBLE);
-		}else{
-			button.setVisibility(View.GONE);
-			if(entity.isIs_thanked()){
-				checkbox.setVisibility(View.GONE);
-				checkbox.setChecked(false);
-			}else{
-				checkbox.setVisibility(View.VISIBLE);
+//		if(isHidden){
+//			checkbox.setVisibility(View.GONE);
+//			button.setVisibility(View.VISIBLE);
+//		}else{
+//			button.setVisibility(View.GONE);
+//			if(entity.isIs_thanked()){
+//				checkbox.setVisibility(View.GONE);
+//				checkbox.setChecked(false);
+//			}else{
+//				checkbox.setVisibility(View.VISIBLE);
+//			}
+//		}
+		checkbox.setChecked(entity.isChecked());
+		checkbox.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				data.get(pos).setChecked(isChecked);
+				notifyDataSetChanged();
 			}
-		}
+			
+		});
 		return convertView;
+	}
+	
+	public void thankPray(int position){
+		try {
+			final int pos = position;
+			ThankPrayEntity entity = data.get(position);
+			
+			Retrofit ret = new Retrofit.Builder()
+					.baseUrl(UrlUtils.SERVER_ADDRESS)
+					.addConverterFactory(GsonConverterFactory.create())
+					.build();
+			BlogService service = ret.create(BlogService.class);
+			Call<ThankPrayEntity> call = service.thankPraySingle(entity.getId(), UserUtils.getInstance().getToken(mContext));
+			call.enqueue(new Callback<ThankPrayEntity>() {
+				
+				@Override
+				public void onResponse(Call<ThankPrayEntity> call, Response<ThankPrayEntity> response) {
+					ThankPrayEntity pray = response.body();
+					data.set(pos, pray);
+					notifyDataSetChanged();
+				}
+				
+				@Override
+				public void onFailure(Call<ThankPrayEntity> arg0, Throwable arg1) {
+					ShowUtils.showToast(mContext, arg1.getMessage());
+				}
+			});
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }
