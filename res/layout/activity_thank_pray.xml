@@ -26,7 +26,22 @@
         android:textSize="@dimen/app_text_size_14"
         android:gravity="center"
         android:visibility="gone"/>
-    
+    <RelativeLayout 
+        android:id="@+id/no_content_tips"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/head_view"
+        android:layout_above="@id/thank_pray_batch_btn"
+        android:background="@drawable/tips_no_bg"
+        android:visibility="gone">
+        <TextView 
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/app_text_size_14"
+            android:text="@string/tips_no_reciver_pray_person"
+            android:layout_centerInParent="true"/>
+    </RelativeLayout>
     <com.yisa.pray.views.swipe.SwipyRefreshLayout
         android:id="@+id/swipy"
         android:layout_below="@id/head_view"

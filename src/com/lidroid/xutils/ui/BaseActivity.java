@@ -13,6 +13,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Toast;
+import cn.jpush.android.api.JPushInterface;
 
 import com.lidroid.xutils.manager.ActivityManager;
 import com.lidroid.xutils.util.LogUtils;
@@ -198,6 +199,14 @@ public abstract class BaseActivity extends FragmentActivity implements OnClickLi
 				&& PreferenceUtils.getPrefBoolean(mActivity, PreferenceUtils.GESTURE_STATE, false)) {
 //			UIHelper.showGestureVerify(this, VERIFY);
 		}
+		JPushInterface.onResume(mActivity);
+	}
+	
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+		JPushInterface.onPause(mActivity);
 	}
 
 	@Override

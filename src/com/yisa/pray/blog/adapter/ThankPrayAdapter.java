@@ -15,6 +15,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
+import com.google.gson.Gson;
 import com.lidroid.xutils.util.AdapterUtils;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.yisa.pray.R;
@@ -22,7 +23,9 @@ import com.yisa.pray.blog.entity.BlogCategroyEntity;
 import com.yisa.pray.blog.entity.ThankPrayEntity;
 import com.yisa.pray.blog.imp.BlogService;
 import com.yisa.pray.converter.gson.GsonConverterFactory;
+import com.yisa.pray.entity.ErrorMessage;
 import com.yisa.pray.utils.ImageLoaderUtil;
+import com.yisa.pray.utils.ResponseCode;
 import com.yisa.pray.utils.ShowUtils;
 import com.yisa.pray.utils.UrlUtils;
 import com.yisa.pray.utils.UserUtils;
@@ -111,9 +114,14 @@ public class ThankPrayAdapter extends BaseAdapter {
 		CheckBox checkbox = AdapterUtils.get(convertView, R.id.check_box);
 		Button button = AdapterUtils.get(convertView, R.id.thank_pray_btn);
 		userName.setText(entity.getUser_name());
-		content.setText(String.format(mContext.getResources().getString(R.string.thank_pray_content), entity.getCreat_at()));
+		content.setText(String.format(mContext.getResources().getString(R.string.thank_pray_content), entity.getCreated_at()));
 		if(entity.getUser_avator() != null && !"".equals(entity.getUser_avator())){
 			ImageLoader.getInstance().displayImage(entity.getUser_avator(), avator);
+		}
+		if(entity.isIs_thanked()){
+			button.setVisibility(View.GONE);
+		}else{
+			button.setVisibility(View.VISIBLE);
 		}
 		button.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -160,9 +168,27 @@ public class ThankPrayAdapter extends BaseAdapter {
 				
 				@Override
 				public void onResponse(Call<ThankPrayEntity> call, Response<ThankPrayEntity> response) {
-					ThankPrayEntity pray = response.body();
-					data.set(pos, pray);
-					notifyDataSetChanged();
+					try {
+						switch (response.code()) {
+						    case ResponseCode.RESPONSE_CODE_200:
+						    	data.get(pos).setIs_thanked(true);
+						    	notifyDataSetChanged();
+						    	break;
+							case ResponseCode.RESPONSE_CODE_201:
+								ThankPrayEntity pray = response.body();
+								data.set(pos, pray);
+								notifyDataSetChanged();
+								break;
+							default:
+								ErrorMessage msg = new Gson().fromJson(response.errorBody().string(), ErrorMessage.class);
+								ShowUtils.showToast(mContext, msg.getError());
+								break;
+						}
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					
+					
 				}
 				
 				@Override

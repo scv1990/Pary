@@ -132,6 +132,12 @@ public class BlogListAdapter extends BaseAdapter {
 		ExpandableTextView content = (ExpandableTextView) AdapterUtils.get(convertView, R.id.posts_content);
 		TextView prayNum = (TextView) AdapterUtils.get(convertView, R.id.recive_pray);
 		TextView comment = (TextView) AdapterUtils.get(convertView, R.id.comment);
+		comment.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				ShowUtils.showToast(mContext, mContext.getResources().getString(R.string.tips_comment_function_enable));
+			}
+		});
 		Button addAttention = (Button) AdapterUtils.get(convertView, R.id.attention);
 		addAttention.setOnClickListener(new View.OnClickListener(){
 

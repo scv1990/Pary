@@ -45,7 +45,7 @@
             android:textSize="@dimen/app_text_size_12" />
 
         <RelativeLayout
-            android:layout_width="150dp"
+            android:layout_width="120dp"
             android:layout_height="match_parent" >
 
             <TextView
@@ -94,7 +94,7 @@
                 android:gravity="center" />
 
             <LinearLayout
-                android:layout_width="100dp"
+                android:layout_width="80dp"
                 android:layout_height="match_parent"
                 android:layout_alignParentRight="true"
                 android:layout_toRightOf="@id/three_clock"

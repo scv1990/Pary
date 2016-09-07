@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 
 import com.lidroid.xutils.ui.BaseActivity;
 import com.yisa.pray.R;
@@ -27,6 +28,7 @@ import com.yisa.pray.blog.entity.ThankPrayEntity;
 import com.yisa.pray.blog.imp.BlogService;
 import com.yisa.pray.converter.gson.GsonConverterFactory;
 import com.yisa.pray.entity.OperationResult;
+import com.yisa.pray.utils.ResponseCode;
 import com.yisa.pray.utils.ShowUtils;
 import com.yisa.pray.utils.UrlUtils;
 import com.yisa.pray.utils.UserUtils;
@@ -48,6 +50,7 @@ import com.yisa.pray.views.swipe.SwipyRefreshLayout.OnRefreshListener;
  */
 public class ThankPrayActivity extends BaseActivity implements OnRefreshListener, OnClickListener {
 	private CustomHeadView mHeadView;
+	private RelativeLayout mNoUserTips;
 	private SwipyRefreshLayout mSwipy;
 	private ListView mListView;
 	private ThankPrayAdapter mAdapter;
@@ -64,6 +67,7 @@ public class ThankPrayActivity extends BaseActivity implements OnRefreshListener
 	@Override
 	public void initView() {
 		mHeadView = (CustomHeadView) getView(R.id.head_view);
+		mNoUserTips = (RelativeLayout) getView(R.id.no_content_tips);
 		mThankPrayBatchBtn = (Button) getView(R.id.thank_pray_batch_btn);
 		mThankPrayBatchBtn.setOnClickListener(this);
 		mHeadView.setLeftIconClickListener(new View.OnClickListener() {
@@ -90,7 +94,7 @@ public class ThankPrayActivity extends BaseActivity implements OnRefreshListener
 		mSwipy = (SwipyRefreshLayout) getView(R.id.swipy);
 		mSwipy.setDirection(SwipyRefreshLayoutDirection.BOTH);
 		mSwipy.setOnRefreshListener(this);
-		mListView = (ListView) getView(R.id.notice_list);
+		mListView = (ListView) getView(R.id.list);
 		mPrayList = new ArrayList<ThankPrayEntity>();
 		getList();
 	}
@@ -133,15 +137,30 @@ public class ThankPrayActivity extends BaseActivity implements OnRefreshListener
 			@Override
 			public void onResponse(Call<List<ThankPrayEntity>> call, Response<List<ThankPrayEntity>> response) {
 				try {
-					mPrayList.addAll(response.body());
-					if (mAdapter == null) {
-						mAdapter = new ThankPrayAdapter(mActivity);
-						mListView.setAdapter(mAdapter);
+					switch (response.code()) {
+					case ResponseCode.RESPONSE_CODE_200:
+						mPrayList.addAll(response.body());
+						if(mPrayList == null || mPrayList.size() == 0){
+							mNoUserTips.setVisibility(View.VISIBLE);
+						}else{
+							mNoUserTips.setVisibility(View.GONE);
+							if (mAdapter == null) {
+								mAdapter = new ThankPrayAdapter(mActivity);
+								mListView.setAdapter(mAdapter);
+							}
+							mAdapter.setData(mPrayList);
+							mAdapter.notifyDataSetChanged();
+						}
+						break;
+					default:
+						
+						break;
 					}
-					mAdapter.setData(mPrayList);
-					mAdapter.notifyDataSetChanged();
+					
 				} catch (Exception e) {
 					e.printStackTrace();
+				}finally{
+					mSwipy.setRefreshing(false);
 				}
 			}
 

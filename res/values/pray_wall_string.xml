@@ -12,4 +12,6 @@
 	<string name="thank_pray_content">%1$s为你代祷</string>
 	<string name="thank_pray_batch">批量感谢</string>
 	<string name="thank_pray_success">感谢代祷成功</string>
+	<string name="tips_no_reciver_pray_person">还没有人为我领取代祷</string>
+	<string name="tips_comment_function_enable">评论功能暂未开放</string>
 </resources>

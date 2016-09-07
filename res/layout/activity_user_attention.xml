@@ -13,6 +13,20 @@
         app:headTitle="@string/my_attention" >
     </com.yisa.pray.views.CustomHeadView>
 
+    <RelativeLayout 
+        android:id="@+id/no_content_tips"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/tips_no_bg"
+        android:visibility="gone">
+        <TextView 
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/app_text_size_14"
+            android:text="@string/tips_user_attention_count_0"
+            android:layout_centerInParent="true"/>
+    </RelativeLayout>
     <com.yisa.pray.views.swipe.SwipyRefreshLayout
         android:id="@+id/swipy"
         android:layout_width="match_parent"

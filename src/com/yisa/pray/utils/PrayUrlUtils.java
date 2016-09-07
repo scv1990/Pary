@@ -21,7 +21,7 @@ package com.yisa.pray.utils;
  */
 public class PrayUrlUtils {
 	
-	private static final String ROOT_PATH = UrlUtils.API + UrlUtils.API_VERSION + UrlUtils.API_MODEL_PRAYS;
+	private static final String ROOT_PATH = UrlUtils.API +"/" + UrlUtils.API_VERSION  +"/" +  UrlUtils.API_MODEL_PRAYS;
 	/**
 	 * 代祷列表（GET请求）
 	 */
@@ -30,7 +30,10 @@ public class PrayUrlUtils {
 	/**
 	 * 感谢代祷（单个）
 	 */
-	public static final String THANK_PRAY_SINGLE = ROOT_PATH + "/{history_id}/thank";
+//	public static final String THANK_PRAY_SINGLE = ROOT_PATH + "/{history_id}/thank";
+	
+	public static final String THANK_PRAY_SINGLE = "api/v1/prays/{history_id}/thank";
+
 	
 	/**
 	 * 感谢代祷（批量）

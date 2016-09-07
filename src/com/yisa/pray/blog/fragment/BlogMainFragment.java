@@ -51,7 +51,6 @@ import com.yisa.pray.utils.IntentKey;
 import com.yisa.pray.utils.PreferenceUtils;
 import com.yisa.pray.utils.ResponseCode;
 import com.yisa.pray.utils.ShowUtils;
-import com.yisa.pray.utils.UIHelper;
 import com.yisa.pray.utils.UrlUtils;
 import com.yisa.pray.utils.UserUtils;
 import com.yisa.pray.views.CustomHeadView;
@@ -123,7 +122,7 @@ public class BlogMainFragment extends BaseFragment implements OnRefreshListener,
 		addListHead(); 
 //		getBlogList();
 		mTimer = new Timer();
-		mTimer.schedule(new getOnlineNumTask(), 60*1000);
+		mTimer.schedule(new getOnlineNumTask(), 0, 60*1000);
 		mAdapter = new BlogListAdapter(mActivity);
 		mListView.setAdapter(mAdapter);
 		mAdapter.setData(mBlogList);
@@ -323,6 +322,7 @@ public class BlogMainFragment extends BaseFragment implements OnRefreshListener,
 		
 		@Override
 		public void run() {
+			Log.i("TASK", "getOnlineNumTask");
 			call.enqueue(new Callback<OnlineCountEntity>() {
 
 				@Override
@@ -335,12 +335,12 @@ public class BlogMainFragment extends BaseFragment implements OnRefreshListener,
 				public void onResponse(Call<OnlineCountEntity> arg0, Response<OnlineCountEntity> response) {
 					try {
 						switch (response.code()) {
-						case ResponseCode.RESPONSE_CODE_200:
-							OnlineCountEntity data = response.body();
-							setOnlineNum(data.getCount());
-							break;
-						default:
-							break;
+							case ResponseCode.RESPONSE_CODE_200:
+								OnlineCountEntity data = response.body();
+								setOnlineNum(data.getCount());
+								break;
+							default:
+								break;
 						}
 					} catch (Exception e) {
 						e.printStackTrace();
@@ -436,8 +436,21 @@ public class BlogMainFragment extends BaseFragment implements OnRefreshListener,
 	
 	@Override
 	public void onDestroy() {
+		Log.i(TAG, "ondestroy");
 		mTimer.cancel();
 		super.onDestroy();
+	}
+	
+	@Override
+	public void onPause() {
+		Log.i(TAG, "onPause");
+		mTimer.cancel();
+		super.onPause();
+	}
+	
+	@Override
+	public void onResume() {
+		super.onResume();
 	}
 
 }

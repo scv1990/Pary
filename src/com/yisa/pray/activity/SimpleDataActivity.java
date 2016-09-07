@@ -65,9 +65,7 @@ public class SimpleDataActivity extends BaseActivity{
 	private ListView mListview;
 	private List<SimpleData> mList;
 	private LoadingDialog mLoading;
-	private String mVersion;
-	private String mModel;
-	private String mFunction;
+	private String url;
 	
 	@Override
 	public void setRootLayout() {
@@ -78,9 +76,7 @@ public class SimpleDataActivity extends BaseActivity{
 	public void initView() {
 		Intent intent = getIntent();
 		String title = intent.getStringExtra(IntentKey.TITLE);
-		mVersion = intent.getStringExtra(IntentKey.API_VERSION);
-		mModel = intent.getStringExtra(IntentKey.API_MODEL);
-		mFunction = intent.getStringExtra(IntentKey.API_FUNCTION);
+		url = intent.getStringExtra(IntentKey.URL);
 		mLoading = new LoadingDialog(mContext);
 		mList = new ArrayList<SimpleData>();
 		mHeadView = (CustomHeadView) getView(R.id.head_view);
@@ -107,11 +103,12 @@ public class SimpleDataActivity extends BaseActivity{
 	
 	
 	public void requestData(){
+		mLoading.show();
 		Retrofit retrofit = new Retrofit.Builder().baseUrl(UrlUtils.SERVER_ADDRESS).addConverterFactory(ScalarsConverterFactory.create()).build();
 		try {
 			SimpleService service = retrofit.create(SimpleService.class);
 			Log.i(TAG + "token",  UserUtils.getInstance().getUser(mContext).getAuthentication_token());
-			Call<String> call = service.getData(mVersion, mModel, mFunction, UserUtils.getInstance().getUser(mContext).getAuthentication_token());
+			Call<String> call = service.getData(UrlUtils.GET_PERIOD, UserUtils.getInstance().getUser(mContext).getAuthentication_token());
 			call.enqueue(new Callback<String>() {
 				@Override
 				public void onFailure(Call<String> arg0, Throwable arg1) {
@@ -122,44 +119,49 @@ public class SimpleDataActivity extends BaseActivity{
 				@Override
 				public void onResponse(Call<String> arg0, Response<String> response) {
 					switch (response.code()) {
-					case  ResponseCode.RESPONSE_CODE_200:
-						mList = new ArrayList<SimpleData>(); 
-						String data = response.body();
-						Log.i(TAG, data);
-						Map<String, String> datas = new Gson().fromJson(data, new TypeToken<Map<String, String>>() {}.getType());  
-						SimpleData simple = null;
-						Iterator<Map.Entry<String,String>> it = datas.entrySet().iterator();
-						while(it.hasNext()){
-							simple = new SimpleData();
-							Entry<String, String> entry = it.next();
-							simple.setId(entry.getKey());
-							simple.setName(entry.getValue());
-							mList.add(simple);
+						case  ResponseCode.RESPONSE_CODE_200:
+							mList = new ArrayList<SimpleData>(); 
+							String data = response.body();
+							Log.i(TAG, data);
+							Map<String, String> datas = new Gson().fromJson(data, new TypeToken<Map<String, String>>() {}.getType());  
+							SimpleData simple = null;
+							Iterator<Map.Entry<String,String>> it = datas.entrySet().iterator();
+							while(it.hasNext()){
+								simple = new SimpleData();
+								Entry<String, String> entry = it.next();
+								simple.setId(entry.getKey());
+								simple.setName(entry.getValue());
+								mList.add(simple);
+							}
+							if(mAdapter == null){
+								mAdapter = new SimpleDataAdapter(mContext);
+								mListview.setAdapter(mAdapter);
+							}
+							mAdapter.setData(mList);
+							mAdapter.notifyDataSetChanged();
+							break;
+						case ResponseCode.RESPONSE_CODE_404 :
+							ShowUtils.showToast(mContext, getResources().getString(R.string.internet_address_is_not_found));
+							break;
+						default:
+							ErrorMessage error;
+							try {
+								Log.i("simple", response.errorBody().string());
+								error = new Gson().fromJson(response.errorBody().string(), ErrorMessage.class);
+								ShowUtils.showToast(mContext, error.getError());
+							} catch (JsonSyntaxException e) {
+								e.printStackTrace();
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
+							break;
 						}
-						if(mAdapter == null){
-							mAdapter = new SimpleDataAdapter(mContext);
-							mListview.setAdapter(mAdapter);
-						}
-						mAdapter.setData(mList);
-						mAdapter.notifyDataSetChanged();
-						break;
-					default:
-						ErrorMessage error;
-						try {
-							Log.i("simple", response.errorBody().string());
-							error = new Gson().fromJson(response.errorBody().string(), ErrorMessage.class);
-							ShowUtils.showToast(mContext, error.getError());
-						} catch (JsonSyntaxException e) {
-							e.printStackTrace();
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
-						break;
-				}
-				}
+					}
 			});
 		} catch (Exception e) {
 			e.printStackTrace();
+		}finally{
+			mLoading.dismiss();
 		}
 		
 	}

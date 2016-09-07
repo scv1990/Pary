@@ -135,7 +135,7 @@ public interface BlogService {
 	 */
 	@PUT(PrayUrlUtils.THANK_PRAY_SINGLE)
 	Call<ThankPrayEntity> thankPraySingle(
-			@Path("histroy_id") int id,
+			@Path("history_id") int id,
 			@Header("X-Access-Token") String token
 			);
 	

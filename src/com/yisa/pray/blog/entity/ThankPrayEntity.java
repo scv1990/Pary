@@ -24,7 +24,7 @@ public class ThankPrayEntity {
 	private int user_id;
 	private String user_name;
 	private String user_avator;
-	private String creat_at;
+	private String created_at;
 	private boolean is_thanked;
 	private boolean isChecked = true;
 	/**
@@ -57,11 +57,12 @@ public class ThankPrayEntity {
 	public void setUser_avator(String user_avator) {
 		this.user_avator = user_avator;
 	}
-	public String getCreat_at() {
-		return creat_at;
+	
+	public String getCreated_at() {
+		return created_at;
 	}
-	public void setCreat_at(String creat_at) {
-		this.creat_at = creat_at;
+	public void setCreated_at(String created_at) {
+		this.created_at = created_at;
 	}
 	public boolean isIs_thanked() {
 		return is_thanked;

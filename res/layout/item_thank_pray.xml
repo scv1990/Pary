@@ -51,7 +51,7 @@
         android:text="@string/thanks_pray"
         android:textColor="@android:color/white"
         android:textSize="@dimen/app_text_size_14"
-        android:visibility="gone" />
+         />
 
     <CheckBox
         android:id="@+id/check_box"

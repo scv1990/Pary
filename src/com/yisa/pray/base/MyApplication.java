@@ -52,7 +52,12 @@ public class MyApplication extends Application {
 		super.onCreate();
 		instance = this;
 		initImageLoader();
-		JPushInterface.init(this);
+		try {
+			JPushInterface.setDebugMode(true);
+			JPushInterface.init(this);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	@SuppressWarnings("deprecation")

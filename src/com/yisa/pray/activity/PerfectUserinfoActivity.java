@@ -128,9 +128,7 @@ public class PerfectUserinfoActivity extends BaseActivity implements OnClickList
 				break;
 			case R.id.pray_period:
 				intent.putExtra(IntentKey.TITLE, getResources().getString(R.string.perfect_period_label));
-				intent.putExtra(IntentKey.API_VERSION, UrlUtils.API_VERSION);
-				intent.putExtra(IntentKey.API_MODEL, UrlUtils.API_MODEL_USER);
-				intent.putExtra(IntentKey.API_FUNCTION, "periods");
+				intent.putExtra(IntentKey.URL, UrlUtils.GET_PERIOD);
 				intent.setClass(mContext, SimpleDataActivity.class);
 				startActivityForResult(intent, Constants.USER_INFO_TO_PERIOD_REQ_CODE);
 				break;

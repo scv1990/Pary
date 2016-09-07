@@ -17,6 +17,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 
 import com.lidroid.xutils.ui.BaseActivity;
 import com.yisa.pray.R;
@@ -46,6 +47,7 @@ import com.yisa.pray.views.swipe.SwipyRefreshLayoutDirection;
 public class UserFavoriteActivity extends BaseActivity implements OnRefreshListener{
 	private CustomHeadView mHeadView;
 	private SwipyRefreshLayout mSwipy;
+	private RelativeLayout mNoUserTips;
 	private ListView mListView;
 	private UserAttentionAdapter mAdapter;
 	private int mPage = 1;
@@ -67,11 +69,13 @@ public class UserFavoriteActivity extends BaseActivity implements OnRefreshListe
 				finish();
 			}
 		});
+		mNoUserTips = (RelativeLayout) getView(R.id.no_content_tips);
 		mSwipy = (SwipyRefreshLayout) getView(R.id.swipy);
 		mSwipy.setDirection(SwipyRefreshLayoutDirection.BOTH);
 		mSwipy.setOnRefreshListener(this);
 		mListView = (ListView) getView(R.id.notice_list);
 		mUserList = new ArrayList<UserInfo>();
+		getList();
 	}
 
 	@Override
@@ -102,13 +106,19 @@ public class UserFavoriteActivity extends BaseActivity implements OnRefreshListe
 			@Override
 			public void onResponse(Call<List<UserInfo>> call, Response<List<UserInfo>> response) {
 				try {
+					
 					mUserList.addAll(response.body());
-					if(mAdapter == null){
-						mAdapter = new UserAttentionAdapter(mActivity);
-						mListView.setAdapter(mAdapter);
+					if(mUserList == null || mUserList.size() == 0){
+						mNoUserTips.setVisibility(View.VISIBLE);
+					}else{
+						mNoUserTips.setVisibility(View.GONE);
+						if(mAdapter == null){
+							mAdapter = new UserAttentionAdapter(mActivity);
+							mListView.setAdapter(mAdapter);
+						}
+						mAdapter.setData(mUserList);
+						mAdapter.notifyDataSetChanged();
 					}
-					mAdapter.setData(mUserList);
-					mAdapter.notifyDataSetChanged();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
