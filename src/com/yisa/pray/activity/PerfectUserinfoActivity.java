@@ -8,15 +8,20 @@
 
 package com.yisa.pray.activity;
 
+import java.util.Calendar;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
+import android.app.DatePickerDialog;
+import android.app.DatePickerDialog.OnDateSetListener;
 import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -76,6 +81,11 @@ public class PerfectUserinfoActivity extends BaseActivity implements OnClickList
 	private EducationEntity mEdu;
 	private RegionEntity mRegion;
 	private Period mPeriodEn;
+	private Calendar mCalender;
+	private int mYear;
+	private int mMonth;
+	private int mDay;
+	
 	@Override
 	public void setRootLayout() {
 		setContentView(R.layout.activity_perfected_userinfo);
@@ -93,6 +103,7 @@ public class PerfectUserinfoActivity extends BaseActivity implements OnClickList
 		mUserName = (EditText) getView(R.id.name);
 		mTel = (EditText) getView(R.id.tel);
 		mAge = (EditText) getView(R.id.age);
+		mAge.setOnClickListener(this);
 		mEducation = (EditText) getView(R.id.education);
 		mVocation = (EditText) getView(R.id.vocation);
 		mChurch = (EditText) getView(R.id.church);
@@ -102,6 +113,7 @@ public class PerfectUserinfoActivity extends BaseActivity implements OnClickList
 		mPeriod = (EditText) getView(R.id.pray_period);
 		mPeriod.setOnClickListener(this);
 		mRebirth = (EditText) getView(R.id.rebirth);
+		mRebirth.setOnClickListener(this);
 		mAddress = (EditText) getView(R.id.address);
 		mRadioGroup = (RadioGroup) getView(R.id.sex_radio_group);
 		mMaleRadio = (RadioButton) getView(R.id.male_radio);
@@ -111,6 +123,13 @@ public class PerfectUserinfoActivity extends BaseActivity implements OnClickList
 		mArea.setOnClickListener(this);
 		mCommit.setOnClickListener(this);
 		token = UserUtils.getInstance().getUser(mContext).getAuthentication_token();
+		
+		mCalender = Calendar.getInstance();
+		// 获取当前对应的年、月、日的信息
+		mYear = mCalender.get(Calendar.YEAR);
+		mMonth = mCalender.get(Calendar.MONTH) + 1;
+		mDay = mCalender.get(Calendar.DAY_OF_MONTH);
+		
 		getUserinfo();
 	}
 
@@ -135,6 +154,23 @@ public class PerfectUserinfoActivity extends BaseActivity implements OnClickList
 			case R.id.education:
 				intent.setClass(mContext, EducationActicity.class);
 				startActivityForResult(intent, Constants.USER_INFO_TO_EDUCATION_REQ_CODE);
+				break;
+			case R.id.age:
+				new DatePickerDialog(mContext, 0, new OnDateSetListener(){
+					@Override
+					public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+						String date = year + "-" + (monthOfYear+1) + "-" + dayOfMonth;
+						mAge.setText(date);
+						
+					}}, mYear, mMonth, mDay).show();;
+				break;
+			case R.id.rebirth:
+				new DatePickerDialog(mContext, 0, new OnDateSetListener(){
+					@Override
+					public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+						String date = year + "-" + (monthOfYear+1) + "-" + dayOfMonth;
+						mRebirth.setText(date);
+					}}, mYear, mMonth, mDay).show();;
 				break;
 			default:
 				break;

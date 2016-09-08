@@ -118,10 +118,15 @@ public class ThankPrayAdapter extends BaseAdapter {
 		if(entity.getUser_avator() != null && !"".equals(entity.getUser_avator())){
 			ImageLoader.getInstance().displayImage(entity.getUser_avator(), avator);
 		}
-		if(entity.isIs_thanked()){
+		
+		if(isHidden){
 			button.setVisibility(View.GONE);
 		}else{
-			button.setVisibility(View.VISIBLE);
+			if(entity.isIs_thanked()){
+				button.setVisibility(View.GONE);
+			}else{
+				button.setVisibility(View.VISIBLE);
+			}
 		}
 		button.setOnClickListener(new View.OnClickListener() {
 			@Override

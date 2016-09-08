@@ -46,7 +46,8 @@
 
         <RelativeLayout
             android:layout_width="120dp"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent" 
+            android:paddingLeft="10dp">
 
             <TextView
                 android:id="@+id/nine_clock"
@@ -81,6 +82,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="10dp"
                 android:layout_above="@id/church_flag"
+                android:layout_toLeftOf="@id/three_clock"
                 android:layout_alignParentTop="true"
                 android:gravity="center" />
 
@@ -91,6 +93,7 @@
                 android:layout_height="10dp"
                 android:layout_alignParentBottom="true"
                 android:layout_below="@id/church_flag"
+                android:layout_toLeftOf="@id/three_clock"
                 android:gravity="center" />
 
             <LinearLayout
@@ -122,6 +125,7 @@
         </RelativeLayout>
     </LinearLayout>
 
+   
     <com.yisa.pray.views.swipe.SwipyRefreshLayout
         android:id="@+id/blog_swipy"
         android:layout_width="match_parent"

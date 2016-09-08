@@ -52,7 +52,7 @@
                     android:weightSum="3" >
 
                     <TextView
-                        android:id="@+id/user_name"
+                        android:id="@+id/user_center_name"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="1"

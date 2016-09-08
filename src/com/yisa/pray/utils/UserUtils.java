@@ -87,7 +87,7 @@ public class UserUtils {
 	
 	/**
 	 * @Title: getLevel 
-	 * @Description: TODO(获取用户等级) 
+	 * @Description: TODO(获取用户姓名) 
 	 * @param @param context
 	 * @param @return    设定文件 
 	 * @return String    返回类型 
@@ -95,5 +95,16 @@ public class UserUtils {
 	 */
 	public String getUserName(Context context){
 		return getUser(context).getName();
+	}
+	
+	/** 
+	 * @Title: getUserId 
+	 * @Description: TODO(获取用户id) 
+	 * @param     设定文件 
+	 * @return void    返回类型 
+	 * @throws 
+	 */
+	public int getUserId(Context context) {
+		return getUser(context).getId();
 	}
 }

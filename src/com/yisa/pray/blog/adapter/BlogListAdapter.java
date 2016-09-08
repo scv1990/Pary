@@ -161,7 +161,11 @@ public class BlogListAdapter extends BaseAdapter {
 			
 			@Override
 			public void onClick(View v) {
-				recivePary(pos);
+				if(data.get(pos).getUser_id() == UserUtils.getInstance().getUserId(mContext)){
+					ShowUtils.showToast(mContext, mContext.getResources().getString(R.string.tips_can_not_pray_for_self));
+				}else{
+					recivePary(pos);
+				}
 			}
 		});
  		return convertView;
@@ -173,8 +177,6 @@ public class BlogListAdapter extends BaseAdapter {
 				.baseUrl(UrlUtils.SERVER_ADDRESS)
 				.addConverterFactory(GsonConverterFactory.create())
 				.build();
-		Log.i("token", UserUtils.getInstance().getUser(mContext).getAuthentication_token());
-		Log.i("id", getItem(position).getId());
 		BlogService service = ret.create(BlogService.class);
 		Call<BlogEntity> call = service.recivePray(
 					UserUtils.getInstance().getUser(mContext).getAuthentication_token(),

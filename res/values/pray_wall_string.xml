@@ -14,4 +14,5 @@
 	<string name="thank_pray_success">感谢代祷成功</string>
 	<string name="tips_no_reciver_pray_person">还没有人为我领取代祷</string>
 	<string name="tips_comment_function_enable">评论功能暂未开放</string>
+	<string name="tips_can_not_pray_for_self">不能为自己带祷</string>
 </resources>

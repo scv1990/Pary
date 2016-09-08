@@ -53,7 +53,7 @@ public class MyApplication extends Application {
 		instance = this;
 		initImageLoader();
 		try {
-			JPushInterface.setDebugMode(true);
+			JPushInterface.setDebugMode(false);
 			JPushInterface.init(this);
 		} catch (Exception e) {
 			e.printStackTrace();

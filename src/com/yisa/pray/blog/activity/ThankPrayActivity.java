@@ -79,13 +79,7 @@ public class ThankPrayActivity extends BaseActivity implements OnRefreshListener
 		mHeadView.setRightText(getResources().getString(R.string.thank_pray_batch), new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-//				boolean isHidden = mAdapter.isHidden();
-//				mAdapter.setHidden(!isHidden);
-//				if (isHidden) {
-//					mThankPrayBatchBtn.setVisibility(View.VISIBLE);
-//				} else {
-//					mThankPrayBatchBtn.setVisibility(View.GONE);
-//				}
+//				mAdapter.setHidden(true);
 //				mAdapter.notifyDataSetChanged();
 				thankPrayBatch();
 			}
@@ -183,7 +177,7 @@ public class ThankPrayActivity extends BaseActivity implements OnRefreshListener
 
 				@Override
 				public void onResponse(Call<OperationResult> call, Response<OperationResult> response) {
-//					ShowUtils.showToast(mContext, getResources().getString(R.string.thanks_pray_success));
+					ShowUtils.showToast(mContext, getResources().getString(R.string.thank_pray_success));
 					onRefresh(SwipyRefreshLayoutDirection.TOP);
 				}
 

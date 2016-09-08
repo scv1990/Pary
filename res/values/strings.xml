@@ -29,7 +29,7 @@
     <string name="reg_verfi_code_send_success">发送成功</string>
     <string name="reg_verfi_code_send_failed">发送失败</string>
     <!-- 祷告墙 -->
-	<string name="add_blog_hint">说点什么吧。。。</string>
+	<string name="add_blog_hint">发布祷告</string>
 	<string name="blog_categroy">帖子分类</string>
 	<string name="blog_add">发布祷告</string>
 	<string name="no_blog_tips">暂时没有祷告发布</string>

@@ -54,7 +54,7 @@ public class UserCenterFragment extends BaseFragment implements OnClickListener 
 	public void onInitView(View view, Bundle savedInstanceState) {
 		Log.i("UserCenterFragment" , "UserCenterFragment init");
 		
-		mUserName = (TextView) getView(R.id.user_name);
+		mUserName = (TextView) getView(R.id.user_center_name);
 		mUserLevel = (TextView) getView(R.id.user_level);
 		mUserScore = (TextView) getView(R.id.user_point);
 		Log.i("user_center", UserUtils.getInstance().getUserName(mActivity));

@@ -132,7 +132,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener{
 						if(user.getRegion_id()== 0 || "".equals(user.getRegion_name()) || user.getPeriod_id() == 0 ){
 							UIHelper.showPerfectUserinfoActicity(mContext);
 						}else{
-							if(user.getStatus() == 0)
+							if(user.getStatus() == 1)
 							{
 								ShowUtils.showToast(mContext, getResources().getString(R.string.user_status_0));
 							}else{

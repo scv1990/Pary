@@ -17,6 +17,8 @@ import com.lidroid.xutils.manager.ActivityManager;
 import com.lidroid.xutils.ui.BaseActivity;
 import com.yisa.pray.R;
 import com.yisa.pray.activity.LoginActivity;
+import com.yisa.pray.utils.IntentKey;
+import com.yisa.pray.utils.PreferenceUtils;
 import com.yisa.pray.utils.UIHelper;
 import com.yisa.pray.utils.UserUtils;
 import com.yisa.pray.views.CustomHeadView;
@@ -54,6 +56,7 @@ public class SettingActivity extends BaseActivity{
 		mQuitBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				PreferenceUtils.setPrefString(mContext, IntentKey.USERINFO, "");
 				ActivityManager.getInstance().finishAllActivity();;
 				UIHelper.showLoginActivity(mContext);
 			}
