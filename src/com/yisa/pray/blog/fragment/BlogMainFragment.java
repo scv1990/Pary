@@ -123,6 +123,7 @@ public class BlogMainFragment extends BaseFragment implements OnRefreshListener,
 //		getBlogList();
 		mTimer = new Timer();
 		mTimer.schedule(new getOnlineNumTask(), 0, 60*1000);
+		Log.i(TAG, "timer run");
 		mAdapter = new BlogListAdapter(mActivity);
 		mListView.setAdapter(mAdapter);
 		mAdapter.setData(mBlogList);
@@ -312,16 +313,16 @@ public class BlogMainFragment extends BaseFragment implements OnRefreshListener,
 	 * 修改备注:
 	 */
 	public class getOnlineNumTask extends TimerTask{
-		Retrofit retrofit = new Retrofit.Builder()
-								.baseUrl(UrlUtils.SERVER_ADDRESS)
-								.addConverterFactory(GsonConverterFactory.create())
-								.build();
-		UserService service = retrofit.create(UserService.class);
-		Call<OnlineCountEntity> call = service.getOnlineNum(
-					UserUtils.getInstance().getUser(mActivity).getAuthentication_token());
 		
 		@Override
 		public void run() {
+			Retrofit retrofit = new Retrofit.Builder()
+					.baseUrl(UrlUtils.SERVER_ADDRESS)
+					.addConverterFactory(GsonConverterFactory.create())
+					.build();
+			UserService service = retrofit.create(UserService.class);
+			Call<OnlineCountEntity> call = service.getOnlineNum(
+					UserUtils.getInstance().getUser(mActivity).getAuthentication_token());
 			Log.i("TASK", "getOnlineNumTask");
 			call.enqueue(new Callback<OnlineCountEntity>() {
 
@@ -437,6 +438,7 @@ public class BlogMainFragment extends BaseFragment implements OnRefreshListener,
 	@Override
 	public void onDestroy() {
 		Log.i(TAG, "ondestroy");
+		Log.i(TAG, "timer cancle");
 		mTimer.cancel();
 		super.onDestroy();
 	}
@@ -444,6 +446,7 @@ public class BlogMainFragment extends BaseFragment implements OnRefreshListener,
 	@Override
 	public void onPause() {
 		Log.i(TAG, "onPause");
+		Log.i(TAG, "timer cancle");
 		mTimer.cancel();
 		super.onPause();
 	}

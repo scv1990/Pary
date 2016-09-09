@@ -180,7 +180,7 @@ public class BlogListAdapter extends BaseAdapter {
 		BlogService service = ret.create(BlogService.class);
 		Call<BlogEntity> call = service.recivePray(
 					UserUtils.getInstance().getUser(mContext).getAuthentication_token(),
-					Integer.parseInt(getItem(position).getId()));
+					Integer.parseInt(getItem(position).getId())); 
 		call.enqueue(new Callback<BlogEntity>() {
 
 			@Override
