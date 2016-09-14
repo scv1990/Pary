@@ -151,7 +151,18 @@
             </intent-filter>
    
         </receiver>
-        
+        <!--自定义reciver  -->
+        <receiver 
+            android:name="com.yisa.pray.reciver.JpushReciver"
+            android:enabled="true">
+            <intent-filter >
+                <action android:name="cn.jpush.android.intent.REGISTRATION" />
+		        <action android:name="cn.jpush.android.intent.MESSAGE_RECEIVED" />
+		        <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED" />
+		        <action android:name="cn.jpush.android.intent.NOTIFICATION_OPENED" />
+		        <category android:name="com.yisa.pray" />
+            </intent-filter>
+        </receiver>
         <!-- Required SDK核心功能-->
         <receiver android:name="cn.jpush.android.service.AlarmReceiver" android:exported="false"/>
         
